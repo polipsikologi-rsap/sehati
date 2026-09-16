@@ -68,21 +68,21 @@
   <!-- NAVIGATION BAR (STICKY)                              -->
   <!-- ==================================================== -->
   <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         
-        <!-- Logo & Identitas Resmi (Logo Palu & RSUD Saja Seperti Semula) -->
-        <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-teal rounded-lg p-1">
-          <div class="flex items-center gap-2">
-            <img src="logo-palu.png" alt="Logo Pemerintah Kota Palu" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.src='https://via.placeholder.com/40?text=Palu';" />
-            <img src="RS.png" alt="Logo RSUD Anutapura Palu" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.src='https://via.placeholder.com/40?text=RSAP';" />
+        <!-- Logo & Identitas Resmi -->
+        <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-1.5 sm:gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-teal rounded-lg p-0.5 sm:p-1">
+          <div class="flex items-center gap-1 flex-shrink-0">
+            <img src="logo-palu.jpg" alt="Logo Pemerintah Kota Palu" class="h-7 sm:h-10 w-auto object-contain drop-shadow-sm" onerror="this.src='https://via.placeholder.com/40?text=Palu';" />
+            <img src="RS.jpg" alt="Logo RSUD Anutapura Palu" class="h-7 sm:h-10 w-auto object-contain drop-shadow-sm" onerror="this.src='https://via.placeholder.com/40?text=RSAP';" />
           </div>
-          <div class="flex flex-col border-l border-slate-200 pl-3">
-            <div class="flex items-center gap-1.5">
-              <span class="text-lg font-black text-brand-teal tracking-tight">SEHATI</span>
-              <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-teal-50 text-brand-teal border border-brand-teal/20">RSAP</span>
+          <div class="flex flex-col border-l border-slate-200 pl-1.5 sm:pl-3 min-w-0">
+            <div class="flex items-center gap-1">
+              <span class="text-sm sm:text-lg font-black text-brand-teal tracking-tight">SEHATI</span>
+              <span class="text-[8px] sm:text-[10px] font-bold px-1 py-0.2 rounded bg-teal-50 text-brand-teal border border-brand-teal/20">RSAP</span>
             </div>
-            <span class="text-[11px] font-semibold text-slate-500 leading-tight">Poli Psikologi RSUD Anutapura Palu</span>
+            <span class="text-[9px] sm:text-[11px] font-semibold text-slate-500 leading-tight truncate">Poli Psikologi RSUD Anutapura Palu</span>
           </div>
         </a>
 
@@ -107,15 +107,16 @@
         </div>
 
         <!-- Tombol Menu Mobile -->
-        <div class="flex items-center gap-2 lg:hidden">
-          <button onclick="startScreeningFlow()" class="sm:hidden px-3 py-1.5 bg-brand-teal text-white text-xs font-bold rounded-lg">Skrining</button>
-          <button id="hamburger-btn" onclick="toggleMobileMenu()" class="p-2 rounded-lg text-slate-600 hover:bg-slate-100" aria-label="Menu">
-            <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+        <div class="flex items-center gap-1 sm:gap-2 lg:hidden">
+          <button onclick="startScreeningFlow()" class="sm:hidden px-2.5 py-1.5 bg-brand-teal text-white text-[11px] font-bold rounded-lg shadow-sm">Skrining</button>
+          <button id="hamburger-btn" onclick="toggleMobileMenu()" class="p-1.5 sm:p-2 rounded-lg text-slate-600 hover:bg-slate-100" aria-label="Menu">
+            <i data-lucide="menu" id="menu-icon" class="w-5 h-5 sm:w-6 sm:h-6"></i>
           </button>
         </div>
 
       </div>
     </div>
+  </header>
 
     <!-- Menu Dropdown Mobile -->
     <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg">
