@@ -86,14 +86,13 @@
           </div>
         </a>
 
-        <!-- Menu Navigasi Desktop -->
+        <!-- Menu Navigasi Desktop (Sama dengan Menu Footer) -->
         <nav class="hidden lg:flex items-center gap-1" aria-label="Menu Utama">
           <button onclick="navigateTo('home')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Beranda</button>
           <button onclick="navigateTo('edukasi')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Psikoedukasi</button>
           <button onclick="navigateTo('layanan')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Layanan & Rujukan</button>
-          <button onclick="navigateTo('psikolog')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Psikolog</button>
+          <button onclick="navigateTo('psikolog')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Psikolog Klinis</button>
           <button onclick="navigateTo('tentang')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Tentang SEHATI</button>
-          <button onclick="navigateTo('kontak')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Kontak</button>
         </nav>
 
         <!-- CTA & Admin -->
@@ -123,9 +122,8 @@
       <button onclick="navigateTo('home'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Beranda</button>
       <button onclick="navigateTo('edukasi'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikoedukasi</button>
       <button onclick="navigateTo('layanan'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Layanan & Rujukan</button>
-      <button onclick="navigateTo('psikolog'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikolog</button>
+      <button onclick="navigateTo('psikolog'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikolog Klinis</button>
       <button onclick="navigateTo('tentang'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Tentang SEHATI</button>
-      <button onclick="navigateTo('kontak'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Kontak</button>
       <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
         <button onclick="startScreeningFlow(); toggleMobileMenu()" class="w-full py-2.5 bg-brand-teal text-white rounded-xl text-xs font-bold text-center">Mulai Skrining</button>
         <button onclick="navigateTo('admin'); toggleMobileMenu()" class="w-full py-2 text-slate-500 hover:text-slate-800 text-xs font-semibold text-center flex items-center justify-center gap-1">
@@ -158,7 +156,7 @@
               <span class="text-slate-600 font-medium text-[11px] sm:text-xs">Sahabat Edukatif, Humanis, Adaptif, Tanggap, dan Informatif</span>
             </div>
 
-            <!-- Slogan Baru SEHATI -->
+            <!-- Slogan SEHATI -->
             <h1 class="text-3xl sm:text-5xl font-extrabold text-brand-navy tracking-tight leading-tight sm:leading-tight mb-4">
               Kenali, Pahami, Peduli
             </h1>
@@ -628,7 +626,6 @@
     <section id="view-tentang" class="view-section hidden py-14 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white p-8 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
         
-        <!-- Logo SEHATI Tunggal di Bagian Tentang SEHATI -->
         <div class="flex items-center gap-3 pb-4 border-b border-slate-100">
           <img src="logo-sehati.jpg" alt="Logo SEHATI" class="h-14 w-auto object-contain rounded-xl shadow-sm" onerror="this.src='https://via.placeholder.com/56?text=SEHATI';" />
           <div>
@@ -637,7 +634,6 @@
           </div>
         </div>
 
-        <!-- Teks Baru Sesuai Permintaan -->
         <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
           <p>
             SEHATI adalah platform digital dari Poli Psikologi RSUD Anutapura Palu yang hadir sebagai media skrining awal dan psikoedukasi kesehatan mental bagi masyarakat dan pasien.
@@ -652,8 +648,9 @@
             Melalui kemudahan akses terhadap skrining, psikoedukasi, dan informasi layanan, SEHATI diharapkan dapat mendukung peningkatan literasi kesehatan mental, kesadaran dalam mengenali kondisi diri, serta pemanfaatan layanan psikologi secara mudah, informatif, dan bertanggung jawab.
           </p>
           
-          <div class="p-4 bg-teal-50/70 rounded-xl border border-brand-teal/20 text-brand-navy font-bold text-center">
-            SEHATI — Kenali, Pahami, dan Peduli
+          <div class="p-4 bg-teal-50/70 rounded-xl border border-brand-teal/20 text-brand-navy font-bold text-center space-y-1">
+            <p class="text-xs text-brand-teal uppercase tracking-wider">Edukatif, Humanis, Adaptif, Tanggap, dan Informatif</p>
+            <p class="text-sm font-black">SEHATI — Kenali, Pahami, Peduli</p>
           </div>
         </div>
       </div>
@@ -697,7 +694,9 @@
             <i data-lucide="instagram" class="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5"></i>
             <div>
               <span class="font-bold text-slate-900 block">Media Sosial Instagram</span>
-              <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="text-brand-teal font-bold hover:underline">@rsud_anutapurapalu</a>
+              <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="text-brand-teal font-bold hover:underline flex items-center gap-1.5 mt-0.5">
+                <i data-lucide="instagram" class="w-3.5 h-3.5"></i> @rsud_anutapurapalu
+              </a>
             </div>
           </div>
         </div>
@@ -710,7 +709,7 @@
     <section id="view-psikolog" class="view-section hidden py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-12">
         <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Tim Profesional</span>
-        <h1 class="text-2xl sm:text-4xl font-extrabold text-brand-navy mt-1">Psikolog Klinis Kami</h1>
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-brand-navy mt-1">Psikolog Klinis</h1>
         <p class="text-slate-600 text-xs sm:text-sm mt-2">
           Psikolog klinis di Poli Psikologi RSUD Anutapura Palu yang melayani asesmen, konseling, dan psikoterapi.
         </p>
@@ -1105,16 +1104,14 @@
         <!-- REKOMENDASI -->
         <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3"></div>
 
-        <!-- DISCLAIMER -->
+        <!-- DISCLAIMER BARU SESUAI PERMINTAAN -->
         <div class="bg-amber-50/90 p-6 sm:p-7 rounded-2xl border border-amber-200 text-amber-950 space-y-3">
           <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-900">
             <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 flex-shrink-0"></i>
             <span>PENTING UNTUK DIPAHAMI</span>
           </div>
           <div class="space-y-2 text-xs sm:text-sm leading-relaxed text-amber-900">
-            <p>Hasil skrining ini merupakan evaluasi awal dan <strong>BUKAN diagnosis final</strong>.</p>
-            <p>Hasil ini tidak dapat digunakan sebagai satu-satunya dasar untuk menentukan diagnosis atau kondisi kesehatan mental seseorang.</p>
-            <p>Untuk mendapatkan pemahaman yang lebih lengkap mengenai kondisi Anda, silakan berkonsultasi dengan psikolog atau tenaga kesehatan profesional.</p>
+            <p>Hasil skrining merupakan gambaran awal kondisi psikologis dan bukan diagnosis. Untuk mendapatkan penilaian dan penanganan lebih lanjut, konsultasikan dengan dokter atau psikolog.</p>
             <p class="font-medium bg-white/70 p-3 rounded-xl border border-amber-200/70">
               Jika Anda sedang mengalami kondisi darurat psikologis, merasa tidak aman, atau memiliki pikiran untuk menyakiti diri sendiri, jangan hanya mengandalkan hasil skrining ini. Segera cari bantuan langsung dari tenaga kesehatan atau layanan kedaruratan yang tersedia.
             </p>
@@ -1374,7 +1371,9 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- ==================================================== -->
+  <!-- FOOTER (MENU UTAMA DIBAWAH DISAMAKAN)                -->
+  <!-- ==================================================== -->
   <footer class="bg-white border-t border-slate-200 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -1398,8 +1397,8 @@
           <ul class="space-y-2 text-xs text-slate-600">
             <li><a href="#home" onclick="navigateTo('home')" class="hover:text-brand-teal">Beranda</a></li>
             <li><a href="#edukasi" onclick="navigateTo('edukasi')" class="hover:text-brand-teal">Psikoedukasi</a></li>
-            <li><a href="#layanan" onclick="navigateTo('layanan')" class="hover:text-brand-teal">Alur Rujukan & Layanan</a></li>
-            <li><a href="#psikolog" onclick="navigateTo('psikolog')" class="hover:text-brand-teal">Daftar Psikolog</a></li>
+            <li><a href="#layanan" onclick="navigateTo('layanan')" class="hover:text-brand-teal">Layanan & Rujukan</a></li>
+            <li><a href="#psikolog" onclick="navigateTo('psikolog')" class="hover:text-brand-teal">Psikolog Klinis</a></li>
             <li><a href="#tentang" onclick="navigateTo('tentang')" class="hover:text-brand-teal">Tentang SEHATI</a></li>
           </ul>
         </div>
@@ -1421,7 +1420,7 @@
             </p>
             <p class="flex items-center gap-2">
               <i data-lucide="instagram" class="w-4 h-4 text-brand-teal flex-shrink-0"></i>
-              <span>Instagram: <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-800 hover:text-brand-teal">@rsud_anutapurapalu</a></span>
+              <span>Instagram: <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-800 hover:text-brand-teal inline-flex items-center gap-1">@rsud_anutapurapalu</a></span>
             </p>
           </div>
         </div>
@@ -1430,7 +1429,7 @@
 
       <div class="pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
         <p>© 2026 SEHATI — Poli Psikologi RSUD Anutapura Palu & Pemerintah Kota Palu.</p>
-        <p class="italic">Instrumen skrining digunakan untuk evaluasi awal mandiri dan bukan pengganti diagnosis dokter/psikolog.</p>
+        <p class="italic">Hasil skrining merupakan gambaran awal kondisi psikologis dan bukan diagnosis. Untuk mendapatkan penilaian dan penanganan lebih lanjut, konsultasikan dengan dokter atau psikolog.</p>
       </div>
     </div>
   </footer>
