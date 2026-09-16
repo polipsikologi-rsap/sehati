@@ -86,7 +86,7 @@
           </div>
         </a>
 
-        <!-- Menu Navigasi Desktop (Sama dengan Menu Footer) -->
+        <!-- Menu Navigasi Desktop -->
         <nav class="hidden lg:flex items-center gap-1" aria-label="Menu Utama">
           <button onclick="navigateTo('home')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Beranda</button>
           <button onclick="navigateTo('edukasi')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Psikoedukasi</button>
@@ -172,147 +172,111 @@
               </button>
               
               <button onclick="navigateTo('edukasi')" class="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-bold text-sm rounded-xl border border-slate-300 shadow-sm transition">
-                Pelajari Kesehatan Mental
+                Psikoedukasi
               </button>
             </div>
 
             <p class="mt-4 text-[11px] text-slate-400 font-medium">
-              *Skrining berlangsung 5–10 menit, bersifat rahasia, dan bukan merupakan diagnosis final.
+              *Skrining berlangsung sekitar 5–10 menit, bersifat rahasia, dan bukan merupakan diagnosis final.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- QUICK ACCESS CARDS -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-10 relative z-10">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          
-          <div onclick="navigateTo('edukasi')" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-brand-teal transition cursor-pointer flex flex-col justify-between group">
-            <div>
-              <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-                <i data-lucide="book-open" class="w-5 h-5"></i>
-              </div>
-              <h2 class="text-sm font-bold text-brand-navy mb-1">Psikoedukasi</h2>
-              <p class="text-xs text-slate-600 leading-relaxed">Pelajari informasi mendalam termasuk psikosomatis, stigma, dan hubungan fisik-mental.</p>
-            </div>
-            <div class="mt-4 flex items-center text-xs font-bold text-brand-teal">
-              Buka Edukasi <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
-            </div>
-          </div>
-
-          <div onclick="startScreeningFlow()" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-brand-teal transition cursor-pointer flex flex-col justify-between group">
-            <div>
-              <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-                <i data-lucide="activity" class="w-5 h-5"></i>
-              </div>
-              <h2 class="text-sm font-bold text-brand-navy mb-1">Skrining Kesehatan</h2>
-              <p class="text-xs text-slate-600 leading-relaxed">Evaluasi mandiri depresi, kecemasan, dan stres lengkap dengan diagram hasil.</p>
-            </div>
-            <div class="mt-4 flex items-center text-xs font-bold text-brand-teal">
-              Mulai Skrining <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
-            </div>
-          </div>
-
-          <div onclick="navigateTo('layanan')" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-brand-teal transition cursor-pointer flex flex-col justify-between group">
-            <div>
-              <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-                <i data-lucide="git-merge" class="w-5 h-5"></i>
-              </div>
-              <h2 class="text-sm font-bold text-brand-navy mb-1">Alur Rujukan</h2>
-              <p class="text-xs text-slate-600 leading-relaxed">Panduan alur berjenjang rujukan BPJS & Pasien Umum ke Poli Psikologi.</p>
-            </div>
-            <div class="mt-4 flex items-center text-xs font-bold text-brand-teal">
-              Pelajari Alur <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
-            </div>
-          </div>
-
-          <div onclick="navigateTo('psikolog')" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-brand-teal transition cursor-pointer flex flex-col justify-between group">
-            <div>
-              <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-                <i data-lucide="users" class="w-5 h-5"></i>
-              </div>
-              <h2 class="text-sm font-bold text-brand-navy mb-1">Psikolog Klinis</h2>
-              <p class="text-xs text-slate-600 leading-relaxed">Kenali psikolog klinis yang bertugas di Poli Psikologi RSUD Anutapura Palu.</p>
-            </div>
-            <div class="mt-4 flex items-center text-xs font-bold text-brand-teal">
-              Lihat Tim <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- SECTION EDUKASI RINGKAS -->
+      <!-- SECTION MATERI LENGKAP STRES, KECEMASAN, DAN DEPRESI DI BERANDA -->
       <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-10">
-          <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Pusat Pembelajaran</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1">Memahami Kesehatan Mental</h2>
-          <p class="text-slate-600 text-xs sm:text-sm mt-2">Pelajari kaitan fisik-mental, psikosomatis, serta perbedaan psikolog dan psikiater.</p>
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Pusat Informasi Utama</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1">Mengenal Stres, Kecemasan, dan Depresi</h2>
+          <p class="text-slate-600 text-xs sm:text-sm mt-2">Pemahaman mendasar mengenai tiga kondisi emosional yang sering dialami sehari-hari.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- STRES -->
+          <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
-              <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-4">
-                <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+              <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
+                <i data-lucide="wind" class="w-6 h-6"></i>
               </div>
-              <h3 class="text-base font-bold text-brand-navy mb-2">Hubungan Fisik & Mental</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                Kondisi pikiran dan emosi berdampak langsung pada tubuh melalui sistem saraf otonom dan hormon stres. Stres emosional dapat memicu keluhan fisik nyata (psikosomatis).
+              <h3 class="text-lg font-bold text-brand-navy mb-3">Stres</h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                Ketegangan fisik dan psikologis yang muncul saat tuntutan hidup atau lingkungan melampaui kapasitas adaptasi diri seseorang.
               </p>
+              <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-3">
+                <strong class="text-slate-800 block mb-1">Gejala Umum:</strong>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>Mudah tersinggung dan cepat marah</li>
+                  <li>Ketegangan otot pada pundak dan leher</li>
+                  <li>Kesulitan berkonsentrasi & gangguan tidur</li>
+                  <li>Merasa kewalahan menghadapi rutinitas</li>
+                </ul>
+              </div>
             </div>
-            <button onclick="navigateTo('edukasi')" class="mt-4 text-xs font-bold text-brand-teal hover:text-brand-teal-dark inline-flex items-center">
-              Pelajari Selengkapnya <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
-            </button>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <!-- KECEMASAN -->
+          <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
-              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
-                <i data-lucide="shield-alert" class="w-5 h-5"></i>
+              <div class="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
+                <i data-lucide="zap" class="w-6 h-6"></i>
               </div>
-              <h3 class="text-base font-bold text-brand-navy mb-2">Stigma & Menyepelekan Gejala</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                Stigma sosial dan kebiasaan menyepelekan gejala psikologis sering membuat seseorang terlambat mendapatkan pertolongan. Padahal intervensi dini mencegah kondisi memburuk.
+              <h3 class="text-lg font-bold text-brand-navy mb-3">Kecemasan</h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                Kekhawatiran berlebih atau antisipasi ketakutan terhadap situasi masa depan yang memicu respons kewaspadaan otonomik tubuh.
               </p>
+              <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-3">
+                <strong class="text-slate-800 block mb-1">Gejala Umum:</strong>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>Detak jantung berdebar kencang</li>
+                  <li>Telapak tangan dingin atau berkeringat</li>
+                  <li>Sensasi napas memendek dan rasa tegang</li>
+                  <li>Pikiran dipenuhi skenario terburuk</li>
+                </ul>
+              </div>
             </div>
-            <button onclick="navigateTo('edukasi')" class="mt-4 text-xs font-bold text-brand-teal hover:text-brand-teal-dark inline-flex items-center">
-              Pelajari Selengkapnya <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
-            </button>
           </div>
 
-          <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <!-- DEPRESI -->
+          <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
-              <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
-                <i data-lucide="user-check" class="w-5 h-5"></i>
+              <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
+                <i data-lucide="cloud-rain" class="w-6 h-6"></i>
               </div>
-              <h3 class="text-base font-bold text-brand-navy mb-2">Psikolog vs Psikiater</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                Memahami perbedaan peran psikolog klinis (asesmen dan psikoterapi) dengan dokter spesialis kedokteran jiwa/psikiater (diagnosis klinis dan farmakoterapi).
+              <h3 class="text-lg font-bold text-brand-navy mb-3">Depresi</h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                Penurunan suasana hati yang menetap disertai hilangnya minat atau energi, perasaan hampa, tidak berharga, dan keputusasaan.
               </p>
+              <div class="space-y-2 text-xs text-slate-600 border-t border-slate-100 pt-3">
+                <strong class="text-slate-800 block mb-1">Gejala Umum:</strong>
+                <ul class="list-disc list-inside space-y-1">
+                  <li>Kehilangan minat total pada aktivitas harian</li>
+                  <li>Rasa lelah berkepanjangan tanpa sebab fisik</li>
+                  <li>Perasaan bersalah berlebih & rendah diri</li>
+                  <li>Pola tidur dan nafsu makan terganggu</li>
+                </ul>
+              </div>
             </div>
-            <button onclick="navigateTo('edukasi')" class="mt-4 text-xs font-bold text-brand-teal hover:text-brand-teal-dark inline-flex items-center">
-              Pelajari Selengkapnya <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
-            </button>
           </div>
+
         </div>
       </section>
 
       <!-- CTA SCREENING -->
-      <section class="py-14 bg-slate-100/70 border-t border-slate-200">
+      <section class="py-16 bg-slate-100/70 border-t border-slate-200 mt-6">
         <div class="max-w-4xl mx-auto px-4 text-center">
           <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mb-2">
             Ingin mengenali kondisi Anda dengan lebih baik?
           </h2>
           <p class="text-xs sm:text-sm text-slate-600 mb-6 max-w-xl mx-auto leading-relaxed">
-            Lakukan evaluasi mandiri sebagai langkah awal untuk mengenali tingkat gejala depresi, kecemasan, dan stres.
+            Lakukan skrining mandiri untuk mendapatkan gambaran awal mengenai gejala stres, kecemasan, dan depresi.
           </p>
           <button onclick="startScreeningFlow()" class="px-8 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition inline-flex items-center gap-2">
             <i data-lucide="clipboard-check" class="w-4 h-4"></i>
             <span>Mulai Skrining</span>
           </button>
           <p class="mt-3 text-[11px] text-slate-400 italic">
-            Skrining bukan diagnosis.
+            Skrining berlangsung sekitar 5–10 menit, bersifat rahasia, dan bukan merupakan diagnosis final.
           </p>
         </div>
       </section>
@@ -320,18 +284,56 @@
     </section>
 
     <!-- ================================================ -->
-    <!-- VIEW 2: MATERI PSIKOEDUKASI LENGKAP              -->
+    <!-- VIEW 2: MATERI PSIKOEDUKASI                      -->
     <!-- ================================================ -->
     <section id="view-edukasi" class="view-section hidden py-14 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-12">
         <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Modul Edukasi SEHATI</span>
         <h1 class="text-2xl sm:text-4xl font-extrabold text-brand-navy mt-1">Psikoedukasi Kesehatan Mental</h1>
         <p class="text-slate-600 text-xs sm:text-sm mt-2">
-          Materi komprehensif mengenai hubungan fisik-mental, psikosomatis, stigma sosial, serta pemahaman klinis profesional.
+          Materi komprehensif mengenai stigma sosial, keterkaitan fisik-mental, psikosomatis, pencegahan penyepeleian gejala, dan pemahaman klinis profesional.
         </p>
       </div>
 
       <div class="space-y-10">
+        
+        <!-- 1. Mengapa Kesehatan Mental Masih Dianggap Tabu? -->
+        <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
+              <i data-lucide="eye-off" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h2 class="text-lg sm:text-xl font-bold text-brand-navy">Mengapa Kesehatan Mental Masih Dianggap Tabu?</h2>
+              <span class="text-xs text-amber-700 font-semibold">Mengikis Miskonsepsi & Membangun Empati Sosial</span>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600">
+            <div>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-amber-600"></i> Akar Stigma</h3>
+              <p class="leading-relaxed">
+                Di tengah masyarakat, isu kesehatan mental kerap dianggap tabu, dikaitkan dengan kelemahan iman, kurang bersyukur, atau dianggap sekadar "mencari perhatian" (lebay). Pandangan ini membuat penderita takut terbuka.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="alert-circle" class="w-4 h-4 text-amber-600"></i> Dampak Negatif</h3>
+              <p class="leading-relaxed">
+                Stigma sosial menciptakan hambatan besar bagi seseorang untuk mencari bantuan profesional. Akibatnya, banyak individu memendam masalah hingga mengalami krisis emosional yang berat.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-brand-teal"></i> Peran Kita Bersama</h3>
+              <ul class="list-disc list-inside space-y-1 leading-relaxed">
+                <li>Normalisasi percakapan seputar kesehatan mental secara terbuka</li>
+                <li>Dengarkan tanpa menghakimi saat seseorang berbagi keluh kesah</li>
+                <li>Dukung akses layanan profesional di fasilitas kesehatan resmi</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Keterkaitan Erat Antara Fisik dan Mental -->
         <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
           <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
             <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center font-bold">
@@ -365,6 +367,7 @@
           </div>
         </article>
 
+        <!-- 3. Memahami Fenomena Psikosomatis -->
         <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
           <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
             <div class="w-10 h-10 rounded-xl bg-rose-50 text-brand-red flex items-center justify-center font-bold">
@@ -403,41 +406,7 @@
           </div>
         </article>
 
-        <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
-            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
-              <i data-lucide="eye-off" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <h2 class="text-lg sm:text-xl font-bold text-brand-navy">Stigma Masyarakat Terkait Kesehatan Mental yang Masih Tabu</h2>
-              <span class="text-xs text-amber-700 font-semibold">Mengikis Miskonsepsi & Membangun Empati Sosial</span>
-            </div>
-          </div>
-          
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600">
-            <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-amber-600"></i> Akar Stigma</h3>
-              <p class="leading-relaxed">
-                Di tengah masyarakat, isu kesehatan mental kerap dianggap tabu, dikaitkan dengan kelemahan iman, kurang bersyukur, atau dianggap sekadar "mencari perhatian" (lebay). Pandangan ini membuat penderita takut terbuka.
-              </p>
-            </div>
-            <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="alert-circle" class="w-4 h-4 text-amber-600"></i> Dampak Negatif</h3>
-              <p class="leading-relaxed">
-                Stigma sosial menciptakan hambatan besar bagi seseorang untuk mencari bantuan profesional. Akibatnya, banyak individu memendam masalah hingga mengalami krisis emosional yang berat.
-              </p>
-            </div>
-            <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-brand-teal"></i> Peran Kita Bersama</h3>
-              <ul class="list-disc list-inside space-y-1 leading-relaxed">
-                <li>Normalisasi percakapan seputar kesehatan mental secara terbuka</li>
-                <li>Dengarkan tanpa menghakimi saat seseorang berbagi keluh kesah</li>
-                <li>Dukung akses layanan profesional di fasilitas kesehatan resmi</li>
-              </ul>
-            </div>
-          </div>
-        </article>
-
+        <!-- 4. Bahaya Kebiasaan Menyepelekan Gejala Psikologis -->
         <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
           <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
             <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold">
@@ -471,6 +440,7 @@
           </div>
         </article>
 
+        <!-- 5. Perbedaan Psikolog Klinis dan Psikiater -->
         <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
           <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
             <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
@@ -748,7 +718,7 @@
             Penting untuk diketahui
           </h2>
           <p class="text-xs text-amber-900/90 leading-relaxed">
-            Alat skrining ini bukan alat untuk menegakkan diagnosis. Hasil skrining tidak menggantikan pemeriksaan atau konsultasi dengan psikolog maupun tenaga kesehatan.
+            Hasil skrining merupakan gambaran awal kondisi psikologis dan bukan diagnosis. Untuk mendapatkan penilaian dan penanganan lebih lanjut, konsultasikan dengan dokter atau psikolog.
           </p>
         </div>
 
@@ -782,7 +752,7 @@
           </div>
           <div class="flex items-start gap-2.5">
             <i data-lucide="check" class="w-4 h-4 text-brand-teal flex-shrink-0 mt-0.5"></i>
-            <span>Hasil merupakan skrining awal dan bukan diagnosis.</span>
+            <span>Hasil skrining merupakan gambaran awal dan bukan diagnosis.</span>
           </div>
           <div class="flex items-start gap-2.5">
             <i data-lucide="check" class="w-4 h-4 text-brand-teal flex-shrink-0 mt-0.5"></i>
@@ -797,7 +767,7 @@
           </label>
           <label class="flex items-start gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
             <input type="checkbox" id="consent-check-2" onchange="validateConsentForm()" class="mt-1 w-4 h-4 rounded text-brand-teal focus:ring-brand-teal">
-            <span class="text-xs text-slate-700 font-medium">Saya memahami bahwa hasil skrining ini merupakan hasil evaluasi awal dan bukan diagnosis final.</span>
+            <span class="text-xs text-slate-700 font-medium">Saya memahami bahwa hasil skrining merupakan gambaran awal dan bukan diagnosis final.</span>
           </label>
         </div>
 
@@ -1104,7 +1074,7 @@
         <!-- REKOMENDASI -->
         <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3"></div>
 
-        <!-- DISCLAIMER BARU SESUAI PERMINTAAN -->
+        <!-- DISCLAIMER -->
         <div class="bg-amber-50/90 p-6 sm:p-7 rounded-2xl border border-amber-200 text-amber-950 space-y-3">
           <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-900">
             <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 flex-shrink-0"></i>
@@ -1372,7 +1342,7 @@
   </div>
 
   <!-- ==================================================== -->
-  <!-- FOOTER (MENU UTAMA DIBAWAH DISAMAKAN)                -->
+  <!-- FOOTER                                               -->
   <!-- ==================================================== -->
   <footer class="bg-white border-t border-slate-200 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -1420,7 +1390,7 @@
             </p>
             <p class="flex items-center gap-2">
               <i data-lucide="instagram" class="w-4 h-4 text-brand-teal flex-shrink-0"></i>
-              <span>Instagram: <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-800 hover:text-brand-teal inline-flex items-center gap-1">@rsud_anutapurapalu</a></span>
+              <span>Instagram: <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-800 hover:text-brand-teal inline-flex items-center gap-1"><i data-lucide="instagram" class="w-3.5 h-3.5"></i> @rsud_anutapurapalu</a></span>
             </p>
           </div>
         </div>
@@ -1784,25 +1754,25 @@
         if (domain === "depression") {
           tipsHtml = `
             <ul class="list-disc list-inside space-y-1 text-[11px] text-blue-900 leading-relaxed mt-1">
-              <li>Lakukan jalan santai pagi 10–15 menit untuk meningkatkan endorfin.</li>
-              <li>Pecah tugas harian menjadi target kecil yang realistis.</li>
-              <li>Berceritalah dengan sahabat atau orang terdekat yang dapat dipercaya.</li>
+              <li>Lakukan aktivitas fisik ringan atau jalan santai pagi secara rutin.</li>
+              <li>Pecah tugas besar menjadi bagian-bagian kecil yang lebih mudah dicapai.</li>
+              <li>Jalin komunikasi terbuka dengan orang terdekat yang dapat dipercaya.</li>
             </ul>
           `;
         } else if (domain === "anxiety") {
           tipsHtml = `
             <ul class="list-disc list-inside space-y-1 text-[11px] text-blue-900 leading-relaxed mt-1">
-              <li>Latihan pernapasan relaksasi (tarik napas 4 detik, tahan 4 detik, hembus 4 detik).</li>
-              <li>Gunakan teknik grounding (sebutkan 5 hal yang dilihat, 4 yang diraba, dll).</li>
-              <li>Kurangi konsumsi kafein berlebih yang dapat memicu debar jantung.</li>
+              <li>Praktikkan teknik pernapasan dalam (tarik perlahan, tahan, hembuskan).</li>
+              <li>Gunakan teknik grounding untuk mengalihkan pikiran cemas.</li>
+              <li>Batasi konsumsi kafein dan kelola paparan informasi berlebih.</li>
             </ul>
           `;
         } else {
           tipsHtml = `
             <ul class="list-disc list-inside space-y-1 text-[11px] text-blue-900 leading-relaxed mt-1">
-              <li>Tuliskan beban pikiran dalam jurnal harian (brain dumping).</li>
-              <li>Ambil jeda istirahat teratur (prinsip jeda 5 menit setiap 1 jam aktivitas).</li>
-              <li>Batasi multitasking dan tetapkan prioritas pekerjaan yang utama.</li>
+              <li>Luangkan waktu untuk jeda istirahat dan lakukan hobi yang menyenangkan.</li>
+              <li>Tuliskan beban pikiran atau buat prioritas tugas harian yang realistis.</li>
+              <li>Pastikan waktu tidur malam tercukupi dengan baik.</li>
             </ul>
           `;
         }
