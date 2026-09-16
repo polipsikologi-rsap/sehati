@@ -71,9 +71,9 @@
         <!-- Logo & Identitas Resmi -->
         <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-teal rounded-lg p-1">
           <div class="flex items-center gap-2">
-  <img src="logo-palu.jpg" alt="Logo Pemerintah Kota Palu" class="h-10 w-auto object-contain drop-shadow-sm" />
-  <img src="RS.jpg" alt="Logo RSUD Anutapura Palu" class="h-10 w-auto object-contain drop-shadow-sm" />
-</div>
+            <img src="logo-palu.jpg" alt="Logo Pemerintah Kota Palu" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.src='https://via.placeholder.com/40?text=Palu';" />
+            <img src="RS.jpg" alt="Logo RSUD Anutapura Palu" class="h-10 w-auto object-contain drop-shadow-sm" onerror="this.src='https://via.placeholder.com/40?text=RSAP';" />
+          </div>
           <div class="flex flex-col border-l border-slate-200 pl-3">
             <div class="flex items-center gap-1.5">
               <span class="text-lg font-black text-brand-teal tracking-tight">SEHATI</span>
@@ -97,7 +97,7 @@
         <div class="hidden sm:flex items-center gap-3">
           <button onclick="startScreeningFlow()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-teal hover:bg-brand-teal-dark text-white text-xs font-bold rounded-xl shadow-sm transition-all">
             <i data-lucide="clipboard-check" class="w-4 h-4"></i>
-            <span>Mulai Skrining DASS-21</span>
+            <span>Mulai Skrining</span>
           </button>
           <button onclick="navigateTo('admin')" title="Panel Admin" class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition">
             <i data-lucide="shield" class="w-4 h-4"></i>
@@ -124,7 +124,7 @@
       <button onclick="navigateTo('tentang'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Tentang SEHATI</button>
       <button onclick="navigateTo('kontak'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Kontak</button>
       <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
-        <button onclick="startScreeningFlow(); toggleMobileMenu()" class="w-full py-2.5 bg-brand-teal text-white rounded-xl text-xs font-bold text-center">Mulai Skrining DASS-21</button>
+        <button onclick="startScreeningFlow(); toggleMobileMenu()" class="w-full py-2.5 bg-brand-teal text-white rounded-xl text-xs font-bold text-center">Mulai Skrining</button>
         <button onclick="navigateTo('admin'); toggleMobileMenu()" class="w-full py-2 text-slate-500 hover:text-slate-800 text-xs font-semibold text-center flex items-center justify-center gap-1">
           <i data-lucide="shield" class="w-3.5 h-3.5"></i> Admin Dashboard
         </button>
@@ -142,12 +142,10 @@
     <!-- ================================================ -->
     <section id="view-home" class="view-section">
       
-      <!-- HERO SECTION -->
       <div class="relative bg-gradient-to-b from-teal-50/70 via-white to-slate-50 py-16 sm:py-24 border-b border-slate-200/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-3xl mx-auto text-center">
             
-            <!-- Acronym Badge -->
             <div class="inline-flex flex-col sm:flex-row items-center gap-2 px-4 py-2 rounded-2xl bg-white border border-teal-200 shadow-sm text-xs font-bold text-slate-700 mb-6">
               <span class="flex items-center gap-1.5 text-brand-teal">
                 <span class="w-2 h-2 rounded-full bg-brand-teal animate-pulse"></span>
@@ -162,13 +160,13 @@
             </h1>
             
             <p class="text-sm sm:text-base text-slate-600 leading-relaxed mb-8 max-w-2xl mx-auto">
-              Platform Skrining dan Edukasi Kesehatan Mental resmi dari <strong>Poli Psikologi RSUD Anutapura Palu</strong>. Temukan informasi berbasis ilmiah dan lakukan evaluasi mandiri awal secara rahasia.
+              Platform Skrining dan Edukasi Kesehatan Mental resmi dari <strong>Poli Psikologi RSUD Anutapura Palu</strong>[cite: 1]. Temukan informasi berbasis ilmiah dan lakukan evaluasi mandiri awal secara rahasia.
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
               <button onclick="startScreeningFlow()" class="w-full sm:w-auto px-8 py-3.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-sm rounded-xl shadow-md transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
                 <i data-lucide="clipboard-check" class="w-4 h-4"></i>
-                <span>Mulai Skrining DASS-21</span>
+                <span>Mulai Skrining</span>
               </button>
               
               <button onclick="navigateTo('edukasi')" class="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-bold text-sm rounded-xl border border-slate-300 shadow-sm transition">
@@ -177,7 +175,7 @@
             </div>
 
             <p class="mt-4 text-[11px] text-slate-400 font-medium">
-              *Skrining berlangsung 5–10 menit, bersifat rahasia, dan bukan merupakan diagnosis final.
+              *Skrining berlangsung 5–10 menit, bersifat rahasia, dan bukan merupakan diagnosis final[cite: 1].
             </p>
           </div>
         </div>
@@ -193,7 +191,7 @@
                 <i data-lucide="book-open" class="w-5 h-5"></i>
               </div>
               <h2 class="text-sm font-bold text-brand-navy mb-1">Psikoedukasi</h2>
-              <p class="text-xs text-slate-600 leading-relaxed">Pelajari berbagai informasi mendalam mengenai stres, cemas, dan depresi.</p>
+              <p class="text-xs text-slate-600 leading-relaxed">Pelajari informasi mendalam termasuk psikosomatis, stigma, dan hubungan fisik-mental.</p>
             </div>
             <div class="mt-4 flex items-center text-xs font-bold text-brand-teal">
               Buka Edukasi <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
@@ -205,11 +203,11 @@
               <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
                 <i data-lucide="activity" class="w-5 h-5"></i>
               </div>
-              <h2 class="text-sm font-bold text-brand-navy mb-1">Skrining DASS-21</h2>
-              <p class="text-xs text-slate-600 leading-relaxed">Lakukan skrining awal mengenai depresi, kecemasan, dan stres.</p>
+              <h2 class="text-sm font-bold text-brand-navy mb-1">Skrining Kesehatan</h2>
+              <p class="text-xs text-slate-600 leading-relaxed">Evaluasi mandiri depresi, kecemasan, dan stres lengkap dengan diagram hasil.</p>
             </div>
             <div class="mt-4 flex items-center text-xs font-bold text-brand-teal">
-              Mulai Tes <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
+              Mulai Skrining <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
             </div>
           </div>
 
@@ -232,7 +230,7 @@
                 <i data-lucide="users" class="w-5 h-5"></i>
               </div>
               <h2 class="text-sm font-bold text-brand-navy mb-1">Psikolog Klinis</h2>
-              <p class="text-xs text-slate-600 leading-relaxed">Kenali psikolog klinis yang bertugas di Poli Psikologi.</p>
+              <p class="text-xs text-slate-600 leading-relaxed">Kenali psikolog klinis yang bertugas di Poli Psikologi RSUD Anutapura Palu[cite: 1].</p>
             </div>
             <div class="mt-4 flex items-center text-xs font-bold text-brand-teal">
               Lihat Tim <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
@@ -247,52 +245,52 @@
         <div class="text-center max-w-2xl mx-auto mb-10">
           <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Pusat Pembelajaran</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1">Memahami Kesehatan Mental</h2>
-          <p class="text-slate-600 text-xs sm:text-sm mt-2">Ketahui perbedaan domain kondisi emosional yang diukur dalam instrumen DASS-21.</p>
+          <p class="text-slate-600 text-xs sm:text-sm mt-2">Pelajari kaitan fisik-mental, psikosomatis, serta perbedaan psikolog dan psikiater.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
             <div>
-              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
-                <i data-lucide="wind" class="w-5 h-5"></i>
+              <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-4">
+                <i data-lucide="heart-pulse" class="w-5 h-5"></i>
               </div>
-              <h3 class="text-base font-bold text-brand-navy mb-2">Stres</h3>
+              <h3 class="text-base font-bold text-brand-navy mb-2">Hubungan Fisik & Mental</h3>
               <p class="text-xs text-slate-600 leading-relaxed">
-                Ketegangan fisik dan psikologis saat tuntutan lingkungan melampaui kapasitas adaptasi diri. Ditandai dengan rasa kewalahan, mudah terpicu, dan sulit merasa rileks.
+                Kondisi pikiran dan emosi berdampak langsung pada tubuh melalui sistem saraf otonom dan hormon stres. Stres emosional dapat memicu keluhan fisik nyata (psikosomatis).
               </p>
             </div>
             <button onclick="navigateTo('edukasi')" class="mt-4 text-xs font-bold text-brand-teal hover:text-brand-teal-dark inline-flex items-center">
-              Pelajari Materi Stres <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
+              Pelajari Selengkapnya <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
+            </button>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
+                <i data-lucide="shield-alert" class="w-5 h-5"></i>
+              </div>
+              <h3 class="text-base font-bold text-brand-navy mb-2">Stigma & Menyepelekan Gejala</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Stigma sosial dan kebiasaan menyepelekan gejala psikologis sering membuat seseorang terlambat mendapatkan pertolongan. Padahal intervensi dini mencegah kondisi memburuk.
+              </p>
+            </div>
+            <button onclick="navigateTo('edukasi')" class="mt-4 text-xs font-bold text-brand-teal hover:text-brand-teal-dark inline-flex items-center">
+              Pelajari Selengkapnya <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
             </button>
           </div>
 
           <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
             <div>
               <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4">
-                <i data-lucide="zap" class="w-5 h-5"></i>
+                <i data-lucide="user-check" class="w-5 h-5"></i>
               </div>
-              <h3 class="text-base font-bold text-brand-navy mb-2">Kecemasan (Cemas)</h3>
+              <h3 class="text-base font-bold text-brand-navy mb-2">Psikolog vs Psikiater</h3>
               <p class="text-xs text-slate-600 leading-relaxed">
-                Kekhawatiran berlebih atau antisipasi bahaya di masa depan yang memicu respons otonomik tubuh seperti jantung berdebar, napas pendek, dan rasa panik.
+                Memahami perbedaan peran psikolog klinis (asesmen dan psikoterapi) dengan dokter spesialis kedokteran jiwa/psikiater (diagnosis klinis dan farmakoterapi).
               </p>
             </div>
             <button onclick="navigateTo('edukasi')" class="mt-4 text-xs font-bold text-brand-teal hover:text-brand-teal-dark inline-flex items-center">
-              Pelajari Materi Cemas <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
-            </button>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl border border-slate-200 flex flex-col justify-between">
-            <div>
-              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
-                <i data-lucide="cloud-rain" class="w-5 h-5"></i>
-              </div>
-              <h3 class="text-base font-bold text-brand-navy mb-2">Depresi</h3>
-              <p class="text-xs text-slate-600 leading-relaxed">
-                Penurunan suasana hati yang menetap disertai hilangnya minat atau energi, perasaan hampa, tidak berharga, dan keputusasaan.
-              </p>
-            </div>
-            <button onclick="navigateTo('edukasi')" class="mt-4 text-xs font-bold text-brand-teal hover:text-brand-teal-dark inline-flex items-center">
-              Pelajari Materi Depresi <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
+              Pelajari Selengkapnya <i data-lucide="chevron-right" class="w-3.5 h-3.5 ml-1"></i>
             </button>
           </div>
         </div>
@@ -305,14 +303,14 @@
             Ingin mengenali kondisi Anda dengan lebih baik?
           </h2>
           <p class="text-xs sm:text-sm text-slate-600 mb-6 max-w-xl mx-auto leading-relaxed">
-            DASS-21 dapat digunakan sebagai langkah awal untuk mengenali tingkat gejala depresi, kecemasan, dan stres.
+            Lakukan evaluasi mandiri sebagai langkah awal untuk mengenali tingkat gejala depresi, kecemasan, dan stres.
           </p>
           <button onclick="startScreeningFlow()" class="px-8 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition inline-flex items-center gap-2">
             <i data-lucide="clipboard-check" class="w-4 h-4"></i>
             <span>Mulai Skrining</span>
           </button>
           <p class="mt-3 text-[11px] text-slate-400 italic">
-            Skrining bukan diagnosis.
+            Skrining bukan diagnosis[cite: 1].
           </p>
         </div>
       </section>
@@ -327,133 +325,198 @@
         <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Modul Edukasi SEHATI</span>
         <h1 class="text-2xl sm:text-4xl font-extrabold text-brand-navy mt-1">Psikoedukasi Kesehatan Mental</h1>
         <p class="text-slate-600 text-xs sm:text-sm mt-2">
-          Kenali mekanisme psikologis dan biologis dari stres, kecemasan, dan depresi serta cara mengelolanya secara adaptif.
+          Materi komprehensif mengenai hubungan fisik-mental, psikosomatis, stigma sosial, serta pemahaman klinis profesional.
         </p>
       </div>
 
       <div class="space-y-10">
-        <!-- 1. STRES -->
+        
         <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
           <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
-            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">1</div>
+            <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center font-bold">
+              <i data-lucide="heart-pulse" class="w-5 h-5"></i>
+            </div>
             <div>
-              <h2 class="text-lg sm:text-xl font-bold text-brand-navy">Mengenal & Mengelola Stres</h2>
-              <span class="text-xs text-amber-700 font-semibold">Tuntutan vs. Kapasitas Coping</span>
+              <h2 class="text-lg sm:text-xl font-bold text-brand-navy">Keterkaitan Erat Antara Fisik dan Mental</h2>
+              <span class="text-xs text-brand-teal font-semibold">Sistem Saraf & Respon Stres Biologis</span>
             </div>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600">
             <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-amber-600"></i> Apa Itu Stres?</h3>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-brand-teal"></i> Konsep Dasar</h3>
               <p class="leading-relaxed">
-                Stres adalah reaksi tubuh terhadap tantangan atau tekanan lingkungan. Jika berlangsung berkepanjangan tanpa istirahat yang cukup, stres dapat memicu kelelahan fisik dan mental yang mendalam.
+                Tubuh dan pikiran bukanlah dua entitas yang terpisah. Saat seseorang mengalami tekanan emosional, otak mengaktifkan sistem saraf otonom (simpatik) yang melepaskan hormon kortisol dan adrenalin ke seluruh tubuh.
               </p>
             </div>
             <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="alert-circle" class="w-4 h-4 text-amber-600"></i> Gejala Umum</h3>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="activity" class="w-4 h-4 text-brand-teal"></i> Manifestasi Tubuh</h3>
+              <p class="leading-relaxed">
+                Kondisi mental yang lelah atau cemas dapat memicu gangguan tidur, penurunan daya tahan tubuh, ketegangan otot kronis, hingga perubahan metabolisme yang berdampak fisik nyata.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-brand-teal"></i> Implikasi</h3>
+              <p class="leading-relaxed">
+                Merawat kesehatan mental adalah bagian esensial dari menjaga kesehatan fisik secara menyeluruh. Keduanya saling memengaruhi dan membutuhkan perhatian yang seimbang.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+            <div class="w-10 h-10 rounded-xl bg-rose-50 text-brand-red flex items-center justify-center font-bold">
+              <i data-lucide="activity" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h2 class="text-lg sm:text-xl font-bold text-brand-navy">Memahami Fenomena Psikosomatis</h2>
+              <span class="text-xs text-brand-red font-semibold">Ketika Stres & Cemas Berwujud Keluhan Fisik</span>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600">
+            <div>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-brand-red"></i> Apa Itu Psikosomatis?</h3>
+              <p class="leading-relaxed">
+                Psikosomatis adalah kondisi ketika faktor psikologis (seperti stres berat, kecemasan kronis, atau trauma) memicu atau memperparah keluhan fisik, meskipun hasil pemeriksaan medis organik sering kali menunjukkan hasil normal.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="alert-circle" class="w-4 h-4 text-brand-red"></i> Gejala Umum</h3>
               <ul class="list-disc list-inside space-y-1 leading-relaxed">
-                <li>Mudah tersinggung & cepat marah</li>
-                <li>Ketegangan otot pada pundak dan leher</li>
-                <li>Kesulitan berkonsentrasi & insomnia</li>
-                <li>Merasa kewalahan dengan rutinitas kerja</li>
+                <li>Nyeri lambung / asam lambung meningkat (GERD akibat cemas)</li>
+                <li>Sakit kepala tegang (tension headache) & pusing berputar</li>
+                <li>Jantung berdebar-debar dan sesak napas psikogenik</li>
+                <li>Kelelahan fisik ekstrem tanpa aktivitas berat</li>
               </ul>
             </div>
             <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-brand-teal"></i> Langkah Peredaan</h3>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-brand-teal"></i> Penanganan</h3>
               <ul class="list-disc list-inside space-y-1 leading-relaxed">
-                <li>Praktik pernapasan teratur (Box Breathing)</li>
-                <li>Tetapkan prioritas dan batasi multitasking</li>
-                <li>Luangkan waktu untuk hobi & istirahat aktif</li>
-                <li>Jaga asupan nutrisi dan pola tidur yang cukup</li>
+                <li>Lakukan pemeriksaan medis untuk menyingkirkan penyakit organik</li>
+                <li>Kelola akar masalah psikologis melalui konseling psikoterapi</li>
+                <li>Latihan teknik relaksasi otot progresif dan pernapasan diafragma</li>
               </ul>
             </div>
           </div>
         </article>
 
-        <!-- 2. CEMAS -->
         <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
           <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
-            <div class="w-10 h-10 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center font-bold">2</div>
+            <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
+              <i data-lucide="eye-off" class="w-5 h-5"></i>
+            </div>
             <div>
-              <h2 class="text-lg sm:text-xl font-bold text-brand-navy">Mengenal & Mengelola Kecemasan (Cemas)</h2>
-              <span class="text-xs text-sky-700 font-semibold">Respon Kewaspadaan & Sistem Otonomik</span>
+              <h2 class="text-lg sm:text-xl font-bold text-brand-navy">Stigma Masyarakat Terkait Kesehatan Mental yang Masih Tabu</h2>
+              <span class="text-xs text-amber-700 font-semibold">Mengikis Miskonsepsi & Membangun Empati Sosial</span>
             </div>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600">
             <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-sky-600"></i> Apa Itu Kecemasan?</h3>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-amber-600"></i> Akar Stigma</h3>
               <p class="leading-relaxed">
-                Kecemasan adalah respon antisipasi terhadap ancaman atau ketidakpastian. Tubuh merespon dengan mengaktifkan sistem saraf simpatik untuk bersiap menghadapi potensi bahaya.
+                Di tengah masyarakat, isu kesehatan mental kerap dianggap tabu, dikaitkan dengan kelemahan iman, kurang bersyukur, atau dianggap sekadar "mencari perhatian" (lebay). Pandangan ini membuat penderita takut terbuka.
               </p>
             </div>
             <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="alert-circle" class="w-4 h-4 text-sky-600"></i> Gejala Umum</h3>
-              <ul class="list-disc list-inside space-y-1 leading-relaxed">
-                <li>Detak jantung cepat tanpa aktivitas fisik berat</li>
-                <li>Telapak tangan dingin, gemetar, atau berkeringat</li>
-                <li>Sensasi napas memendek & mulut kering</li>
-                <li>Pikiran berulang tentang kekhawatiran buruk</li>
-              </ul>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="alert-circle" class="w-4 h-4 text-amber-600"></i> Dampak Negatif</h3>
+              <p class="leading-relaxed">
+                Stigma sosial menciptakan hambatan besar bagi seseorang untuk mencari bantuan profesional. Akibatnya, banyak individu memendam masalah hingga mengalami krisis emosional yang berat.
+              </p>
             </div>
             <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-brand-teal"></i> Langkah Peredaan</h3>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-brand-teal"></i> Peran Kita Bersama</h3>
               <ul class="list-disc list-inside space-y-1 leading-relaxed">
-                <li>Gunakan teknik grounding 5-4-3-2-1</li>
-                <li>Tuliskan kekhawatiran dan uji buktinya secara logis</li>
-                <li>Batasi konsumsi minuman berkafein tinggi</li>
-                <li>Bicarakan rasa cemas dengan orang yang dipercaya</li>
+                <li>Normalisasi percakapan seputar kesehatan mental secara terbuka</li>
+                <li>Dengarkan tanpa menghakimi saat seseorang berbagi keluh kesah</li>
+                <li>Dukung akses layanan profesional di fasilitas kesehatan resmi</li>
               </ul>
             </div>
           </div>
         </article>
 
-        <!-- 3. DEPRESI -->
         <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
           <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
-            <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">3</div>
+            <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold">
+              <i data-lucide="clock" class="w-5 h-5"></i>
+            </div>
             <div>
-              <h2 class="text-lg sm:text-xl font-bold text-brand-navy">Mengenal & Mengatasi Gejala Depresi</h2>
-              <span class="text-xs text-indigo-700 font-semibold">Penurunan Afek Positif & Motivasi Diri</span>
+              <h2 class="text-lg sm:text-xl font-bold text-brand-navy">Bahaya Kebiasaan Menyepelekan Gejala Psikologis</h2>
+              <span class="text-xs text-orange-700 font-semibold">Mengapa Deteksi Dini Sangat Krusial</span>
             </div>
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs sm:text-sm text-slate-600">
             <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-indigo-600"></i> Apa Itu Gejala Depresi?</h3>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="info" class="w-4 h-4 text-orange-600"></i> Fenomena Pengabaian</h3>
               <p class="leading-relaxed">
-                Gejala depresi ditandai dengan perasaan sedih yang menetap, anhedonia (kehilangan rasa senang), penurunan energi secara drastis, serta keyakinan negatif terhadap diri dan masa depan.
+                Banyak orang menganggap remeh gejala awal seperti sulit tidur sesekali, mudah lelah, cemas ringan, atau hilang minat, dengan asumsi bahwa hal tersebut akan "hilang sendiri seiring waktu".
               </p>
             </div>
             <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="alert-circle" class="w-4 h-4 text-indigo-600"></i> Gejala Umum</h3>
-              <ul class="list-disc list-inside space-y-1 leading-relaxed">
-                <li>Kehilangan minat total pada aktivitas harian</li>
-                <li>Rasa lelah berkepanjangan tanpa sebab fisik</li>
-                <li>Perasaan bersalah berlebih & rendah diri</li>
-                <li>Pola tidur dan nafsu makan terganggu drastis</li>
-              </ul>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="alert-circle" class="w-4 h-4 text-orange-600"></i> Risiko Eskalasi</h3>
+              <p class="leading-relaxed">
+                Ketika gejala ringan dibiarkan menumpuk tanpa manajemen yang tepat, masalah psikologis dapat bereskalasi menjadi gangguan kecemasan menyeluruh atau depresi berat yang mengganggu fungsi sosial dan produktivitas.
+              </p>
             </div>
             <div>
-              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-brand-teal"></i> Langkah Penanganan</h3>
-              <ul class="list-disc list-inside space-y-1 leading-relaxed">
-                <li>Lakukan aktivitas fisik ringan secara berkala</li>
-                <li>Pecah tugas besar menjadi bagian-bagian kecil</li>
-                <li>Jalin komunikasi terbuka dengan keluarga/teman</li>
-                <li><strong>Konsultasikan segera ke psikolog atau psikiater</strong></li>
+              <h3 class="font-bold text-slate-800 mb-2 flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-brand-teal"></i> Solusi Intervensi Dini</h3>
+              <p class="leading-relaxed">
+                Melakukan skrining mandiri secara berkala dan berkonsultasi lebih awal saat gejala dirasa mulai mengganggu adalah langkah bijak untuk menjaga kesejahteraan mental jangka panjang.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+            <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
+              <i data-lucide="users" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h2 class="text-lg sm:text-xl font-bold text-brand-navy">Perbedaan Psikolog Klinis dan Psikiater</h2>
+              <span class="text-xs text-purple-700 font-semibold">Memahami Ruang Lingkup Peran Tenaga Profesional</span>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm text-slate-600">
+            <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
+              <h3 class="font-bold text-brand-navy text-sm mb-2 flex items-center gap-2">
+                <i data-lucide="user-check" class="w-4 h-4 text-brand-teal"></i> Psikolog Klinis (M. Psi., Psikolog)
+              </h3>
+              <ul class="list-disc list-inside space-y-1.5 leading-relaxed">
+                <li><strong>Latar Belakang:</strong> Sarjana Psikologi dilanjutkan Pendidikan Profesi Psikolog Klinis.</li>
+                <li><strong>Fokus Utama:</strong> Asesmen psikologis mendalam, tes psikometri, konseling suportif, dan psikoterapi terstruktur.</li>
+                <li><strong>Pendekatan:</strong> Menggunakan teknik modifikasi perilaku, terapi kognitif-perilaku (CBT), dan konseling psikososial.</li>
+                <li><strong>Resep Obat:</strong> Tidak berwenang meresepkan obat medis.</li>
+              </ul>
+            </div>
+
+            <div class="p-5 bg-slate-50 rounded-xl border border-slate-200">
+              <h3 class="font-bold text-brand-navy text-sm mb-2 flex items-center gap-2">
+                <i data-lucide="stethoscope" class="w-4 h-4 text-purple-600"></i> Psikiater / Dokter Spesialis Kedokteran Jiwa (Sp.KJ)
+              </h3>
+              <ul class="list-disc list-inside space-y-1.5 leading-relaxed">
+                <li><strong>Latar Belakang:</strong> Dokter umum yang mengambil spesialisasi ilmu kedokteran jiwa.</li>
+                <li><strong>Fokus Utama:</strong> Diagnosis medis gangguan kejiwaan dan penanganan klinis komprehensif.</li>
+                <li><strong>Pendekatan:</strong> Evaluasi medis biologis, psikoterapi, serta penegakan diagnosis klinis psikiatrik.</li>
+                <li><strong>Resep Obat:</strong> Berwenang penuh memberikan resep obat farmakoterapi (antidepresan, anti-kecemasan, dll).</li>
               </ul>
             </div>
           </div>
         </article>
+
       </div>
 
       <div class="mt-12 p-8 rounded-2xl bg-teal-50 border border-brand-teal/20 text-center">
         <h3 class="text-lg font-bold text-brand-navy mb-2">Ingin Memeriksa Tingkat Gejala yang Anda Rasakan?</h3>
         <p class="text-xs sm:text-sm text-slate-600 mb-6 max-w-xl mx-auto">
-          Gunakan instrumen skrining standar DASS-21 untuk melihat gambaran kondisi emosional Anda selama 1 minggu terakhir.
+          Gunakan instrumen skrining standar untuk melihat gambaran kondisi emosional Anda selama 1 minggu terakhir.
         </p>
         <button onclick="startScreeningFlow()" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition">
-          Mulai Skrining DASS-21 Sekarang
+          Mulai Skrining
         </button>
       </div>
     </section>
@@ -466,26 +529,24 @@
         <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Layanan Rumah Sakit</span>
         <h1 class="text-2xl sm:text-4xl font-extrabold text-brand-navy mt-1">Alur Pelayanan & Rujukan</h1>
         <p class="text-slate-600 text-xs sm:text-sm mt-2">
-          Tata cara dan alur rujukan berjenjang ke Poli Psikologi RSUD Anutapura Palu untuk pasien BPJS Kesehatan maupun Pasien Umum.
+          Tata cara dan alur rujukan berjenjang ke Poli Psikologi RSUD Anutapura Palu[cite: 1] untuk pasien BPJS Kesehatan maupun Pasien Umum.
         </p>
       </div>
 
-      <!-- ALUR RUJUKAN 4 TAHAP -->
       <div class="bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm mb-10">
         <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-teal mb-6">
           <i data-lucide="git-commit" class="w-4 h-4"></i>
-          <span>Alur Rujukan Pasien ke Poli Psikologi RSUD Anutapura Palu</span>
+          <span>Alur Rujukan Pasien ke Poli Psikologi RSUD Anutapura Palu[cite: 1]</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
           
-          <!-- Tahap 1 -->
           <div class="relative p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
             <div>
               <div class="w-8 h-8 rounded-lg bg-brand-teal text-white font-extrabold flex items-center justify-center text-xs mb-3">1</div>
               <h3 class="text-sm font-bold text-brand-navy mb-2">Faskes Tingkat Pertama (FKTP)</h3>
               <p class="text-xs text-slate-600 leading-relaxed">
-                Pasien melakukan pemeriksaan awal keluhan kesehatan mental di FKTP tempat terdaftar (Puskesmas / Klinik Pratama / Dokter Keluarga). Dokter FKTP menerbitkan surat rujukan berjenjang ke RSUD Anutapura Palu.
+                Pasien melakukan pemeriksaan awal keluhan kesehatan mental di FKTP tempat terdaftar (Puskesmas / Klinik Pratama / Dokter Keluarga). Dokter FKTP menerbitkan surat rujukan berjenjang ke RSUD Anutapura Palu[cite: 1].
               </p>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-200/60 text-[11px] font-semibold text-slate-500">
@@ -493,7 +554,6 @@
             </div>
           </div>
 
-          <!-- Tahap 2 -->
           <div class="relative p-5 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
             <div>
               <div class="w-8 h-8 rounded-lg bg-brand-teal text-white font-extrabold flex items-center justify-center text-xs mb-3">2</div>
@@ -507,25 +567,23 @@
             </div>
           </div>
 
-          <!-- Tahap 3 -->
           <div class="relative p-5 rounded-2xl bg-amber-50/70 border border-amber-200 flex flex-col justify-between">
             <div>
               <div class="w-8 h-8 rounded-lg bg-amber-600 text-white font-extrabold flex items-center justify-center text-xs mb-3">3</div>
               <h3 class="text-sm font-bold text-brand-navy mb-2">Konsultasi Poli Jiwa / Psikiatri</h3>
               <p class="text-xs text-slate-700 leading-relaxed">
-                <strong>Khusus Pasien BPJS:</strong> Sesuai ketentuan penjaminan, pasien diarahkan terlebih dahulu ke Poli Jiwa untuk pemeriksaan medis oleh Dokter Spesialis Kedokteran Jiwa (Sp.KJ) dan rujukan internal ke Poli Psikologi.
+                <strong>Khusus Pasien BPJS:</strong> Sesuai ketentuan penjaminan, pasien diarahkan terlebih dahulu ke Poli Jiwa untuk pemeriksaan medis oleh Dokter Spesialis Kedokteran Jiwa (Sp.KJ) dan rujukan internal ke Poli Psikologi[cite: 1].
               </p>
             </div>
             <div class="mt-4 pt-3 border-t border-amber-200 text-[11px] font-bold text-amber-900">
-              *Pasien Non-BPJS/Umum dapat langsung menuju Poli Psikologi
+              *Pasien Non-BPJS/Umum dapat langsung menuju Poli Psikologi[cite: 1]
             </div>
           </div>
 
-          <!-- Tahap 4 -->
           <div class="relative p-5 rounded-2xl bg-teal-50/80 border border-brand-teal/30 flex flex-col justify-between">
             <div>
               <div class="w-8 h-8 rounded-lg bg-brand-teal text-white font-extrabold flex items-center justify-center text-xs mb-3">4</div>
-              <h3 class="text-sm font-bold text-brand-navy mb-2">Pelayanan Poli Psikologi Klinis</h3>
+              <h3 class="text-sm font-bold text-brand-navy mb-2">Pelayanan Poli Psikologi Klinis[cite: 1]</h3>
               <p class="text-xs text-slate-700 leading-relaxed">
                 Pasien menerima layanan asesmen mendalam, konseling suportif, tes psikologi terstandar, atau sesi psikoterapi terstruktur oleh Psikolog Klinis.
               </p>
@@ -538,7 +596,6 @@
         </div>
       </div>
 
-      <!-- DAFTAR LAYANAN -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-white p-6 rounded-2xl border border-slate-200">
           <div class="w-10 h-10 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center mb-3">
@@ -546,7 +603,7 @@
           </div>
           <h2 class="text-base font-bold text-brand-navy mb-2">Konseling & Psikoterapi Klinis</h2>
           <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Penanganan psikologis untuk individu, remaja, maupun dewasa yang mengalami gangguan kecemasan, depresi, manajemen emosi, trauma, dan stres adaptasi lingkungan.
+            Penanganan psikologis untuk individu, remaja, maupun dewasa yang mengalami gangguan kecemasan, depresi, manajemen emosi, trauma, dan psikosomatis.
           </p>
         </div>
 
@@ -569,20 +626,20 @@
       <div class="bg-white p-8 sm:p-10 rounded-2xl border border-slate-200 shadow-sm space-y-6">
         
         <div class="flex items-center gap-3 pb-4 border-b border-slate-100">
-          <img src="Lambang Kota Palu.jpg" alt="Pemkot Palu" class="h-12 w-auto object-contain" onerror="this.onerror=null; this.src='Lambang Kota Palu_2.jpg';" />
-          <img src="RS.jpg" alt="RSAP" class="h-12 w-auto object-contain" onerror="this.onerror=null; this.src='RS_2.jpg';" />
+          <img src="Lambang Kota Palu.jpg" alt="Pemkot Palu" class="h-12 w-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/48?text=Palu';" />
+          <img src="RS.jpg" alt="RSAP" class="h-12 w-auto object-contain" onerror="this.onerror=null; this.src='https://via.placeholder.com/48?text=RSAP';" />
           <div>
             <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Tentang Platform</span>
-            <h1 class="text-xl sm:text-2xl font-black text-brand-navy">SEHATI RSUD Anutapura Palu</h1>
+            <h1 class="text-xl sm:text-2xl font-black text-brand-navy">SEHATI RSUD Anutapura Palu[cite: 1]</h1>
           </div>
         </div>
 
         <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
           <p>
-            <strong>SEHATI</strong> merupakan singkatan dari <em>Sahabat Edukatif, Humanis, Adaptif, Tanggap, dan Informatif</em>. Inisiatif digital ini dihadirkan oleh Poli Psikologi RSUD Anutapura Palu bersama Pemerintah Kota Palu untuk mempermudah akses psikoedukasi dan deteksi dini kesehatan mental bagi masyarakat umum dan pasien.
+            <strong>SEHATI</strong> merupakan singkatan dari <em>Sahabat Edukatif, Humanis, Adaptif, Tanggap, dan Informatif</em>. Inisiatif digital ini dihadirkan oleh Poli Psikologi RSUD Anutapura Palu[cite: 1] bersama Pemerintah Kota Palu untuk mempermudah akses psikoedukasi dan deteksi dini kesehatan mental bagi masyarakat umum dan pasien.
           </p>
           <p>
-            Melalui platform SEHATI, masyarakat dapat memahami kondisi psikologisnya secara mandiri, nyaman, dan tanpa stigma melalui instrumen <strong>DASS-21 (Depression Anxiety Stress Scales)</strong> serta memperoleh panduan rujukan yang jelas saat membutuhkan penanganan klinis lanjutan.
+            Melalui platform SEHATI, masyarakat dapat memahami kondisi psikologisnya secara mandiri, nyaman, dan tanpa stigma melalui instrumen skrining mandiri serta memperoleh panduan rujukan yang jelas saat membutuhkan penanganan klinis lanjutan.
           </p>
           
           <div class="p-4 bg-teal-50/70 rounded-xl border border-brand-teal/20 text-slate-800 font-medium">
@@ -599,7 +656,7 @@
     <section id="view-kontak" class="view-section hidden py-14 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="bg-white p-8 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
         <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Informasi Layanan & Bantuan</span>
-        <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1 mb-2">Kontak RSUD Anutapura Palu</h1>
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1 mb-2">Kontak RSUD Anutapura Palu[cite: 1]</h1>
         <p class="text-slate-600 text-xs sm:text-sm mb-6">Hubungi kami atau kunjungi langsung unit layanan Poli Psikologi pada jam operasional rawat jalan.</p>
         
         <div class="space-y-4 text-xs sm:text-sm text-slate-700">
@@ -646,17 +703,16 @@
         <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Tim Profesional</span>
         <h1 class="text-2xl sm:text-4xl font-extrabold text-brand-navy mt-1">Psikolog Klinis Kami</h1>
         <p class="text-slate-600 text-xs sm:text-sm mt-2">
-          Psikolog klinis di Poli Psikologi RSUD Anutapura Palu yang melayani asesmen, konseling, dan psikoterapi.
+          Psikolog klinis di Poli Psikologi RSUD Anutapura Palu[cite: 1] yang melayani asesmen, konseling, dan psikoterapi.
         </p>
       </div>
 
       <div id="public-psychologist-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Populated by JS -->
       </div>
     </section>
 
     <!-- ================================================ -->
-    <!-- VIEW 7: SKRINING DASS-21 (STEP-BY-STEP)          -->
+    <!-- VIEW 7: SKRINING KESEHATAN (STEP-BY-STEP)        -->
     <!-- ================================================ -->
     <section id="view-screening" class="view-section hidden py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
       
@@ -667,10 +723,10 @@
           Informasi Instrumen
         </div>
         <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mb-4">
-          Skrining Kesehatan Mental DASS-21
+          Skrining Kesehatan Mental
         </h1>
         <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
-          DASS-21 merupakan instrumen skrining yang dapat membantu mengenali tingkat gejala depresi, kecemasan, dan stres selama satu minggu terakhir.
+          Instrumen skrining ini dapat membantu mengenali tingkat gejala depresi, kecemasan, dan stres selama satu minggu terakhir.
         </p>
         
         <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-200/80 mb-6 text-slate-700 text-xs sm:text-sm font-medium">
@@ -684,13 +740,13 @@
             Penting untuk diketahui
           </h2>
           <p class="text-xs text-amber-900/90 leading-relaxed">
-            DASS-21 merupakan alat skrining dan bukan alat untuk menegakkan diagnosis. Hasil skrining tidak menggantikan pemeriksaan atau konsultasi dengan psikolog maupun tenaga kesehatan.
+            Alat skrining ini bukan alat untuk menegakkan diagnosis. Hasil skrining tidak menggantikan pemeriksaan atau konsultasi dengan psikolog maupun tenaga kesehatan.
           </p>
         </div>
 
         <div class="flex justify-end">
           <button onclick="goToScreeningStep('consent')" class="w-full sm:w-auto px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl transition flex items-center justify-center gap-2">
-            <span>Mulai Proses Skrining</span>
+            <span>Mulai Skrining</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
@@ -718,11 +774,7 @@
           </div>
           <div class="flex items-start gap-2.5">
             <i data-lucide="check" class="w-4 h-4 text-brand-teal flex-shrink-0 mt-0.5"></i>
-            <span>Hasil merupakan skrining awal.</span>
-          </div>
-          <div class="flex items-start gap-2.5">
-            <i data-lucide="check" class="w-4 h-4 text-brand-teal flex-shrink-0 mt-0.5"></i>
-            <span>Hasil bukan diagnosis.</span>
+            <span>Hasil merupakan skrining awal dan bukan diagnosis.</span>
           </div>
           <div class="flex items-start gap-2.5">
             <i data-lucide="check" class="w-4 h-4 text-brand-teal flex-shrink-0 mt-0.5"></i>
@@ -737,7 +789,7 @@
           </label>
           <label class="flex items-start gap-3 p-3.5 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
             <input type="checkbox" id="consent-check-2" onchange="validateConsentForm()" class="mt-1 w-4 h-4 rounded text-brand-teal focus:ring-brand-teal">
-            <span class="text-xs text-slate-700 font-medium">Saya memahami bahwa hasil DASS-21 merupakan hasil skrining dan bukan diagnosis final.</span>
+            <span class="text-xs text-slate-700 font-medium">Saya memahami bahwa hasil skrining ini merupakan hasil evaluasi awal dan bukan diagnosis final.</span>
           </label>
         </div>
 
@@ -802,7 +854,7 @@
       <!-- STEP 4: FORM BIODATA -->
       <div id="step-biodata" class="screening-step hidden bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm max-w-3xl mx-auto">
         <h1 class="text-2xl font-extrabold text-brand-navy mb-2">Data Diri</h1>
-        <p class="text-slate-600 text-xs sm:text-sm mb-6">Mohon lengkapi data diri Anda sebelum mengisi lembar pernyataan DASS-21.</p>
+        <p class="text-slate-600 text-xs sm:text-sm mb-6">Mohon lengkapi data diri Anda sebelum mengisi lembar pernyataan skrining.</p>
 
         <div id="biodata-alert" class="hidden p-3.5 mb-6 bg-red-50 border border-red-200 text-brand-red rounded-xl text-xs font-medium">
           Mohon lengkapi data diri Anda terlebih dahulu.
@@ -846,9 +898,9 @@
         </form>
       </div>
 
-      <!-- STEP 5: PETUNJUK DASS-21 -->
+      <!-- STEP 5: PETUNJUK -->
       <div id="step-instructions" class="screening-step hidden bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm max-w-3xl mx-auto">
-        <h1 class="text-2xl font-extrabold text-brand-navy mb-3">Petunjuk Pengisian DASS-21</h1>
+        <h1 class="text-2xl font-extrabold text-brand-navy mb-3">Petunjuk Pengisian Skrining</h1>
         <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6">
           Silakan baca setiap pernyataan dan pilih jawaban yang paling sesuai dengan kondisi Anda <strong>selama satu minggu terakhir</strong>.
         </p>
@@ -887,7 +939,7 @@
         </div>
       </div>
 
-      <!-- STEP 6: DASS-21 QUESTIONS -->
+      <!-- STEP 6: QUESTIONS -->
       <div id="step-questions" class="screening-step hidden max-w-3xl mx-auto">
         <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm mb-4">
           <div class="flex items-center justify-between text-xs font-bold text-slate-700 mb-2">
@@ -936,7 +988,7 @@
         </div>
       </div>
 
-      <!-- STEP 7: HASIL SKRINING, REKOMENDASI ADAPTIF & DISCLAIMER -->
+      <!-- STEP 7: HASIL, DIAGRAM, REKOMENDASI & SURVEI -->
       <div id="step-results" class="screening-step hidden space-y-6">
         
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
@@ -945,10 +997,55 @@
           <p id="result-user-name" class="text-slate-600 text-xs sm:text-sm mt-1 font-medium">Hasil skrining untuk Pengguna</p>
         </div>
 
+        <!-- DIAGRAM / VISUALISASI GRAFIK BATANG SKOR -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <h2 class="text-sm font-bold text-brand-navy flex items-center gap-2">
+              <i data-lucide="bar-chart-3" class="w-4 h-4 text-brand-teal"></i> Visualisasi Diagram Skor Skrining
+            </h2>
+            <span class="text-[11px] font-semibold text-slate-400">Skor Akhir (0 - 42)</span>
+          </div>
+
+          <div class="space-y-4 pt-2">
+            <div>
+              <div class="flex justify-between text-xs font-bold mb-1">
+                <span class="text-slate-700">Depresi</span>
+                <span id="chart-dep-val" class="text-brand-teal">0 (Normal)</span>
+              </div>
+              <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                <div id="chart-dep-bar" class="bg-brand-teal h-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-bold mb-1">
+                <span class="text-slate-700">Kecemasan</span>
+                <span id="chart-anx-val" class="text-sky-600">0 (Normal)</span>
+              </div>
+              <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                <div id="chart-anx-bar" class="bg-sky-500 h-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-bold mb-1">
+                <span class="text-slate-700">Stres</span>
+                <span id="chart-str-val" class="text-amber-600">0 (Normal)</span>
+              </div>
+              <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                <div id="chart-str-bar" class="bg-amber-500 h-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="pt-2 text-[11px] text-slate-500 italic text-center">
+            Akumulasi data keseluruhan peserta skrining secara kolektif telah dicatat dan diperbarui secara anonim di sistem.
+          </div>
+        </div>
+
         <!-- 3 Category Result Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
           
-          <!-- Depresi -->
           <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
@@ -961,12 +1058,9 @@
                 Memuat interpretasi...
               </p>
             </div>
-            <div id="action-dep-box" class="mt-4 pt-3 border-t border-slate-100">
-              <!-- Rendered via JS -->
-            </div>
+            <div id="action-dep-box" class="mt-4 pt-3 border-t border-slate-100"></div>
           </div>
 
-          <!-- Kecemasan -->
           <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
@@ -979,12 +1073,9 @@
                 Memuat interpretasi...
               </p>
             </div>
-            <div id="action-anx-box" class="mt-4 pt-3 border-t border-slate-100">
-              <!-- Rendered via JS -->
-            </div>
+            <div id="action-anx-box" class="mt-4 pt-3 border-t border-slate-100"></div>
           </div>
 
-          <!-- Stres -->
           <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
@@ -997,26 +1088,22 @@
                 Memuat interpretasi...
               </p>
             </div>
-            <div id="action-str-box" class="mt-4 pt-3 border-t border-slate-100">
-              <!-- Rendered via JS -->
-            </div>
+            <div id="action-str-box" class="mt-4 pt-3 border-t border-slate-100"></div>
           </div>
 
         </div>
 
-        <!-- REKOMENDASI ADAPTIF TINDAK LANJUT -->
-        <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3">
-          <!-- Rendered via JS -->
-        </div>
+        <!-- REKOMENDASI -->
+        <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3"></div>
 
-        <!-- DISCLAIMER HASIL WAJIB -->
+        <!-- DISCLAIMER -->
         <div class="bg-amber-50/90 p-6 sm:p-7 rounded-2xl border border-amber-200 text-amber-950 space-y-3">
           <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-900">
             <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 flex-shrink-0"></i>
             <span>PENTING UNTUK DIPAHAMI</span>
           </div>
           <div class="space-y-2 text-xs sm:text-sm leading-relaxed text-amber-900">
-            <p>Hasil DASS-21 ini merupakan hasil skrining awal dan <strong>BUKAN diagnosis final</strong>.</p>
+            <p>Hasil skrining ini merupakan evaluasi awal dan <strong>BUKAN diagnosis final</strong>.</p>
             <p>Hasil ini tidak dapat digunakan sebagai satu-satunya dasar untuk menentukan diagnosis atau kondisi kesehatan mental seseorang.</p>
             <p>Untuk mendapatkan pemahaman yang lebih lengkap mengenai kondisi Anda, silakan berkonsultasi dengan psikolog atau tenaga kesehatan profesional.</p>
             <p class="font-medium bg-white/70 p-3 rounded-xl border border-amber-200/70">
@@ -1025,7 +1112,52 @@
           </div>
         </div>
 
-        <!-- CTA HASIL -->
+        <!-- SURVEI KEPUASAN -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+          <div class="pb-3 border-b border-slate-100">
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Feedback Pengguna</span>
+            <h2 class="text-base font-extrabold text-brand-navy mt-1">Survei Kepuasan Layanan Skrining SEHATI</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Bantu kami meningkatkan kualitas layanan dengan memberikan penilaian Anda.</p>
+          </div>
+
+          <form id="satisfaction-form" onsubmit="event.preventDefault(); submitSatisfactionSurvey();" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Seberapa puas Anda menggunakan layanan skrining ini? (Skala 1 - 10)</label>
+              <div class="flex items-center justify-between gap-1 sm:gap-2">
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="1" required class="mb-1 text-brand-teal focus:ring-brand-teal"> 1</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="2" class="mb-1 text-brand-teal focus:ring-brand-teal"> 2</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="3" class="mb-1 text-brand-teal focus:ring-brand-teal"> 3</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="4" class="mb-1 text-brand-teal focus:ring-brand-teal"> 4</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="5" class="mb-1 text-brand-teal focus:ring-brand-teal"> 5</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="6" class="mb-1 text-brand-teal focus:ring-brand-teal"> 6</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="7" class="mb-1 text-brand-teal focus:ring-brand-teal"> 7</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="8" class="mb-1 text-brand-teal focus:ring-brand-teal"> 8</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="9" class="mb-1 text-brand-teal focus:ring-brand-teal"> 9</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="10" class="mb-1 text-brand-teal focus:ring-brand-teal"> 10</label>
+              </div>
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1 px-1">
+                <span>1 (Sangat Tidak Puas)</span>
+                <span>10 (Sangat Puas)</span>
+              </div>
+            </div>
+
+            <div>
+              <label for="survey-comment" class="block text-xs font-bold text-slate-700 uppercase mb-1">Kolom Komentar / Masukan</label>
+              <textarea id="survey-comment" rows="3" placeholder="Tuliskan saran, kesan, atau masukan Anda terhadap platform SEHATI..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-teal"></textarea>
+            </div>
+
+            <div id="survey-success-alert" class="hidden p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold">
+              Terima kasih! Penilaian dan komentar Anda berhasil direkam.
+            </div>
+
+            <div class="flex justify-end">
+              <button type="submit" class="px-6 py-2.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl transition">
+                Kirim Survei Kepuasan
+              </button>
+            </div>
+          </form>
+        </div>
+
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
           <h2 class="text-sm font-bold text-brand-navy mb-4">Apa yang dapat Anda lakukan selanjutnya?</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto text-xs sm:text-sm">
@@ -1056,14 +1188,12 @@
     <!-- VIEW 8: ADMIN DASHBOARD                          -->
     <!-- ================================================ -->
     <section id="view-admin" class="view-section hidden py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Form Login Admin -->
       <div id="admin-login-panel" class="max-w-md mx-auto bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
         <div class="w-12 h-12 bg-slate-100 text-slate-700 rounded-xl flex items-center justify-center mx-auto mb-4">
           <i data-lucide="lock" class="w-6 h-6"></i>
         </div>
         <h1 class="text-lg font-bold text-center text-brand-navy mb-1">Admin Panel SEHATI</h1>
-        <p class="text-xs text-center text-slate-500 mb-6">Poli Psikologi RSUD Anutapura Palu</p>
+        <p class="text-xs text-center text-slate-500 mb-6">Poli Psikologi RSUD Anutapura Palu[cite: 1]</p>
         
         <form onsubmit="event.preventDefault(); handleAdminLogin();" class="space-y-4">
           <div>
@@ -1077,7 +1207,6 @@
         </form>
       </div>
 
-      <!-- Panel Dashboard Admin -->
       <div id="admin-dashboard-panel" class="hidden">
         <div class="flex flex-col lg:flex-row gap-6">
           <aside class="w-full lg:w-64 bg-white p-5 rounded-2xl border border-slate-200 shadow-sm h-fit">
@@ -1087,7 +1216,7 @@
               </div>
               <div class="flex flex-col">
                 <span class="text-xs font-bold text-brand-navy">Admin SEHATI</span>
-                <span class="text-[10px] text-slate-400">RSUD Anutapura Palu</span>
+                <span class="text-[10px] text-slate-400">RSUD Anutapura Palu[cite: 1]</span>
               </div>
             </div>
 
@@ -1098,8 +1227,11 @@
               <button onclick="switchAdminTab('psychologists')" id="tab-btn-psychologists" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5">
                 <i data-lucide="users" class="w-4 h-4"></i> Kelola Psikolog
               </button>
+              <button onclick="switchAdminTab('analytics')" id="tab-btn-analytics" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5">
+                <i data-lucide="database" class="w-4 h-4"></i> Akumulasi & Survei
+              </button>
               <button onclick="switchAdminTab('testing')" id="tab-btn-testing" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5">
-                <i data-lucide="check-circle" class="w-4 h-4"></i> Uji Scoring DASS-21
+                <i data-lucide="check-circle" class="w-4 h-4"></i> Uji Scoring
               </button>
             </nav>
 
@@ -1111,7 +1243,6 @@
           </aside>
 
           <div class="flex-grow space-y-6">
-            <!-- TAB 1: KELOLA KETERSEDIAAN -->
             <div id="admin-tab-availability" class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
               <div class="mb-6 pb-4 border-b border-slate-100">
                 <h2 class="text-base font-extrabold text-brand-navy">Kelola Ketersediaan Psikolog Hari Ini</h2>
@@ -1127,14 +1258,11 @@
                       <th class="py-3 px-4 text-right">Aksi Toggle</th>
                     </tr>
                   </thead>
-                  <tbody id="admin-availability-tbody" class="divide-y divide-slate-100">
-                    <!-- Populated by JS -->
-                  </tbody>
+                  <tbody id="admin-availability-tbody" class="divide-y divide-slate-100"></tbody>
                 </table>
               </div>
             </div>
 
-            <!-- TAB 2: KELOLA PSIKOLOG -->
             <div id="admin-tab-psychologists" class="hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
               <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
                 <div>
@@ -1146,16 +1274,38 @@
                 </button>
               </div>
 
-              <div id="admin-psychologist-cards" class="space-y-3">
-                <!-- Populated by JS -->
+              <div id="admin-psychologist-cards" class="space-y-3"></div>
+            </div>
+
+            <div id="admin-tab-analytics" class="hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+              <div class="pb-4 border-b border-slate-100">
+                <h2 class="text-base font-extrabold text-brand-navy">Akumulasi Data Skrining & Survei Kepuasan</h2>
+                <p class="text-xs text-slate-500 mt-0.5">Rekapitulasi hasil skrining keseluruhan orang dan masukan survei.</p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="p-4 bg-teal-50 rounded-xl border border-brand-teal/20">
+                  <span class="text-xs font-bold text-brand-teal block">Total Responden Skrining</span>
+                  <span id="stat-total-screening" class="text-2xl font-black text-brand-navy mt-1 block">0</span>
+                </div>
+                <div class="p-4 bg-sky-50 rounded-xl border border-sky-200">
+                  <span class="text-xs font-bold text-sky-700 block">Rata-rata Skor Kepuasan (1-10)</span>
+                  <span id="stat-avg-rating" class="text-2xl font-black text-brand-navy mt-1 block">0.0</span>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-xs font-bold text-slate-700 uppercase mb-3">Daftar Komentar Survei Terbaru</h3>
+                <div id="admin-survey-comments-list" class="space-y-2 max-h-60 overflow-y-auto">
+                  <div class="p-3 bg-slate-50 rounded-xl text-xs text-slate-500">Belum ada komentar survei yang masuk.</div>
+                </div>
               </div>
             </div>
 
-            <!-- TAB 3: UJI SCORING -->
             <div id="admin-tab-testing" class="hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
               <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
                 <div>
-                  <h2 class="text-base font-extrabold text-brand-navy">Automated Unit Testing — Scoring DASS-21</h2>
+                  <h2 class="text-base font-extrabold text-brand-navy">Automated Unit Testing — Scoring</h2>
                   <p class="text-xs text-slate-500 mt-0.5">Pengujian keakuratan perkalian ×2, batas rentang kategori, dan mapping domain.</p>
                 </div>
                 <button onclick="runDassUnitTests()" class="px-3.5 py-2 bg-brand-teal text-white text-xs font-bold rounded-xl hover:bg-brand-teal-dark transition flex items-center gap-1.5">
@@ -1165,7 +1315,7 @@
 
               <div id="test-results-container" class="space-y-2 font-mono text-xs">
                 <div class="p-4 bg-slate-50 rounded-xl text-slate-500">
-                  Klik tombol <strong>"Jalankan Tes"</strong> di atas untuk memverifikasi 10 test case standar DASS-21.
+                  Klik tombol <strong>"Jalankan Tes"</strong> di atas untuk memverifikasi test case standar.
                 </div>
               </div>
             </div>
@@ -1173,14 +1323,11 @@
           </div>
         </div>
       </div>
-
     </section>
 
   </main>
 
-  <!-- ================================================ -->
-  <!-- MODAL EDIT/TAMBAH PSIKOLOG                       -->
-  <!-- ================================================ -->
+  <!-- MODAL EDIT/TAMBAH PSIKOLOG -->
   <div id="psychologist-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
@@ -1218,24 +1365,22 @@
     </div>
   </div>
 
-  <!-- ==================================================== -->
-  <!-- FOOTER                                               -->
-  <!-- ==================================================== -->
+  <!-- FOOTER -->
   <footer class="bg-white border-t border-slate-200 mt-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
         
         <div class="md:col-span-1">
           <div class="flex items-center gap-2.5 mb-3">
-  <img src="logo-palu.jpg" alt="Logo Kota Palu" class="h-9 w-auto object-contain" />
-  <img src="RS.jpg" alt="Logo RSAP" class="h-9 w-auto object-contain" />
-  <div class="flex flex-col">
-    <span class="text-xs font-black text-brand-teal">SEHATI</span>
-    <span class="text-[10px] font-bold text-brand-navy">RSUD ANUTAPURA PALU</span>
-  </div>
-</div>
+            <img src="logo-palu.jpg" alt="Logo Kota Palu" class="h-9 w-auto object-contain" onerror="this.src='https://via.placeholder.com/36?text=Palu';" />
+            <img src="RS.jpg" alt="Logo RSAP" class="h-9 w-auto object-contain" onerror="this.src='https://via.placeholder.com/36?text=RSAP';" />
+            <div class="flex flex-col">
+              <span class="text-xs font-black text-brand-teal">SEHATI</span>
+              <span class="text-[10px] font-bold text-brand-navy">RSUD ANUTAPURA PALU[cite: 1]</span>
+            </div>
+          </div>
           <p class="text-xs text-slate-500 leading-relaxed">
-            Sahabat Edukatif, Humanis, Adaptif, Tanggap, dan Informatif. Layanan terpadu kesehatan mental Poli Psikologi RSUD Anutapura Palu.
+            Sahabat Edukatif, Humanis, Adaptif, Tanggap, dan Informatif. Layanan terpadu kesehatan mental Poli Psikologi RSUD Anutapura Palu[cite: 1].
           </p>
         </div>
 
@@ -1275,17 +1420,14 @@
       </div>
 
       <div class="pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
-        <p>© 2026 SEHATI — Poli Psikologi RSUD Anutapura Palu & Pemerintah Kota Palu.</p>
-        <p class="italic">Instrumen DASS-21 digunakan untuk evaluasi awal mandiri dan bukan pengganti diagnosis dokter/psikolog.</p>
+        <p>© 2026 SEHATI — Poli Psikologi RSUD Anutapura Palu[cite: 1] & Pemerintah Kota Palu.</p>
+        <p class="italic">Instrumen skrining digunakan untuk evaluasi awal mandiri dan bukan pengganti diagnosis dokter/psikolog.</p>
       </div>
     </div>
   </footer>
 
-  <!-- ==================================================== -->
-  <!-- JAVASCRIPT: LOGIKA SISTEM, SKOR & REKOMENDASI ADAPTIF -->
-  <!-- ==================================================== -->
+  <!-- SCRIPT -->
   <script>
-    /* 1. MAPPING INSTRUMEN RESMI DASS-21 */
     const DASS21_ITEMS = [
       { id: 1, text: "Saya merasa sulit untuk menenangkan diri", domain: "stress" },
       { id: 2, text: "Saya menyadari mulut saya terasa kering", domain: "anxiety" },
@@ -1310,14 +1452,13 @@
       { id: 21, text: "Saya merasa bahwa hidup ini tidak berarti", domain: "depression" }
     ];
 
-    /* 2. DATA DASAR PSIKOLOG KLINIS */
     const INITIAL_PSYCHOLOGISTS = [
       {
         id: "psy-1",
         name: "Octaviani Evelyn Balebu, M. Psi., Psikolog",
         degree: "M. Psi., Psikolog",
         photo: null,
-        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang menangani konseling dan psikoterapi individu.",
+        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu[cite: 1] yang menangani konseling dan psikoterapi individu.",
         specialization: "Layanan Psikologi Klinis",
         availability: true,
         active: true
@@ -1327,7 +1468,7 @@
         name: "Moh. Anshar, M. Psi., Psikolog",
         degree: "M. Psi., Psikolog",
         photo: null,
-        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang menangani asesmen psikologi dan konseling.",
+        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu[cite: 1] yang menangani asesmen psikologi dan konseling.",
         specialization: "Layanan Psikologi Klinis",
         availability: true,
         active: true
@@ -1337,7 +1478,7 @@
         name: "Ahmad Yusuf Wibowo, M. Psi., Psikolog",
         degree: "M. Psi., Psikolog",
         photo: null,
-        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang menangani evaluasi dan pendampingan psikologis.",
+        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu[cite: 1] yang menangani evaluasi dan pendampingan psikologis.",
         specialization: "Layanan Psikologi Klinis",
         availability: false,
         active: true
@@ -1347,7 +1488,7 @@
         name: "Indri Sutrisna Widyaningsih, M. Psi., Psikolog",
         degree: "M. Psi., Psikolog",
         photo: null,
-        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang berfokus pada intervensi psikososial dan terapi adaptif.",
+        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu[cite: 1] yang berfokus pada intervensi psikososial dan terapi adaptif.",
         specialization: "Layanan Psikologi Klinis",
         availability: true,
         active: true
@@ -1370,12 +1511,57 @@
       renderAdminPsychologistsList();
     }
 
-    /* 3. CLIENT-SIDE IN-MEMORY STATE */
+    function getAccumulatedData() {
+      const stored = localStorage.getItem("sehati_accumulated_data");
+      if (!stored) {
+        const initial = { totalScreenings: 142, ratings: [9, 8, 10, 9, 8], comments: ["Sangat membantu untuk skrining awal mandiri.", "Informasi alur rujukan jelas."] };
+        localStorage.setItem("sehati_accumulated_data", JSON.stringify(initial));
+        return initial;
+      }
+      return JSON.parse(stored);
+    }
+
+    function recordNewScreeningAndSurvey(rating, comment) {
+      const data = getAccumulatedData();
+      data.totalScreenings += 1;
+      if (rating) {
+        data.ratings.push(parseInt(rating));
+      }
+      if (comment && comment.trim() !== "") {
+        data.comments.unshift(comment.trim());
+      }
+      localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
+      updateAdminAnalyticsDisplay();
+    }
+
+    function updateAdminAnalyticsDisplay() {
+      const data = getAccumulatedData();
+      const totalEl = document.getElementById("stat-total-screening");
+      const avgEl = document.getElementById("stat-avg-rating");
+      const commentsListEl = document.getElementById("admin-survey-comments-list");
+
+      if (totalEl) totalEl.innerText = data.totalScreenings;
+      if (avgEl && data.ratings.length > 0) {
+        const sum = data.ratings.reduce((a, b) => a + b, 0);
+        avgEl.innerText = (sum / data.ratings.length).toFixed(1);
+      }
+      if (commentsListEl) {
+        if (data.comments.length === 0) {
+          commentsListEl.innerHTML = `<div class="p-3 bg-slate-50 rounded-xl text-xs text-slate-500">Belum ada komentar survei yang masuk.</div>`;
+        } else {
+          commentsListEl.innerHTML = data.comments.map(c => `
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700">
+              "${c}"
+            </div>
+          `).join("");
+        }
+      }
+    }
+
     let screeningUserData = { name: "", age: "", gender: "", phone: "" };
     let currentQuestionIndex = 0;
     let answers = new Array(21).fill(null);
 
-    /* 4. ROUTING */
     function navigateTo(viewId) {
       document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
       const target = document.getElementById("view-" + viewId);
@@ -1384,7 +1570,10 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
       if (viewId === "psikolog") renderPublicPsychologists();
-      if (viewId === "admin") initAdminView();
+      if (viewId === "admin") {
+        initAdminView();
+        updateAdminAnalyticsDisplay();
+      }
       lucide.createIcons();
     }
 
@@ -1393,7 +1582,6 @@
       menu.classList.toggle("hidden");
     }
 
-    /* 5. KONTROL ALUR SKRINING */
     function startScreeningFlow() {
       navigateTo("screening");
       goToScreeningStep("intro");
@@ -1503,7 +1691,6 @@
       }
     }
 
-    /* 6. PERHITUNGAN SKOR & KLASIFIKASI DASS-21 */
     function computeDassScores(answersArray) {
       const depressionIndices = [2, 4, 9, 12, 15, 16, 20];
       const anxietyIndices    = [1, 3, 6, 8, 14, 18, 19];
@@ -1572,7 +1759,6 @@
       }
     }
 
-    /* 7. KONTEN TIPS & SARAN ADAPTIF */
     function renderDomainActionBox(domain, category) {
       if (category === "Normal") {
         return `
@@ -1590,25 +1776,25 @@
         if (domain === "depression") {
           tipsHtml = `
             <ul class="list-disc list-inside space-y-1 text-[11px] text-blue-900 leading-relaxed mt-1">
-              <li>Lakukan jalan santai pagi 10–15 menit.</li>
-              <li>Tetapkan target kecil yang realistis setiap hari.</li>
-              <li>Berceritalah dengan sahabat atau orang terdekat.</li>
+              <li>Lakukan jalan santai pagi 10–15 menit untuk meningkatkan endorfin.</li>
+              <li>Pecah tugas harian menjadi target kecil yang realistis.</li>
+              <li>Berceritalah dengan sahabat atau orang terdekat yang dapat dipercaya.</li>
             </ul>
           `;
         } else if (domain === "anxiety") {
           tipsHtml = `
             <ul class="list-disc list-inside space-y-1 text-[11px] text-blue-900 leading-relaxed mt-1">
-              <li>Latihan napas lambat 4 hitungan masuk, 4 tahan, 4 hembus.</li>
-              <li>Praktikkan teknik grounding 5-4-3-2-1 saat merasa cemas.</li>
-              <li>Batasi konsumsi kopi, teh pekat, atau minuman berkafein.</li>
+              <li>Latihan pernapasan relaksasi (tarik napas 4 detik, tahan 4 detik, hembus 4 detik).</li>
+              <li>Gunakan teknik grounding (sebutkan 5 hal yang dilihat, 4 yang diraba, dll).</li>
+              <li>Kurangi konsumsi kafein berlebih yang dapat memicu debar jantung.</li>
             </ul>
           `;
         } else {
           tipsHtml = `
             <ul class="list-disc list-inside space-y-1 text-[11px] text-blue-900 leading-relaxed mt-1">
-              <li>Tuliskan daftar tugas dan urutkan berdasarkan prioritas.</li>
-              <li>Ambil jeda istirahat 5 menit setiap 1 jam bekerja/belajar.</li>
-              <li>Kurangi paparan layar gawai 30 menit sebelum tidur.</li>
+              <li>Tuliskan beban pikiran dalam jurnal harian (brain dumping).</li>
+              <li>Ambil jeda istirahat teratur (prinsip jeda 5 menit setiap 1 jam aktivitas).</li>
+              <li>Batasi multitasking dan tetapkan prioritas pekerjaan yang utama.</li>
             </ul>
           `;
         }
@@ -1616,21 +1802,20 @@
         return `
           <div class="p-3 bg-blue-50/80 border border-blue-200 rounded-xl text-xs text-blue-950">
             <span class="font-bold flex items-center gap-1.5 text-blue-800">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-600"></i> Tips Penanganan Mandiri:
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-600"></i> Langkah Peredaan Mandiri (Ringan):
             </span>
             ${tipsHtml}
           </div>
         `;
       }
 
-      // Kategori Sedang, Berat, dan Sangat Berat
       return `
         <div class="p-3 bg-amber-50/90 border border-amber-300 rounded-xl text-xs text-amber-950">
           <span class="font-bold flex items-center gap-1.5 text-amber-900 mb-1">
             <i data-lucide="user-check" class="w-3.5 h-3.5 text-amber-700"></i> Disarankan Konsultasi:
           </span>
           <p class="text-[11px] leading-relaxed text-amber-900">
-            Tingkat gejala ini membutuhkan penanganan menyeluruh. Segera konsultasikan dengan <strong>Psikolog Klinis Poli Psikologi RSUD Anutapura Palu</strong> untuk asesmen dan evaluasi lebih lanjut.
+            Tingkat gejala ini membutuhkan penanganan menyeluruh. Segera konsultasikan dengan <strong>Psikolog Klinis Poli Psikologi RSUD Anutapura Palu[cite: 1]</strong> untuk asesmen dan evaluasi lebih lanjut.
           </p>
         </div>
       `;
@@ -1689,9 +1874,9 @@
               <i data-lucide="info" class="w-5 h-5"></i>
             </div>
             <div>
-              <h3 class="text-sm font-bold text-blue-950">Rekomendasi Tindak Lanjut: Perawatan Mandiri</h3>
+              <h3 class="text-sm font-bold text-blue-950">Rekomendasi Tindak Lanjut: Perawatan & Peredaan Mandiri</h3>
               <p class="text-xs text-blue-900 leading-relaxed mt-1">
-                Hasil skrining Anda menunjukkan tingkat gejala <strong>ringan</strong>. Terapkan tips mandiri di atas selama 1–2 minggu ke depan. Bila keluhan tidak kunjung membaik atau justru semakin memberat, pertimbangkan untuk menjadwalkan konsultasi di Poli Psikologi RSUD Anutapura Palu.
+                Hasil skrining Anda menunjukkan tingkat gejala <strong>ringan</strong>. Terapkan tips peredaan mandiri di atas selama 1–2 minggu ke depan. Bila keluhan tidak kunjung membaik atau justru semakin memberat, pertimbangkan untuk menjadwalkan konsultasi di Poli Psikologi RSUD Anutapura Palu[cite: 1].
               </p>
             </div>
           </div>
@@ -1704,7 +1889,19 @@
 
       document.getElementById("result-user-name").innerText = `Hasil skrining untuk ${screeningUserData.name || 'Pengguna'}`;
 
-      // Depresi
+      const depPct = Math.min(100, Math.round((results.depression.final / 42) * 100));
+      const anxPct = Math.min(100, Math.round((results.anxiety.final / 42) * 100));
+      const strPct = Math.min(100, Math.round((results.stress.final / 42) * 100));
+
+      document.getElementById("chart-dep-val").innerText = `${results.depression.final} (${results.depression.category})`;
+      document.getElementById("chart-dep-bar").style.width = `${depPct}%`;
+
+      document.getElementById("chart-anx-val").innerText = `${results.anxiety.final} (${results.anxiety.category})`;
+      document.getElementById("chart-anx-bar").style.width = `${anxPct}%`;
+
+      document.getElementById("chart-str-val").innerText = `${results.stress.final} (${results.stress.category})`;
+      document.getElementById("chart-str-bar").style.width = `${strPct}%`;
+
       document.getElementById("score-dep-val").innerText = results.depression.final;
       const depBadge = document.getElementById("badge-dep-category");
       depBadge.innerText = results.depression.category;
@@ -1712,7 +1909,6 @@
       document.getElementById("interpret-dep-text").innerText = getInterpretationText(results.depression.category);
       document.getElementById("action-dep-box").innerHTML = renderDomainActionBox("depression", results.depression.category);
 
-      // Kecemasan
       document.getElementById("score-anx-val").innerText = results.anxiety.final;
       const anxBadge = document.getElementById("badge-anx-category");
       anxBadge.innerText = results.anxiety.category;
@@ -1720,7 +1916,6 @@
       document.getElementById("interpret-anx-text").innerText = getInterpretationText(results.anxiety.category);
       document.getElementById("action-anx-box").innerHTML = renderDomainActionBox("anxiety", results.anxiety.category);
 
-      // Stres
       document.getElementById("score-str-val").innerText = results.stress.final;
       const strBadge = document.getElementById("badge-str-category");
       strBadge.innerText = results.stress.category;
@@ -1728,11 +1923,30 @@
       document.getElementById("interpret-str-text").innerText = getInterpretationText(results.stress.category);
       document.getElementById("action-str-box").innerHTML = renderDomainActionBox("stress", results.stress.category);
 
-      // Rekomendasi Umum
       renderOverallGuidance(results.depression.category, results.anxiety.category, results.stress.category);
+
+      recordNewScreeningAndSurvey(null, null);
 
       goToScreeningStep("results");
       lucide.createIcons();
+    }
+
+    function submitSatisfactionSurvey() {
+      const selectedRating = document.querySelector('input[name="rating-score"]:checked');
+      const commentText = document.getElementById("survey-comment").value;
+      const successAlert = document.getElementById("survey-success-alert");
+
+      if (!selectedRating) {
+        alert("Silakan pilih rating kepuasan terlebih dahulu (skala 1-10).");
+        return;
+      }
+
+      recordNewScreeningAndSurvey(selectedRating.value, commentText);
+      successAlert.classList.remove("hidden");
+      document.getElementById("satisfaction-form").reset();
+      setTimeout(() => {
+        successAlert.classList.add("hidden");
+      }, 4000);
     }
 
     function restartScreening() {
@@ -1741,7 +1955,6 @@
       goToScreeningStep("intro");
     }
 
-    /* 8. RENDER DAFTAR PSIKOLOG PUBLIK */
     function renderPublicPsychologists() {
       const container = document.getElementById("public-psychologist-grid");
       if (!container) return;
@@ -1779,7 +1992,6 @@
       lucide.createIcons();
     }
 
-    /* 9. PENGENDALI ADMIN */
     let isAdminAuthenticated = false;
 
     function initAdminView() {
@@ -1788,6 +2000,7 @@
         document.getElementById("admin-dashboard-panel").classList.remove("hidden");
         renderAdminAvailabilityTable();
         renderAdminPsychologistsList();
+        updateAdminAnalyticsDisplay();
       } else {
         document.getElementById("admin-login-panel").classList.remove("hidden");
         document.getElementById("admin-dashboard-panel").classList.add("hidden");
@@ -1816,10 +2029,12 @@
     function switchAdminTab(tabName) {
       document.getElementById("admin-tab-availability").classList.add("hidden");
       document.getElementById("admin-tab-psychologists").classList.add("hidden");
+      document.getElementById("admin-tab-analytics").classList.add("hidden");
       document.getElementById("admin-tab-testing").classList.add("hidden");
 
       document.getElementById("tab-btn-availability").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5";
       document.getElementById("tab-btn-psychologists").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5";
+      document.getElementById("tab-btn-analytics").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5";
       document.getElementById("tab-btn-testing").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5";
 
       document.getElementById(`admin-tab-${tabName}`).classList.remove("hidden");
@@ -1944,7 +2159,6 @@
       closePsychologistModal();
     }
 
-    /* 10. TEST SUITE DASS-21 */
     function runDassUnitTests() {
       const container = document.getElementById("test-results-container");
       const tests = [];
@@ -2026,7 +2240,6 @@
       `;
     }
 
-    /* 11. INITIALIZATION */
     document.addEventListener("DOMContentLoaded", () => {
       lucide.createIcons();
       getPsychologists();
