@@ -118,21 +118,20 @@
     </div>
   </header>
 
-    <!-- Menu Dropdown Mobile -->
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg">
-      <button onclick="navigateTo('home'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Beranda</button>
-      <button onclick="navigateTo('edukasi'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikoedukasi</button>
-      <button onclick="navigateTo('layanan'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Layanan & Rujukan</button>
-      <button onclick="navigateTo('psikolog'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikolog Klinis</button>
-      <button onclick="navigateTo('tentang'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Tentang SEHATI</button>
-      <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
-        <button onclick="startScreeningFlow(); toggleMobileMenu()" class="w-full py-2.5 bg-brand-teal text-white rounded-xl text-xs font-bold text-center">Mulai Skrining</button>
-        <button onclick="navigateTo('admin'); toggleMobileMenu()" class="w-full py-2 text-slate-500 hover:text-slate-800 text-xs font-semibold text-center flex items-center justify-center gap-1">
-          <i data-lucide="shield" class="w-3.5 h-3.5"></i> Admin Dashboard
-        </button>
-      </div>
+  <!-- Menu Dropdown Mobile -->
+  <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg">
+    <button onclick="navigateTo('home'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Beranda</button>
+    <button onclick="navigateTo('edukasi'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikoedukasi</button>
+    <button onclick="navigateTo('layanan'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Layanan & Rujukan</button>
+    <button onclick="navigateTo('psikolog'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikolog Klinis</button>
+    <button onclick="navigateTo('tentang'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Tentang SEHATI</button>
+    <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+      <button onclick="startScreeningFlow(); toggleMobileMenu()" class="w-full py-2.5 bg-brand-teal text-white rounded-xl text-xs font-bold text-center">Mulai Skrining</button>
+      <button onclick="navigateTo('admin'); toggleMobileMenu()" class="w-full py-2 text-slate-500 hover:text-slate-800 text-xs font-semibold text-center flex items-center justify-center gap-1">
+        <i data-lucide="shield" class="w-3.5 h-3.5"></i> Admin Dashboard
+      </button>
     </div>
-  </header>
+  </div>
 
   <!-- ==================================================== -->
   <!-- MAIN APP CONTAINER                                   -->
@@ -148,7 +147,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="max-w-3xl mx-auto text-center">
             
-            <!-- Logo SEHATI Ditambahkan di Sini (Di Atas Badge Akronim) -->
+            <!-- Logo SEHATI -->
             <div class="flex justify-center mb-5">
               <img src="logo-sehati.png" alt="Logo SEHATI" class="h-20 sm:h-24 w-auto object-contain drop-shadow-md rounded-2xl" onerror="this.src='https://via.placeholder.com/96?text=SEHATI';" />
             </div>
@@ -641,37 +640,37 @@
         <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1 mb-2">Kontak RSUD Anutapura Palu</h1>
         <p class="text-slate-600 text-xs sm:text-sm mb-6">Hubungi kami atau kunjungi langsung unit layanan Poli Psikologi pada jam operasional rawat jalan.</p>
         
-        <div class="space-y-4 text-xs sm:text-sm text-slate-700">
-          <div class="flex items-start gap-3.5 p-4 bg-slate-50 rounded-xl border border-slate-200/80">
+        <div class="space-y-3 text-xs sm:text-sm text-slate-700">
+          <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200/80">
             <i data-lucide="map-pin" class="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5"></i>
             <div>
-              <span class="font-bold text-slate-900 block">Alamat Rumah Sakit</span>
-              <span class="text-slate-600">Jl. Kangkung No. 1, Kel. Donggala Kodi, Kec. Palu Barat, Kota Palu, Sulawesi Tengah 94221</span>
+              <span class="font-bold text-slate-900 block mb-0.5">Alamat Rumah Sakit</span>
+              <span class="text-slate-600 leading-snug">Jl. Kangkung No. 1, Kel. Donggala Kodi, Kec. Palu Barat, Kota Palu, Sulawesi Tengah 94221</span>
             </div>
           </div>
 
-          <div class="flex items-start gap-3.5 p-4 bg-slate-50 rounded-xl border border-slate-200/80">
+          <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200/80">
             <i data-lucide="phone-call" class="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5"></i>
             <div>
-              <span class="font-bold text-slate-900 block">Telepon / Call Center Resmi</span>
+              <span class="font-bold text-slate-900 block mb-0.5">Telepon / Call Center Resmi</span>
               <a href="tel:082227249685" class="text-brand-teal font-bold hover:underline">0822 2724 9685</a>
             </div>
           </div>
 
-          <div class="flex items-start gap-3.5 p-4 bg-slate-50 rounded-xl border border-slate-200/80">
+          <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200/80">
             <i data-lucide="mail" class="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5"></i>
             <div>
-              <span class="font-bold text-slate-900 block">Email Resmi</span>
+              <span class="font-bold text-slate-900 block mb-0.5">Email Resmi</span>
               <a href="mailto:rsu.anutapurapalu@yahoo.com" class="text-brand-teal font-bold hover:underline">rsu.anutapurapalu@yahoo.com</a>
             </div>
           </div>
 
-          <div class="flex items-start gap-3.5 p-4 bg-slate-50 rounded-xl border border-slate-200/80">
+          <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200/80">
             <i data-lucide="instagram" class="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5"></i>
             <div>
-              <span class="font-bold text-slate-900 block">Media Sosial Instagram</span>
-              <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="text-brand-teal font-bold hover:underline flex items-center gap-1.5 mt-0.5">
-                <i data-lucide="instagram" class="w-3.5 h-3.5"></i> @rsud_anutapurapalu
+              <span class="font-bold text-slate-900 block mb-0.5">Media Sosial Instagram</span>
+              <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="text-brand-teal font-bold hover:underline inline-flex items-center gap-1.5">
+                <i data-lucide="instagram" class="w-4 h-4 text-brand-teal"></i> @rsud_anutapurapalu
               </a>
             </div>
           </div>
@@ -1351,13 +1350,13 @@
   <!-- FOOTER                                               -->
   <!-- ==================================================== -->
   <footer class="bg-white border-t border-slate-200 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
         
         <div class="md:col-span-1">
-          <div class="flex items-center gap-2.5 mb-3">
-            <img src="logo-palu.png" alt="Logo Kota Palu" class="h-8 w-auto object-contain" onerror="this.src='https://via.placeholder.com/32?text=Palu';" />
-            <img src="RS.png" alt="Logo RSAP" class="h-8 w-auto object-contain" onerror="this.src='https://via.placeholder.com/32?text=RSAP';" />
+          <div class="flex items-center gap-2 mb-2.5">
+            <img src="logo-palu.png" alt="Logo Kota Palu" class="h-7 w-auto object-contain" onerror="this.src='https://via.placeholder.com/32?text=Palu';" />
+            <img src="RS.png" alt="Logo RSAP" class="h-7 w-auto object-contain" onerror="this.src='https://via.placeholder.com/32?text=RSAP';" />
             <div class="flex flex-col">
               <span class="text-xs font-black text-brand-teal">SEHATI</span>
               <span class="text-[10px] font-bold text-brand-navy">RSUD ANUTAPURA PALU</span>
@@ -1369,8 +1368,8 @@
         </div>
 
         <div>
-          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-3">Menu Utama</h2>
-          <ul class="space-y-2 text-xs text-slate-600">
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-2.5">Menu Utama</h2>
+          <ul class="space-y-1.5 text-xs text-slate-600">
             <li><a href="#home" onclick="navigateTo('home')" class="hover:text-brand-teal">Beranda</a></li>
             <li><a href="#edukasi" onclick="navigateTo('edukasi')" class="hover:text-brand-teal">Psikoedukasi</a></li>
             <li><a href="#layanan" onclick="navigateTo('layanan')" class="hover:text-brand-teal">Layanan & Rujukan</a></li>
@@ -1380,7 +1379,7 @@
         </div>
 
         <div class="md:col-span-2">
-          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-3">Kontak Resmi & Alamat</h2>
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-2.5">Kontak Resmi & Alamat</h2>
           <div class="space-y-2 text-xs text-slate-600 leading-relaxed">
             <p class="flex items-start gap-2">
               <i data-lucide="map-pin" class="w-4 h-4 text-brand-teal flex-shrink-0 mt-0.5"></i>
@@ -1396,14 +1395,14 @@
             </p>
             <p class="flex items-center gap-2">
               <i data-lucide="instagram" class="w-4 h-4 text-brand-teal flex-shrink-0"></i>
-              <span>Instagram: <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-800 hover:text-brand-teal inline-flex items-center gap-1"><i data-lucide="instagram" class="w-3.5 h-3.5"></i> @rsud_anutapurapalu</a></span>
+              <span>Instagram: <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-800 hover:text-brand-teal inline-flex items-center gap-1.5"><i data-lucide="instagram" class="w-3.5 h-3.5 text-brand-teal"></i> @rsud_anutapurapalu</a></span>
             </p>
           </div>
         </div>
 
       </div>
 
-      <div class="pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
+      <div class="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
         <p>© 2026 SEHATI — Poli Psikologi RSUD Anutapura Palu & Pemerintah Kota Palu.</p>
         <p class="italic">Hasil skrining merupakan gambaran awal kondisi psikologis dan bukan diagnosis. Untuk mendapatkan penilaian dan penanganan lebih lanjut, konsultasikan dengan dokter atau psikolog.</p>
       </div>
