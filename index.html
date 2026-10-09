@@ -195,7 +195,7 @@
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <button onclick="startScreeningFlow()" class="w-full sm:w-auto px-8 py-3.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-sm rounded-xl shadow-md transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+              <button onclick="startScreeningFlow()" class="w-full sm:w-auto px-8 py-3.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-sm rounded-xl shadow-sm transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
                 <i data-lucide="clipboard-check" class="w-4 h-4"></i>
                 <span>Mulai Skrining</span>
               </button>
@@ -998,14 +998,7 @@
       <!-- STEP 7: HASIL, DIAGRAM, REKOMENDASI & SURVEI -->
       <div id="step-results" class="screening-step hidden space-y-6">
         
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center relative">
-          <!-- Tombol Download Hasil Skrining bagi Pasien/Pengunjung -->
-          <div class="absolute top-4 right-4 no-print">
-            <button onclick="downloadPatientResultReport()" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition">
-              <i data-lucide="download" class="w-4 h-4"></i> Download Hasil (PDF/Print)
-            </button>
-          </div>
-
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
           <span class="text-xs font-bold uppercase tracking-widest text-brand-teal">Laporan Evaluasi Awal SEHATI</span>
           <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1">Hasil Skrining Anda</h1>
           <p id="result-user-name" class="text-slate-600 text-xs sm:text-sm mt-1 font-medium">Hasil skrining untuk Pengguna</p>
@@ -1125,7 +1118,7 @@
         </div>
 
         <!-- SURVEI KEPUASAN -->
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5 no-print">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5">
           <div class="pb-3 border-b border-slate-100">
             <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Feedback Pengguna</span>
             <h2 class="text-base font-extrabold text-brand-navy mt-1">Survei Kepuasan Layanan Skrining SEHATI</h2>
@@ -1170,7 +1163,7 @@
           </form>
         </div>
 
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center no-print">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
           <h2 class="text-sm font-bold text-brand-navy mb-4">Apa yang dapat Anda lakukan selanjutnya?</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto text-xs sm:text-sm">
             <button onclick="navigateTo('psikolog')" class="px-4 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold rounded-xl transition flex items-center justify-center gap-2">
@@ -1241,9 +1234,6 @@
               </button>
               <button onclick="switchAdminTab('analytics')" id="tab-btn-analytics" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5">
                 <i data-lucide="database" class="w-4 h-4"></i> Akumulasi & Survei
-              </button>
-              <button onclick="switchAdminTab('respondents')" id="tab-btn-respondents" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5">
-                <i data-lucide="users" class="w-4 h-4"></i> Data Responden
               </button>
               <button onclick="switchAdminTab('testing')" id="tab-btn-testing" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5">
                 <i data-lucide="check-circle" class="w-4 h-4"></i> Uji Scoring
@@ -1317,36 +1307,6 @@
               </div>
             </div>
 
-            <!-- TAB ADMIN: DATA KESELURUHAN RESPONDEN & DIAGRAM DETAIL -->
-            <div id="admin-tab-respondents" class="hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-              <div class="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div>
-                  <h2 class="text-base font-extrabold text-brand-navy">Data Keseluruhan Responden Skrining</h2>
-                  <p class="text-xs text-slate-500 mt-0.5">Daftar lengkap biodata, diagram skor per orang, komentar, dan hasil penilaian.</p>
-                </div>
-                <button onclick="exportRespondentsCSV()" class="px-3.5 py-2 bg-slate-800 text-white text-xs font-bold rounded-xl hover:bg-slate-900 transition flex items-center gap-1.5">
-                  <i data-lucide="download" class="w-3.5 h-3.5"></i> Export Data CSV
-                </button>
-              </div>
-
-              <div class="overflow-x-auto">
-                <table class="w-full text-left text-xs">
-                  <thead>
-                    <tr class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200">
-                      <th class="py-3 px-3">Waktu & Identitas</th>
-                      <th class="py-3 px-3">Usia / JK / Telp</th>
-                      <th class="py-3 px-3">Skor & Kategori DASS-21</th>
-                      <th class="py-3 px-3">Komentar / Masukan</th>
-                      <th class="py-3 px-3 text-right">Aksi Detail</th>
-                    </tr>
-                  </thead>
-                  <tbody id="admin-respondents-tbody" class="divide-y divide-slate-100">
-                    <tr><td colspan="5" class="py-4 text-center text-slate-400">Belum ada data responden yang terekam.</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
             <div id="admin-tab-testing" class="hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
               <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
                 <div>
@@ -1371,28 +1331,6 @@
     </section>
 
   </main>
-
-  <!-- MODAL ADMIN: LIHAT DETAIL DIAGRAM & PENILAIAN PER ORANG -->
-  <div id="admin-detail-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto space-y-4">
-      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-        <h3 class="text-sm font-bold text-brand-navy flex items-center gap-2">
-          <i data-lucide="user-check" class="w-4 h-4 text-brand-teal"></i> Detail Responden & Diagram Skor
-        </h3>
-        <button onclick="closeAdminDetailModal()" class="text-slate-400 hover:text-slate-700">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <div id="admin-modal-content" class="space-y-4 text-xs">
-        <!-- Diisi dinamis via JavaScript -->
-      </div>
-
-      <div class="flex justify-end pt-3 border-t border-slate-100">
-        <button onclick="closeAdminDetailModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl">Tutup</button>
-      </div>
-    </div>
-  </div>
 
   <!-- MODAL EDIT/TAMBAH PSIKOLOG -->
   <div id="psychologist-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
@@ -1456,11 +1394,11 @@
         <div>
           <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-2.5">Menu Utama</h2>
           <ul class="space-y-1.5 text-xs text-slate-600">
-            <li><a href="#home" onclick="event.preventDefault(); navigateTo('home')" class="hover:text-brand-teal">Beranda</a></li>
-            <li><a href="#edukasi" onclick="event.preventDefault(); navigateTo('edukasi')" class="hover:text-brand-teal">Psikoedukasi</a></li>
-            <li><a href="#layanan" onclick="event.preventDefault(); navigateTo('layanan')" class="hover:text-brand-teal">Layanan & Rujukan</a></li>
-            <li><a href="#psikolog" onclick="event.preventDefault(); navigateTo('psikolog')" class="hover:text-brand-teal">Psikolog Klinis</a></li>
-            <li><a href="#tentang" onclick="event.preventDefault(); navigateTo('tentang')" class="hover:text-brand-teal">Tentang SEHATI</a></li>
+            <li><a href="#home" onclick="navigateTo('home')" class="hover:text-brand-teal">Beranda</a></li>
+            <li><a href="#edukasi" onclick="navigateTo('edukasi')" class="hover:text-brand-teal">Psikoedukasi</a></li>
+            <li><a href="#layanan" onclick="navigateTo('layanan')" class="hover:text-brand-teal">Layanan & Rujukan</a></li>
+            <li><a href="#psikolog" onclick="navigateTo('psikolog')" class="hover:text-brand-teal">Psikolog Klinis</a></li>
+            <li><a href="#tentang" onclick="navigateTo('tentang')" class="hover:text-brand-teal">Tentang SEHATI</a></li>
           </ul>
         </div>
 
@@ -1481,7 +1419,7 @@
             </p>
             <p class="flex items-center gap-2">
               <i data-lucide="instagram" class="w-4 h-4 text-brand-teal flex-shrink-0"></i>
-              <span>instagram: <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-800 hover:text-brand-teal inline-flex items-center gap-1 ml-1"><i data-lucide="instagram" class="w-3.5 h-3.5"></i>@rsud_anutapura palu</a></span>
+              <span>Instagram: <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-800 hover:text-brand-teal inline-flex items-center gap-1 ml-1"><i data-lucide="instagram" class="w-3.5 h-3.5"></i>@rsud_anutapurapalu</a></span>
             </p>
           </div>
         </div>
@@ -1527,7 +1465,7 @@
         name: "Octaviani Evelyn Balebu, M. Psi., Psikolog",
         degree: "M. Psi., Psikolog",
         photo: null,
-        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang menangani konseling dan psikoterapi individu.",
+        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang menangani konseling dan psikoterapi individu.<br>STR: 720272124-3456789<br>SIPPK: 445/123/Poli-Psi/2026",
         specialization: "Layanan Psikologi Klinis",
         availability: true,
         active: true
@@ -1537,7 +1475,7 @@
         name: "Moh. Anshar, M. Psi., Psikolog",
         degree: "M. Psi., Psikolog",
         photo: null,
-        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang menangani asesmen psikologi dan konseling.",
+        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang menangani asesmen psikologi dan konseling.<br>STR: 720272224-3456790<br>SIPPK: 445/124/Poli-Psi/2026",
         specialization: "Layanan Psikologi Klinis",
         availability: true,
         active: true
@@ -1547,7 +1485,7 @@
         name: "Ahmad Yusuf Wibowo, M. Psi., Psikolog",
         degree: "M. Psi., Psikolog",
         photo: null,
-        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang menangani evaluasi dan pendampingan psikologis.",
+        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang menangani evaluasi dan pendampingan psikologis.<br>STR: 720272324-3456791<br>SIPPK: 445/125/Poli-Psi/2026",
         specialization: "Layanan Psikologi Klinis",
         availability: false,
         active: true
@@ -1557,7 +1495,7 @@
         name: "Indri Sutrisna Widyaningsih, M. Psi., Psikolog",
         degree: "M. Psi., Psikolog",
         photo: null,
-        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang berfokus pada intervensi psikososial dan terapi adaptif.",
+        bio: "Psikolog Klinis di Poli Psikologi RSUD Anutapura Palu yang berfokus pada intervensi psikososial dan terapi adaptif.<br>STR: 720272424-3456792<br>SIPPK: 445/126/Poli-Psi/2026",
         specialization: "Layanan Psikologi Klinis",
         availability: true,
         active: true
@@ -1583,47 +1521,24 @@
     function getAccumulatedData() {
       const stored = localStorage.getItem("sehati_accumulated_data");
       if (!stored) {
-        const initial = { 
-          totalScreenings: 142, 
-          ratings: [9, 8, 10, 9, 8], 
-          comments: ["Sangat membantu untuk skrining awal mandiri.", "Informasi alur rujukan jelas."],
-          respondents: []
-        };
+        const initial = { totalScreenings: 142, ratings: [9, 8, 10, 9, 8], comments: ["Sangat membantu untuk skrining awal mandiri.", "Informasi alur rujukan jelas."] };
         localStorage.setItem("sehati_accumulated_data", JSON.stringify(initial));
         return initial;
       }
       return JSON.parse(stored);
     }
 
-    function recordNewScreeningAndSurvey(rating, comment, userData, results) {
+    function recordNewScreeningAndSurvey(rating, comment) {
       const data = getAccumulatedData();
       data.totalScreenings += 1;
-      
-      if (userData && results) {
-        const newRecord = {
-          id: "resp-" + Date.now(),
-          timestamp: new Date().toLocaleString("id-ID"),
-          name: userData.name,
-          age: userData.age,
-          gender: userData.gender,
-          phone: userData.phone,
-          results: results,
-          comment: comment || "-"
-        };
-        if (!data.respondents) data.respondents = [];
-        data.respondents.unshift(newRecord);
-      }
-
       if (rating) {
         data.ratings.push(parseInt(rating));
       }
-      if (comment && comment.trim() !== "" && !userData) {
+      if (comment && comment.trim() !== "") {
         data.comments.unshift(comment.trim());
       }
-      
       localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
       updateAdminAnalyticsDisplay();
-      renderAdminRespondentsTable();
     }
 
     function updateAdminAnalyticsDisplay() {
@@ -1638,14 +1553,10 @@
         avgEl.innerText = (sum / data.ratings.length).toFixed(1);
       }
       if (commentsListEl) {
-        const allComments = [
-          ...(data.comments || []),
-          ...((data.respondents || []).map(r => r.comment).filter(c => c && c !== "-"))
-        ];
-        if (allComments.length === 0) {
+        if (data.comments.length === 0) {
           commentsListEl.innerHTML = `<div class="p-3 bg-slate-50 rounded-xl text-xs text-slate-500">Belum ada komentar survei yang masuk.</div>`;
         } else {
-          commentsListEl.innerHTML = allComments.map(c => `
+          commentsListEl.innerHTML = data.comments.map(c => `
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700">
               "${c}"
             </div>
@@ -1654,153 +1565,9 @@
       }
     }
 
-    function renderAdminRespondentsTable() {
-      const tbody = document.getElementById("admin-respondents-tbody");
-      if (!tbody) return;
-      const data = getAccumulatedData();
-      const respondents = data.respondents || [];
-
-      if (respondents.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-slate-400">Belum ada data responden yang terekam.</td></tr>`;
-        return;
-      }
-
-      tbody.innerHTML = respondents.map((r, idx) => `
-        <tr class="hover:bg-slate-50 transition">
-          <td class="py-3 px-3">
-            <span class="font-bold text-slate-900 block">${r.name}</span>
-            <span class="text-[10px] text-slate-400">${r.timestamp}</span>
-          </td>
-          <td class="py-3 px-3 text-slate-600">
-            ${r.age} thn • ${r.gender}<br>
-            <span class="text-[10px] text-slate-500">${r.phone}</span>
-          </td>
-          <td class="py-3 px-3">
-            <div class="space-y-1">
-              <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-teal-50 text-brand-teal">Dep: ${r.results.depression.final} (${r.results.depression.category})</span>
-              <br>
-              <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-sky-50 text-sky-700">Anx: ${r.results.anxiety.final} (${r.results.anxiety.category})</span>
-              <br>
-              <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700">Str: ${r.results.stress.final} (${r.results.stress.category})</span>
-            </div>
-          </td>
-          <td class="py-3 px-3 text-slate-600 italic">
-            "${r.comment}"
-          </td>
-          <td class="py-3 px-3 text-right">
-            <button onclick="openAdminRespondentDetail('${r.id}')" class="px-3 py-1.5 bg-brand-teal text-white rounded-lg text-xs font-bold hover:bg-brand-teal-dark transition">
-              Lihat Diagram
-            </button>
-          </td>
-        </tr>
-      `).join("");
-    }
-
-    function openAdminRespondentDetail(id) {
-      const data = getAccumulatedData();
-      const r = (data.respondents || []).find(x => x.id === id);
-      if (!r) return;
-
-      const depPct = Math.min(100, Math.round((r.results.depression.final / 42) * 100));
-      const anxPct = Math.min(100, Math.round((r.results.anxiety.final / 42) * 100));
-      const strPct = Math.min(100, Math.round((r.results.stress.final / 42) * 100));
-
-      const modalContent = document.getElementById("admin-modal-content");
-      modalContent.innerHTML = `
-        <div class="p-3 bg-slate-50 rounded-xl space-y-1">
-          <p><strong>Nama:</strong> ${r.name} (${r.age} tahun, ${r.gender})</p>
-          <p><strong>No. Telp / WA:</strong> ${r.phone}</p>
-          <p><strong>Waktu Skrining:</strong> ${r.timestamp}</p>
-          <p><strong>Komentar Survei:</strong> "${r.comment}"</p>
-        </div>
-
-        <div class="space-y-3 pt-2">
-          <h4 class="font-bold text-slate-800">Visualisasi Diagram Skor DASS-21</h4>
-          
-          <div>
-            <div class="flex justify-between font-bold mb-1">
-              <span>Depresi: ${r.results.depression.final}</span>
-              <span class="text-brand-teal">${r.results.depression.category}</span>
-            </div>
-            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div class="bg-brand-teal h-full" style="width: ${depPct}%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="flex justify-between font-bold mb-1">
-              <span>Kecemasan: ${r.results.anxiety.final}</span>
-              <span class="text-sky-600">${r.results.anxiety.category}</span>
-            </div>
-            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div class="bg-sky-500 h-full" style="width: ${anxPct}%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="flex justify-between font-bold mb-1">
-              <span>Stres: ${r.results.stress.final}</span>
-              <span class="text-amber-600">${r.results.stress.category}</span>
-            </div>
-            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div class="bg-amber-500 h-full" style="width: ${strPct}%"></div>
-            </div>
-          </div>
-        </div>
-      `;
-
-      document.getElementById("admin-detail-modal").classList.remove("hidden");
-    }
-
-    function closeAdminDetailModal() {
-      document.getElementById("admin-detail-modal").classList.add("hidden");
-    }
-
-    function exportRespondentsCSV() {
-      const data = getAccumulatedData();
-      const respondents = data.respondents || [];
-      if (respondents.length === 0) {
-        alert("Belum ada data responden untuk diexport.");
-        return;
-      }
-
-      let csvContent = "data:text/csv;charset=utf-8,Waktu,Nama,Usia,Jenis Kelamin,Telepon,Depresi Skor,Depresi Kategori,Kecemasan Skor,Kecemasan Kategori,Stres Skor,Stres Kategori,Komentar\r\n";
-      
-      respondents.forEach(r => {
-        const row = [
-          `"${r.timestamp}"`,
-          `"${r.name}"`,
-          r.age,
-          `"${r.gender}"`,
-          `"${r.phone}"`,
-          r.results.depression.final,
-          `"${r.results.depression.category}"`,
-          r.results.anxiety.final,
-          `"${r.results.anxiety.category}"`,
-          r.results.stress.final,
-          `"${r.results.stress.category}"`,
-          `"${r.comment}"`
-        ];
-        csvContent += row.join(",") + "\r\n";
-      });
-
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `data_responden_sehati_${Date.now()}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-    function downloadPatientResultReport() {
-      window.print();
-    }
-
     let screeningUserData = { name: "", age: "", gender: "", phone: "" };
     let currentQuestionIndex = 0;
     let answers = new Array(21).fill(null);
-    let latestComputedResults = null;
 
     function navigateTo(viewId) {
       document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
@@ -1813,7 +1580,6 @@
       if (viewId === "admin") {
         initAdminView();
         updateAdminAnalyticsDisplay();
-        renderAdminRespondentsTable();
       }
       lucide.createIcons();
     }
@@ -2082,12 +1848,12 @@
                 Berdasarkan hasil skrining, terdapat indikasi gejala dalam kategori <strong>sedang hingga berat</strong> pada setidaknya satu domain. Anda sangat disarankan untuk melakukan pemeriksaan lanjutan bersama tenaga profesional.
               </p>
               <div class="mt-3.5 flex flex-wrap items-center gap-2.5">
-                <a href="#layanan" onclick="event.preventDefault(); navigateTo('layanan')" class="px-4 py-2 bg-amber-800 hover:bg-amber-900 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5">
+                <button onclick="navigateTo('layanan')" class="px-4 py-2 bg-amber-800 hover:bg-amber-900 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5">
                   <i data-lucide="git-merge" class="w-3.5 h-3.5"></i> Pelajari Alur Rujukan BPJS & Umum
-                </a>
-                <a href="#psikolog" onclick="event.preventDefault(); navigateTo('psikolog')" class="px-4 py-2 bg-white border border-amber-300 hover:bg-amber-100 text-amber-900 text-xs font-bold rounded-xl transition flex items-center gap-1.5">
+                </button>
+                <button onclick="navigateTo('psikolog')" class="px-4 py-2 bg-white border border-amber-300 hover:bg-amber-100 text-amber-900 text-xs font-bold rounded-xl transition flex items-center gap-1.5">
                   <i data-lucide="users" class="w-3.5 h-3.5"></i> Cek Ketersediaan Psikolog Hari Ini
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -2127,7 +1893,6 @@
 
     function calculateAndShowResults() {
       const results = computeDassScores(answers);
-      latestComputedResults = results;
 
       document.getElementById("result-user-name").innerText = `Hasil skrining untuk ${screeningUserData.name || 'Pengguna'}`;
 
@@ -2167,6 +1932,8 @@
 
       renderOverallGuidance(results.depression.category, results.anxiety.category, results.stress.category);
 
+      recordNewScreeningAndSurvey(null, null);
+
       goToScreeningStep("results");
       lucide.createIcons();
     }
@@ -2181,7 +1948,7 @@
         return;
       }
 
-      recordNewScreeningAndSurvey(selectedRating.value, commentText, screeningUserData, latestComputedResults);
+      recordNewScreeningAndSurvey(selectedRating.value, commentText);
       successAlert.classList.remove("hidden");
       document.getElementById("satisfaction-form").reset();
       setTimeout(() => {
@@ -2223,7 +1990,7 @@
                 </div>
                 <h2 class="text-sm font-bold text-brand-navy text-center mb-1 leading-snug">${p.name}</h2>
                 <p class="text-xs text-brand-teal font-semibold text-center mb-3">${p.specialization || 'Psikologi Klinis'}</p>
-                <p class="text-xs text-slate-500 text-center leading-relaxed">${p.bio || ''}</p>
+                <div class="text-xs text-slate-500 text-center leading-relaxed">${p.bio || ''}</div>
               </div>
             </div>
           `;
@@ -2241,7 +2008,6 @@
         renderAdminAvailabilityTable();
         renderAdminPsychologistsList();
         updateAdminAnalyticsDisplay();
-        renderAdminRespondentsTable();
       } else {
         document.getElementById("admin-login-panel").classList.remove("hidden");
         document.getElementById("admin-dashboard-panel").classList.add("hidden");
@@ -2271,13 +2037,11 @@
       document.getElementById("admin-tab-availability").classList.add("hidden");
       document.getElementById("admin-tab-psychologists").classList.add("hidden");
       document.getElementById("admin-tab-analytics").classList.add("hidden");
-      document.getElementById("admin-tab-respondents").classList.add("hidden");
       document.getElementById("admin-tab-testing").classList.add("hidden");
 
       document.getElementById("tab-btn-availability").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5";
       document.getElementById("tab-btn-psychologists").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5";
       document.getElementById("tab-btn-analytics").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5";
-      document.getElementById("tab-btn-respondents").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5";
       document.getElementById("tab-btn-testing").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5";
 
       document.getElementById(`admin-tab-${tabName}`).classList.remove("hidden");
