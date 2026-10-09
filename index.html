@@ -1583,10 +1583,11 @@
     function getAccumulatedData() {
       const stored = localStorage.getItem("sehati_accumulated_data");
       if (!stored) {
+        // Mengubah data awal menjadi kosong (0)
         const initial = { 
-          totalScreenings: 142, 
-          ratings: [9, 8, 10, 9, 8], 
-          comments: ["Sangat membantu untuk skrining awal mandiri.", "Informasi alur rujukan jelas."],
+          totalScreenings: 0, 
+          ratings: [], 
+          comments: [],
           respondents: []
         };
         localStorage.setItem("sehati_accumulated_data", JSON.stringify(initial));
