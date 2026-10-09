@@ -1209,8 +1209,8 @@
         
         <form onsubmit="event.preventDefault(); handleAdminLogin();" class="space-y-4">
           <div>
-            <label for="admin-pin" class="block text-xs font-bold text-slate-700 uppercase mb-1">PIN Akses</label>
-            <input type="password" id="admin-pin" placeholder="Default PIN: admin123" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-teal">
+            <label for="admin-pin" class="block text-xs font-bold text-slate-700 uppercase mb-1">Kata Sandi</label>
+            <input type="password" id="admin-pin" placeholder="" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-teal">
           </div>
           <p id="admin-login-error" class="hidden text-xs text-red-600 font-medium"></p>
           <button type="submit" class="w-full py-2.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold rounded-xl text-xs transition">
@@ -2248,12 +2248,12 @@
     function handleAdminLogin() {
       const pin = document.getElementById("admin-pin").value;
       const err = document.getElementById("admin-login-error");
-      if (pin === "admin123" || pin === "1234") {
+      if (pin === "Ppsikologi123" || pin === "1026") {
         isAdminAuthenticated = true;
         err.classList.add("hidden");
         initAdminView();
       } else {
-        err.innerText = "PIN salah. Gunakan PIN: admin123";
+        err.innerText = "Kata sandi salah";
         err.classList.remove("hidden");
       }
     }
