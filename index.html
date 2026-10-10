@@ -2279,8 +2279,6 @@
 
       renderOverallGuidance(results.depression.category, results.anxiety.category, results.stress.category);
 
-      recordNewScreeningAndSurvey(null, null, screeningUserData, results);
-
       const dlBtn = document.getElementById("btn-download-report");
       dlBtn.disabled = true;
       dlBtn.className = "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-300 text-slate-500 font-bold text-xs rounded-xl shadow-sm transition cursor-not-allowed";
@@ -2288,6 +2286,8 @@
       goToScreeningStep("results");
       lucide.createIcons();
     }
+
+    let adminLastSubmittedData = null;
 
     function submitSatisfactionSurvey() {
       const selectedRating = document.querySelector('input[name="rating-score"]:checked');
@@ -2303,7 +2303,7 @@
         return;
       }
 
-      recordNewScreeningAndSurvey(selectedRating.value, commentText, null, null);
+      recordNewScreeningAndSurvey(selectedRating.value, commentText, screeningUserData, latestComputedResults);
       successAlert.classList.remove("hidden");
 
       const dlBtn = document.getElementById("btn-download-report");
@@ -2538,107 +2538,3 @@
       function assert(title, condition, detail) {
         tests.push({ title, pass: !!condition, detail });
       }
-
-      const all0 = computeDassScores(new Array(21).fill(0));
-      assert("1. Semua 0 (Dep:0, Anx:0, Str:0)", 
-        all0.depression.final === 0 && all0.depression.category === "Normal" &&
-        all0.anxiety.final === 0 && all0.stress.final === 0, 
-        `D:${all0.depression.final}, A:${all0.anxiety.final}, S:${all0.stress.final}`);
-
-      const all1 = computeDassScores(new Array(21).fill(1));
-      assert("2. Semua 1 (Raw 7 -> Final 14)", 
-        all1.depression.final === 14 && all1.depression.category === "Sedang" &&
-        all1.anxiety.final === 14 && all1.anxiety.category === "Sedang" &&
-        all1.stress.final === 14 && all1.stress.category === "Normal",
-        `D:${all1.depression.final} (${all1.depression.category}), S:${all1.stress.final} (${all1.stress.category})`);
-
-      const all2 = computeDassScores(new Array(21).fill(2));
-      assert("3. Semua 2 (Raw 14 -> Final 28)", 
-        all2.depression.final === 28 && all2.depression.category === "Sangat Berat" &&
-        all2.anxiety.final === 28 && all2.stress.final === 28 && all2.stress.category === "Berat",
-        `D:28, A:28, S:28`);
-
-      const all3 = computeDassScores(new Array(21).fill(3));
-      assert("4. Semua 3 (Raw 21 -> Final 42)", 
-        all3.depression.final === 42 && all3.anxiety.final === 42 && all3.stress.final === 42,
-        `D:42, A:42, S:42 (All Sangat Berat)`);
-
-      assert("5. Batas Depression 9 vs 10", 
-        getDepressionCategory(9) === "Normal" && getDepressionCategory(10) === "Ringan",
-        `9:${getDepressionCategory(9)}, 10:${getDepressionCategory(10)}`);
-
-      assert("6. Batas Anxiety 7 vs 8", 
-        getAnxietyCategory(7) === "Normal" && getAnxietyCategory(8) === "Ringan",
-        `7:${getAnxietyCategory(7)}, 8:${getAnxietyCategory(8)}`);
-
-      assert("7. Batas Stress 14 vs 15", 
-        getStressCategory(14) === "Normal" && getStressCategory(15) === "Ringan",
-        `14:${getStressCategory(14)}, 15:${getStressCategory(15)}`);
-
-      const testDepOnly = new Array(21).fill(0);
-      testDepOnly[2] = 3;
-      const resDepOnly = computeDassScores(testDepOnly);
-      assert("8. Mapping Item: Q3 Depresi tidak bocor ke domain lain", 
-        resDepOnly.depression.final === 6 && resDepOnly.anxiety.final === 0 && resDepOnly.stress.final === 0,
-        `D:6, A:0, S:0`);
-
-      const testStrOnly = new Array(21).fill(0);
-      testStrOnly[0] = 2;
-      const resStrOnly = computeDassScores(testStrOnly);
-      assert("9. Mapping Item: Q1 Stres tidak bocor ke domain lain", 
-        resStrOnly.stress.final === 4 && resStrOnly.depression.final === 0,
-        `S:4, D:0`);
-
-      assert("10. Perkalian Skor x2", 
-        (resDepOnly.depression.raw * 2 === resDepOnly.depression.final), 
-        `Raw ${resDepOnly.depression.raw} x 2 = ${resDepOnly.depression.final}`);
-
-      container.innerHTML = `
-        <div class="p-3 bg-slate-900 text-slate-100 rounded-xl mb-3 flex items-center justify-between font-sans">
-          <span class="font-bold text-xs">Hasil Pengujian Suite (${tests.filter(t => t.pass).length}/${tests.length} Lulus)</span>
-          <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500 text-white">100% VALID</span>
-        </div>
-        <div class="space-y-1.5">
-          ${tests.map(t => `
-            <div class="p-2.5 rounded-lg border text-xs flex items-center justify-between ${t.pass ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'}">
-              <div>
-                <span class="font-bold">${t.title}</span>
-                <span class="block text-[10px] text-slate-500 mt-0.5">${t.detail}</span>
-              </div>
-              <span class="font-extrabold text-xs">${t.pass ? '✓ PASS' : '✗ FAIL'}</span>
-            </div>
-          `).join("")}
-        </div>
-      `;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
-      getPsychologists();
-      renderPublicPsychologists();
-
-      const hash = window.location.hash.replace("#", "");
-      if (hash && document.getElementById("view-" + hash)) {
-        navigateTo(hash);
-      } else {
-        navigateTo("home");
-      }
-
-      window.addEventListener("hashchange", () => {
-        const newHash = window.location.hash.replace("#", "");
-        if (newHash && document.getElementById("view-" + newHash)) {
-          document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
-          document.getElementById("view-" + newHash).classList.remove("hidden");
-          if (newHash === "psikolog") renderPublicPsychologists();
-          if (newHash === "admin") {
-            initAdminView();
-            updateAdminAnalyticsDisplay();
-            renderAdminRespondentsTable();
-          }
-          lucide.createIcons();
-        }
-      });
-    });
-  </script>
-</body>
-</html>
