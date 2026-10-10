@@ -1896,6 +1896,14 @@
     }
 
     function downloadPatientResultReport() {
+      // Pastikan form survei sudah diisi dan tombol aktif
+      const dlBtn = document.getElementById("btn-download-report");
+      if (dlBtn.disabled) {
+        alert("Silakan lengkapi dan kirim survei kepuasan terlebih dahulu untuk mengaktifkan unduhan hasil skrining.");
+        return;
+      }
+      
+      // Memanggil fungsi cetak/download PDF bawaan browser (Print to PDF)
       window.print();
     }
 
