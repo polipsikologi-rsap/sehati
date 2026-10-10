@@ -110,7 +110,7 @@
           </div>
         </button>
 
-        <!-- Menu Navigasi Desktop (Support Klik Kanan / Open Link in New Tab) -->
+        <!-- Menu Navigasi Desktop -->
         <nav class="hidden lg:flex items-center gap-1" aria-label="Menu Utama">
           <button onclick="navigateTo('home')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition cursor-pointer">Beranda</button>
           <button onclick="navigateTo('edukasi')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition cursor-pointer">Psikoedukasi</button>
@@ -195,7 +195,7 @@
             </p>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <button onclick="startScreeningFlow()" class="w-full sm:w-auto px-8 py-3.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-sm rounded-xl shadow-md transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer">
+              <button onclick="startScreeningFlow()" class="w-full sm:w-auto px-8 py-3.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-sm rounded-xl shadow-sm transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer">
                 <i data-lucide="clipboard-check" class="w-4 h-4"></i>
                 <span>Mulai Skrining</span>
               </button>
@@ -693,8 +693,8 @@
             <i data-lucide="instagram" class="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5"></i>
             <div>
               <span class="font-bold text-slate-900 block">Media Sosial Instagram</span>
-              <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="text-brand-teal font-bold hover:underline inline-flex items-center gap-1 mt-0.5">
-                <i data-lucide="instagram" class="w-3.5 h-3.5"></i>@rsud_anutapurapalu
+              <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="text-brand-teal font-bold hover:underline inline-flex items-center gap-1.5 mt-0.5">
+                <i data-lucide="instagram" class="w-4 h-4 text-brand-teal"></i>@rsud_anutapurapalu
               </a>
             </div>
           </div>
@@ -860,11 +860,11 @@
 
       <!-- STEP 4: FORM BIODATA -->
       <div id="step-biodata" class="screening-step hidden bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm max-w-3xl mx-auto">
-        <h1 class="text-2xl font-extrabold text-brand-navy mb-2">Data Diri</h1>
-        <p class="text-slate-600 text-xs sm:text-sm mb-6">Mohon lengkapi data diri Anda sebelum mengisi lembar pernyataan skrining.</p>
+        <h1 class="text-2xl font-extrabold text-brand-navy mb-2">Data Diri & Kunjungan</h1>
+        <p class="text-slate-600 text-xs sm:text-sm mb-6">Mohon lengkapi data diri serta informasi kunjungan Anda sebelum mengisi lembar pernyataan skrining.</p>
 
         <div id="biodata-alert" class="hidden p-3.5 mb-6 bg-red-50 border border-red-200 text-brand-red rounded-xl text-xs font-medium">
-          Mohon lengkapi data diri Anda terlebih dahulu.
+          Mohon lengkapi seluruh kolom data diri dan kunjungan dengan benar.
         </div>
 
         <form id="biodata-form" onsubmit="event.preventDefault(); submitBiodata();" class="space-y-4 text-xs sm:text-sm">
@@ -892,6 +892,34 @@
           <div>
             <label for="bio-phone" class="block font-bold text-slate-700 uppercase mb-1">Nomor Telepon / WhatsApp *</label>
             <input type="tel" id="bio-phone" required placeholder="cth. 08123456789" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-teal">
+          </div>
+
+          <!-- Tujuan Kedatangan -->
+          <div>
+            <label for="bio-tujuan" class="block font-bold text-slate-700 uppercase mb-1">Tujuan Kedatangan *</label>
+            <select id="bio-tujuan" required onchange="handleTujuanChange(this.value)" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-teal bg-white">
+              <option value="">Pilih Tujuan Kedatangan</option>
+              <option value="Berobat / Memiliki jadwal pemeriksaan">Berobat / Memiliki jadwal pemeriksaan</option>
+              <option value="Mengantar / Menemani pasien">Mengantar / Menemani pasien</option>
+              <option value="Lainnya">Keperluan lainnya (Isi sendiri)</option>
+            </select>
+          </div>
+          <div id="tujuan-lainnya-wrapper" class="hidden">
+            <input type="text" id="bio-tujuan-lainnya" placeholder="Tuliskan tujuan kedatangan Anda..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-teal">
+          </div>
+
+          <!-- Poli yang Dituju -->
+          <div>
+            <label for="bio-poli" class="block font-bold text-slate-700 uppercase mb-1">Poli yang Dituju *</label>
+            <select id="bio-poli" required onchange="handlePoliChange(this.value)" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-teal bg-white">
+              <option value="">Pilih Poli yang Dituju</option>
+              <option value="Poli Jiwa">Poli Jiwa</option>
+              <option value="Poli Psikologi">Poli Psikologi</option>
+              <option value="Poli Lainnya">Poli Lainnya (Isi sendiri)</option>
+            </select>
+          </div>
+          <div id="poli-lainnya-wrapper" class="hidden">
+            <input type="text" id="bio-poli-lainnya" placeholder="Tuliskan nama poli yang dituju..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-teal">
           </div>
 
           <div class="flex justify-between items-center pt-4">
@@ -998,7 +1026,14 @@
       <!-- STEP 7: HASIL, DIAGRAM, REKOMENDASI & SURVEI -->
       <div id="step-results" class="screening-step hidden space-y-6">
         
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center relative">
+          <!-- Tombol Download Hasil Skrining bagi Pasien/Pengunjung -->
+          <div class="absolute top-4 right-4 no-print">
+            <button onclick="downloadPatientResultReport()" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition cursor-pointer">
+              <i data-lucide="download" class="w-4 h-4"></i> Download Hasil (PDF/Print)
+            </button>
+          </div>
+
           <span class="text-xs font-bold uppercase tracking-widest text-brand-teal">Laporan Evaluasi Awal SEHATI</span>
           <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1">Hasil Skrining Anda</h1>
           <p id="result-user-name" class="text-slate-600 text-xs sm:text-sm mt-1 font-medium">Hasil skrining untuk Pengguna</p>
@@ -1046,7 +1081,7 @@
           </div>
           
           <div class="pt-2 text-[11px] text-slate-500 italic text-center">
-            Akumulasi data keseluruhan peserta skrining secara kolektif telah dicatat dan diperbarui secara anonim di sistem.
+            Data hasil skrining telah tercatat dan terkirim secara otomatis ke pusat Poli Psikologi RSUD Anutapura Palu.
           </div>
         </div>
 
@@ -1118,7 +1153,7 @@
         </div>
 
         <!-- SURVEI KEPUASAN -->
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5 no-print">
           <div class="pb-3 border-b border-slate-100">
             <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Feedback Pengguna</span>
             <h2 class="text-base font-extrabold text-brand-navy mt-1">Survei Kepuasan Layanan Skrining SEHATI</h2>
@@ -1163,7 +1198,7 @@
           </form>
         </div>
 
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center no-print">
           <h2 class="text-sm font-bold text-brand-navy mb-4">Apa yang dapat Anda lakukan selanjutnya?</h2>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mx-auto text-xs sm:text-sm">
             <button onclick="navigateTo('psikolog')" class="px-4 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold rounded-xl transition flex items-center justify-center gap-2 cursor-pointer">
@@ -1203,7 +1238,7 @@
         <form onsubmit="event.preventDefault(); handleAdminLogin();" class="space-y-4">
           <div>
             <label for="admin-pin" class="block text-xs font-bold text-slate-700 uppercase mb-1">PIN Akses</label>
-            <input type="password" id="admin-pin" placeholder="Default PIN: admin123" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-teal">
+            <input type="password" inputmode="numeric" pattern="[0-9]*" id="admin-pin" placeholder="" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-teal">
           </div>
           <p id="admin-login-error" class="hidden text-xs text-red-600 font-medium"></p>
           <button type="submit" class="w-full py-2.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold rounded-xl text-xs transition cursor-pointer">
@@ -1234,6 +1269,9 @@
               </button>
               <button onclick="switchAdminTab('analytics')" id="tab-btn-analytics" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5 cursor-pointer">
                 <i data-lucide="database" class="w-4 h-4"></i> Akumulasi & Survei
+              </button>
+              <button onclick="switchAdminTab('respondents')" id="tab-btn-respondents" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5 cursor-pointer">
+                <i data-lucide="users" class="w-4 h-4"></i> Data Responden
               </button>
               <button onclick="switchAdminTab('testing')" id="tab-btn-testing" class="w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5 cursor-pointer">
                 <i data-lucide="check-circle" class="w-4 h-4"></i> Uji Scoring
@@ -1307,6 +1345,36 @@
               </div>
             </div>
 
+            <!-- TAB ADMIN: DATA KESELURUHAN RESPONDEN & DIAGRAM DETAIL -->
+            <div id="admin-tab-respondents" class="hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+              <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div>
+                  <h2 class="text-base font-extrabold text-brand-navy">Data Keseluruhan Responden Skrining</h2>
+                  <p class="text-xs text-slate-500 mt-0.5">Daftar lengkap biodata, tujuan, poli, diagram skor per orang, dan penilaian.</p>
+                </div>
+                <button onclick="exportRespondentsCSV()" class="px-3.5 py-2 bg-slate-800 text-white text-xs font-bold rounded-xl hover:bg-slate-900 transition flex items-center gap-1.5 cursor-pointer">
+                  <i data-lucide="download" class="w-3.5 h-3.5"></i> Export Data CSV
+                </button>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                  <thead>
+                    <tr class="bg-slate-50 text-slate-500 font-bold border-b border-slate-200">
+                      <th class="py-3 px-3">Waktu & Identitas</th>
+                      <th class="py-3 px-3">Usia/JK/Telp</th>
+                      <th class="py-3 px-3">Tujuan & Poli</th>
+                      <th class="py-3 px-3">Skor & Kategori DASS-21</th>
+                      <th class="py-3 px-3 text-right">Aksi Detail</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-respondents-tbody" class="divide-y divide-slate-100">
+                    <tr><td colspan="5" class="py-4 text-center text-slate-400">Belum ada data responden yang terekam.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
             <div id="admin-tab-testing" class="hidden bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
               <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
                 <div>
@@ -1331,6 +1399,28 @@
     </section>
 
   </main>
+
+  <!-- MODAL ADMIN: LIHAT DETAIL DIAGRAM & PENILAIAN PER ORANG -->
+  <div id="admin-detail-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-xl max-h-[90vh] overflow-y-auto space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <h3 class="text-sm font-bold text-brand-navy flex items-center gap-2">
+          <i data-lucide="user-check" class="w-4 h-4 text-brand-teal"></i> Detail Responden & Diagram Skor
+        </h3>
+        <button onclick="closeAdminDetailModal()" class="text-slate-400 hover:text-slate-700 cursor-pointer">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div id="admin-modal-content" class="space-y-4 text-xs">
+        <!-- Diisi dinamis via JavaScript -->
+      </div>
+
+      <div class="flex justify-end pt-3 border-t border-slate-100">
+        <button onclick="closeAdminDetailModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl cursor-pointer">Tutup</button>
+      </div>
+    </div>
+  </div>
 
   <!-- MODAL EDIT/TAMBAH PSIKOLOG -->
   <div id="psychologist-modal" class="hidden fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4">
@@ -1435,6 +1525,9 @@
 
   <!-- SCRIPT -->
   <script>
+    // URL Web App Google Apps Script Anda (Ganti dengan link deployment Google Sheets Anda)
+    const GOOGLE_SHEET_WEB_URL = "PASTE_WEB_APP_URL_GOOGLE_APPS_SCRIPT_DI_SINI";
+
     const DASS21_ITEMS = [
       { id: 1, text: "Saya merasa sulit untuk menenangkan diri", domain: "stress" },
       { id: 2, text: "Saya menyadari mulut saya terasa kering", domain: "anxiety" },
@@ -1521,24 +1614,78 @@
     function getAccumulatedData() {
       const stored = localStorage.getItem("sehati_accumulated_data");
       if (!stored) {
-        const initial = { totalScreenings: 142, ratings: [9, 8, 10, 9, 8], comments: ["Sangat membantu untuk skrining awal mandiri.", "Informasi alur rujukan jelas."] };
+        const initial = { 
+          totalScreenings: 0, 
+          ratings: [], 
+          comments: [],
+          respondents: []
+        };
         localStorage.setItem("sehati_accumulated_data", JSON.stringify(initial));
         return initial;
       }
       return JSON.parse(stored);
     }
 
-    function recordNewScreeningAndSurvey(rating, comment) {
+    function recordNewScreeningAndSurvey(rating, comment, userData, results) {
       const data = getAccumulatedData();
       data.totalScreenings += 1;
+      
+      let newRecord = null;
+      if (userData && results) {
+        newRecord = {
+          id: "resp-" + Date.now(),
+          timestamp: new Date().toLocaleString("id-ID"),
+          name: userData.name,
+          age: userData.age,
+          gender: userData.gender,
+          phone: userData.phone,
+          tujuan: userData.tujuan,
+          poli: userData.poli,
+          results: results,
+          comment: comment || "-"
+        };
+        if (!data.respondents) data.respondents = [];
+        data.respondents.unshift(newRecord);
+
+        // KIRIM KE GOOGLE SHEETS OTOMATIS
+        if (GOOGLE_SHEET_WEB_URL && GOOGLE_SHEET_WEB_URL !== "PASTE_WEB_APP_URL_GOOGLE_APPS_SCRIPT_DI_SINI") {
+          const payload = {
+            timestamp: newRecord.timestamp,
+            name: newRecord.name,
+            age: newRecord.age,
+            gender: newRecord.gender,
+            phone: newRecord.phone,
+            tujuan: newRecord.tujuan,
+            poli: newRecord.poli,
+            depressionScore: results.depression.final,
+            depressionCategory: results.depression.category,
+            anxietyScore: results.anxiety.final,
+            anxietyCategory: results.anxiety.category,
+            stressScore: results.stress.final,
+            stressCategory: results.stress.category,
+            satisfactionRating: rating || "-",
+            comment: newRecord.comment
+          };
+
+          fetch(GOOGLE_SHEET_WEB_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          }).catch(err => console.error("Gagal sinkron ke Sheets:", err));
+        }
+      }
+
       if (rating) {
         data.ratings.push(parseInt(rating));
       }
-      if (comment && comment.trim() !== "") {
+      if (comment && comment.trim() !== "" && !userData) {
         data.comments.unshift(comment.trim());
       }
+      
       localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
       updateAdminAnalyticsDisplay();
+      renderAdminRespondentsTable();
     }
 
     function updateAdminAnalyticsDisplay() {
@@ -1551,12 +1698,18 @@
       if (avgEl && data.ratings.length > 0) {
         const sum = data.ratings.reduce((a, b) => a + b, 0);
         avgEl.innerText = (sum / data.ratings.length).toFixed(1);
+      } else if (avgEl) {
+        avgEl.innerText = "0.0";
       }
       if (commentsListEl) {
-        if (data.comments.length === 0) {
+        const allComments = [
+          ...(data.comments || []),
+          ...((data.respondents || []).map(r => r.comment).filter(c => c && c !== "-"))
+        ];
+        if (allComments.length === 0) {
           commentsListEl.innerHTML = `<div class="p-3 bg-slate-50 rounded-xl text-xs text-slate-500">Belum ada komentar survei yang masuk.</div>`;
         } else {
-          commentsListEl.innerHTML = data.comments.map(c => `
+          commentsListEl.innerHTML = allComments.map(c => `
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700">
               "${c}"
             </div>
@@ -1565,9 +1718,154 @@
       }
     }
 
-    let screeningUserData = { name: "", age: "", gender: "", phone: "" };
+    function renderAdminRespondentsTable() {
+      const tbody = document.getElementById("admin-respondents-tbody");
+      if (!tbody) return;
+      const data = getAccumulatedData();
+      const respondents = data.respondents || [];
+
+      if (respondents.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-slate-400">Belum ada data responden yang terekam.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = respondents.map((r, idx) => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="py-3 px-3">
+            <span class="font-bold text-slate-900 block">${r.name}</span>
+            <span class="text-[10px] text-slate-400">${r.timestamp}</span>
+          </td>
+          <td class="py-3 px-3 text-slate-600">
+            ${r.age} thn • ${r.gender}<br>
+            <span class="text-[10px] text-slate-500">${r.phone}</span>
+          </td>
+          <td class="py-3 px-3 text-slate-700">
+            <strong>Tujuan:</strong> ${r.tujuan}<br>
+            <strong>Poli:</strong> ${r.poli}
+          </td>
+          <td class="py-3 px-3">
+            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-teal-50 text-brand-teal mb-0.5">Dep: ${r.results.depression.final} (${r.results.depression.category})</span><br>
+            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-sky-50 text-sky-700 mb-0.5">Anx: ${r.results.anxiety.final} (${r.results.anxiety.category})</span><br>
+            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700">Str: ${r.results.stress.final} (${r.results.stress.category})</span>
+          </td>
+          <td class="py-3 px-3 text-right">
+            <button onclick="openAdminRespondentDetail('${r.id}')" class="px-3 py-1.5 bg-brand-teal text-white rounded-lg text-xs font-bold hover:bg-brand-teal-dark transition cursor-pointer">
+              Lihat Diagram
+            </button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function openAdminRespondentDetail(id) {
+      const data = getAccumulatedData();
+      const r = (data.respondents || []).find(x => x.id === id);
+      if (!r) return;
+
+      const depPct = Math.min(100, Math.round((r.results.depression.final / 42) * 100));
+      const anxPct = Math.min(100, Math.round((r.results.anxiety.final / 42) * 100));
+      const strPct = Math.min(100, Math.round((r.results.stress.final / 42) * 100));
+
+      const modalContent = document.getElementById("admin-modal-content");
+      modalContent.innerHTML = `
+        <div class="p-3 bg-slate-50 rounded-xl space-y-1">
+          <p><strong>Nama:</strong> ${r.name} (${r.age} tahun, ${r.gender})</p>
+          <p><strong>No. Telp / WA:</strong> ${r.phone}</p>
+          <p><strong>Tujuan Kedatangan:</strong> ${r.tujuan}</p>
+          <p><strong>Poli yang Dituju:</strong> ${r.poli}</p>
+          <p><strong>Waktu Skrining:</strong> ${r.timestamp}</p>
+          <p><strong>Komentar Survei:</strong> "${r.comment}"</p>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <h4 class="font-bold text-slate-800">Visualisasi Diagram Skor DASS-21</h4>
+          
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span>Depresi: ${r.results.depression.final}</span>
+              <span class="text-brand-teal">${r.results.depression.category}</span>
+            </div>
+            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-brand-teal h-full" style="width: ${depPct}%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span>Kecemasan: ${r.results.anxiety.final}</span>
+              <span class="text-sky-600">${r.results.anxiety.category}</span>
+            </div>
+            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-sky-500 h-full" style="width: ${anxPct}%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between font-bold mb-1">
+              <span>Stres: ${r.results.stress.final}</span>
+              <span class="text-amber-600">${r.results.stress.category}</span>
+            </div>
+            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+              <div class="bg-amber-500 h-full" style="width: ${strPct}%"></div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.getElementById("admin-detail-modal").classList.remove("hidden");
+    }
+
+    function closeAdminDetailModal() {
+      document.getElementById("admin-detail-modal").classList.add("hidden");
+    }
+
+    function exportRespondentsCSV() {
+      const data = getAccumulatedData();
+      const respondents = data.respondents || [];
+      if (respondents.length === 0) {
+        alert("Belum ada data responden untuk diexport.");
+        return;
+      }
+
+      let csvContent = "data:text/csv;charset=utf-8,Waktu,Nama,Usia,Jenis Kelamin,Telepon,Tujuan Kedatangan,Poli Dituju,Depresi Skor,Depresi Kategori,Kecemasan Skor,Kecemasan Kategori,Stres Skor,Stres Kategori,Komentar\r\n";
+      
+      respondents.forEach(r => {
+        const row = [
+          `"${r.timestamp}"`,
+          `"${r.name}"`,
+          r.age,
+          `"${r.gender}"`,
+          `"${r.phone}"`,
+          `"${r.tujuan}"`,
+          `"${r.poli}"`,
+          r.results.depression.final,
+          `"${r.results.depression.category}"`,
+          r.results.anxiety.final,
+          `"${r.results.anxiety.category}"`,
+          r.results.stress.final,
+          `"${r.results.stress.category}"`,
+          `"${r.comment}"`
+        ];
+        csvContent += row.join(",") + "\r\n";
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `data_responden_sehati_${Date.now()}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function downloadPatientResultReport() {
+      window.print();
+    }
+
+    let screeningUserData = { name: "", age: "", gender: "", phone: "", tujuan: "", poli: "" };
     let currentQuestionIndex = 0;
     let answers = new Array(21).fill(null);
+    let latestComputedResults = null;
 
     function navigateTo(viewId) {
       document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
@@ -1575,11 +1873,13 @@
       if (target) {
         target.classList.remove("hidden");
         window.scrollTo({ top: 0, behavior: "smooth" });
+        window.location.hash = viewId;
       }
       if (viewId === "psikolog") renderPublicPsychologists();
       if (viewId === "admin") {
         initAdminView();
         updateAdminAnalyticsDisplay();
+        renderAdminRespondentsTable();
       }
       lucide.createIcons();
     }
@@ -1615,20 +1915,59 @@
       document.getElementById("privacy-next-btn").disabled = !p;
     }
 
+    function handleTujuanChange(val) {
+      const wrapper = document.getElementById("tujuan-lainnya-wrapper");
+      const input = document.getElementById("bio-tujuan-lainnya");
+      if (val === "Lainnya") {
+        wrapper.classList.remove("hidden");
+        input.required = true;
+      } else {
+        wrapper.classList.add("hidden");
+        input.required = false;
+        input.value = "";
+      }
+    }
+
+    function handlePoliChange(val) {
+      const wrapper = document.getElementById("poli-lainnya-wrapper");
+      const input = document.getElementById("bio-poli-lainnya");
+      if (val === "Poli Lainnya") {
+        wrapper.classList.remove("hidden");
+        input.required = true;
+      } else {
+        wrapper.classList.add("hidden");
+        input.required = false;
+        input.value = "";
+      }
+    }
+
     function submitBiodata() {
       const name = document.getElementById("bio-name").value.trim();
       const age = document.getElementById("bio-age").value.trim();
       const gender = document.getElementById("bio-gender").value;
       const phone = document.getElementById("bio-phone").value.trim();
+      
+      const tujuanSelect = document.getElementById("bio-tujuan").value;
+      let tujuanFinal = tujuanSelect;
+      if (tujuanSelect === "Lainnya") {
+        tujuanFinal = document.getElementById("bio-tujuan-lainnya").value.trim();
+      }
+
+      const poliSelect = document.getElementById("bio-poli").value;
+      let poliFinal = poliSelect;
+      if (poliSelect === "Poli Lainnya") {
+        poliFinal = document.getElementById("bio-poli-lainnya").value.trim();
+      }
+
       const alertBox = document.getElementById("biodata-alert");
 
-      if (!name || !age || !gender || !phone || isNaN(age) || parseInt(age) < 5) {
+      if (!name || !age || !gender || !phone || !tujuanFinal || !poliFinal || isNaN(age) || parseInt(age) < 5) {
         alertBox.classList.remove("hidden");
         return;
       }
 
       alertBox.classList.add("hidden");
-      screeningUserData = { name, age, gender, phone };
+      screeningUserData = { name, age, gender, phone, tujuan: tujuanFinal, poli: poliFinal };
       goToScreeningStep("instructions");
     }
 
@@ -1703,562 +2042,4 @@
       const anxietyIndices    = [1, 3, 6, 8, 14, 18, 19];
       const stressIndices     = [0, 5, 7, 10, 11, 13, 17];
 
-      const depRaw = depressionIndices.reduce((sum, idx) => sum + (answersArray[idx] || 0), 0);
-      const anxRaw = anxietyIndices.reduce((sum, idx) => sum + (answersArray[idx] || 0), 0);
-      const strRaw = stressIndices.reduce((sum, idx) => sum + (answersArray[idx] || 0), 0);
-
-      const depFinal = depRaw * 2;
-      const anxFinal = anxRaw * 2;
-      const strFinal = strRaw * 2;
-
-      return {
-        depression: { raw: depRaw, final: depFinal, category: getDepressionCategory(depFinal) },
-        anxiety:    { raw: anxRaw, final: anxFinal, category: getAnxietyCategory(anxFinal) },
-        stress:     { raw: strRaw, final: strFinal, category: getStressCategory(strFinal) }
-      };
-    }
-
-    function getDepressionCategory(score) {
-      if (score <= 9) return "Normal";
-      if (score <= 13) return "Ringan";
-      if (score <= 20) return "Sedang";
-      if (score <= 27) return "Berat";
-      return "Sangat Berat";
-    }
-
-    function getAnxietyCategory(score) {
-      if (score <= 7) return "Normal";
-      if (score <= 9) return "Ringan";
-      if (score <= 14) return "Sedang";
-      if (score <= 19) return "Berat";
-      return "Sangat Berat";
-    }
-
-    function getStressCategory(score) {
-      if (score <= 14) return "Normal";
-      if (score <= 18) return "Ringan";
-      if (score <= 25) return "Sedang";
-      if (score <= 33) return "Berat";
-      return "Sangat Berat";
-    }
-
-    function getInterpretationText(category) {
-      if (category === "Normal") {
-        return "Skor Anda berada pada rentang normal. Kondisi emosional Anda saat ini terpantau stabil dalam batas penyesuaian yang sehat.";
-      }
-      if (category === "Ringan") {
-        return "Skor Anda menunjukkan adanya tingkat gejala ringan. Keluhan yang dirasakan berpotensi mereda dengan langkah penanganan mandiri yang tepat.";
-      }
-      if (category === "Sedang") {
-        return "Skor Anda menunjukkan adanya tingkat gejala sedang. Kondisi ini mulai memengaruhi kenyamanan harian dan memerlukan perhatian profesional.";
-      }
-      return "Skor Anda menunjukkan adanya tingkat gejala berat/sangat berat. Anda sangat dianjurkan untuk tidak memikulnya sendiri dan berkonsultasi dengan tenaga profesional.";
-    }
-
-    function getBadgeClass(category) {
-      switch(category) {
-        case "Normal": return "bg-emerald-100 text-emerald-800";
-        case "Ringan": return "bg-blue-100 text-blue-800";
-        case "Sedang": return "bg-amber-100 text-amber-800";
-        case "Berat": return "bg-orange-100 text-orange-800";
-        case "Sangat Berat": return "bg-rose-100 text-rose-800";
-        default: return "bg-slate-100 text-slate-800";
-      }
-    }
-
-    function renderDomainActionBox(domain, category) {
-      if (category === "Normal") {
-        return `
-          <div class="p-3 bg-emerald-50/70 border border-emerald-200 rounded-xl text-xs text-emerald-900">
-            <span class="font-bold flex items-center gap-1 mb-1">
-              <i data-lucide="check-circle" class="w-3.5 h-3.5 text-emerald-600"></i> Terjaga Baik
-            </span>
-            <p class="text-[11px] leading-relaxed text-emerald-800">Pertahankan pola tidur yang cukup, aktivitas fisik teratur, serta luangkan waktu untuk relaksasi.</p>
-          </div>
-        `;
-      }
-
-      if (category === "Ringan") {
-        let tipsHtml = "";
-        if (domain === "depression") {
-          tipsHtml = `
-            <ul class="list-disc list-inside space-y-1 text-[11px] text-blue-900 leading-relaxed mt-1">
-              <li>Lakukan aktivitas fisik ringan atau jalan santai pagi secara rutin.</li>
-              <li>Pecah tugas besar menjadi bagian-bagian kecil yang lebih mudah dicapai.</li>
-              <li>Jalin komunikasi terbuka dengan orang terdekat yang dapat dipercaya.</li>
-            </ul>
-          `;
-        } else if (domain === "anxiety") {
-          tipsHtml = `
-            <ul class="list-disc list-inside space-y-1 text-[11px] text-blue-900 leading-relaxed mt-1">
-              <li>Praktikkan teknik pernapasan dalam (tarik perlahan, tahan, hembuskan).</li>
-              <li>Gunakan teknik grounding untuk mengalihkan pikiran cemas.</li>
-              <li>Batasi konsumsi kafein dan kelola paparan informasi berlebih.</li>
-            </ul>
-          `;
-        } else {
-          tipsHtml = `
-            <ul class="list-disc list-inside space-y-1 text-[11px] text-blue-900 leading-relaxed mt-1">
-              <li>Luangkan waktu untuk jeda istirahat dan lakukan hobi yang menyenangkan.</li>
-              <li>Tuliskan beban pikiran atau buat prioritas tugas harian yang realistis.</li>
-              <li>Pastikan waktu tidur malam tercukupi dengan baik.</li>
-            </ul>
-          `;
-        }
-
-        return `
-          <div class="p-3 bg-blue-50/80 border border-blue-200 rounded-xl text-xs text-blue-950">
-            <span class="font-bold flex items-center gap-1.5 text-blue-800">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-600"></i> Langkah Peredaan Mandiri (Ringan):
-            </span>
-            ${tipsHtml}
-          </div>
-        `;
-      }
-
-      return `
-        <div class="p-3 bg-amber-50/90 border border-amber-300 rounded-xl text-xs text-amber-950">
-          <span class="font-bold flex items-center gap-1.5 text-amber-900 mb-1">
-            <i data-lucide="user-check" class="w-3.5 h-3.5 text-amber-700"></i> Disarankan Konsultasi:
-          </span>
-          <p class="text-[11px] leading-relaxed text-amber-900">
-            Tingkat gejala ini membutuhkan penanganan menyeluruh. Segera konsultasikan dengan <strong>Psikolog Klinis Poli Psikologi RSUD Anutapura Palu</strong> untuk asesmen dan evaluasi lebih lanjut.
-          </p>
-        </div>
-      `;
-    }
-
-    function renderOverallGuidance(depCat, anxCat, strCat) {
-      const highSeverityList = ["Sedang", "Berat", "Sangat Berat"];
-      const hasHighSeverity = highSeverityList.includes(depCat) || highSeverityList.includes(anxCat) || highSeverityList.includes(strCat);
-      const isAllNormal = (depCat === "Normal" && anxCat === "Normal" && strCat === "Normal");
-
-      const guidanceContainer = document.getElementById("overall-guidance-card");
-
-      if (hasHighSeverity) {
-        guidanceContainer.className = "p-6 rounded-2xl border border-amber-300 bg-amber-50/80 shadow-sm space-y-3";
-        guidanceContainer.innerHTML = `
-          <div class="flex items-start gap-3">
-            <div class="p-2 rounded-xl bg-amber-600 text-white flex-shrink-0 mt-0.5">
-              <i data-lucide="help-circle" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <h3 class="text-sm font-bold text-amber-950">Rekomendasi Tindak Lanjut: Konsultasi Profesional</h3>
-              <p class="text-xs text-amber-900 leading-relaxed mt-1">
-                Berdasarkan hasil skrining, terdapat indikasi gejala dalam kategori <strong>sedang hingga berat</strong> pada setidaknya satu domain. Anda sangat disarankan untuk melakukan pemeriksaan lanjutan bersama tenaga profesional.
-              </p>
-              <div class="mt-3.5 flex flex-wrap items-center gap-2.5">
-                <button onclick="navigateTo('layanan')" class="px-4 py-2 bg-amber-800 hover:bg-amber-900 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5 cursor-pointer">
-                  <i data-lucide="git-merge" class="w-3.5 h-3.5"></i> Pelajari Alur Rujukan BPJS & Umum
-                </button>
-                <button onclick="navigateTo('psikolog')" class="px-4 py-2 bg-white border border-amber-300 hover:bg-amber-100 text-amber-900 text-xs font-bold rounded-xl transition flex items-center gap-1.5 cursor-pointer">
-                  <i data-lucide="users" class="w-3.5 h-3.5"></i> Cek Ketersediaan Psikolog Hari Ini
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
-      } else if (isAllNormal) {
-        guidanceContainer.className = "p-6 rounded-2xl border border-emerald-200 bg-emerald-50/70 shadow-sm space-y-2";
-        guidanceContainer.innerHTML = `
-          <div class="flex items-start gap-3">
-            <div class="p-2 rounded-xl bg-emerald-600 text-white flex-shrink-0 mt-0.5">
-              <i data-lucide="smile" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <h3 class="text-sm font-bold text-emerald-950">Kondisi Emosional Terpantau Baik</h3>
-              <p class="text-xs text-emerald-900 leading-relaxed mt-1">
-                Seluruh indikator berada pada batas normal. Terus jaga kesehatan psikologis Anda melalui gaya hidup seimbang, interaksi sosial positif, dan luangkan waktu untuk hal-hal yang Anda sukai.
-              </p>
-            </div>
-          </div>
-        `;
-      } else {
-        guidanceContainer.className = "p-6 rounded-2xl border border-blue-200 bg-blue-50/70 shadow-sm space-y-2";
-        guidanceContainer.innerHTML = `
-          <div class="flex items-start gap-3">
-            <div class="p-2 rounded-xl bg-blue-600 text-white flex-shrink-0 mt-0.5">
-              <i data-lucide="info" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <h3 class="text-sm font-bold text-blue-950">Rekomendasi Tindak Lanjut: Perawatan & Peredaan Mandiri</h3>
-              <p class="text-xs text-blue-900 leading-relaxed mt-1">
-                Hasil skrining Anda menunjukkan tingkat gejala <strong>ringan</strong>. Terapkan tips peredaan mandiri di atas selama 1–2 minggu ke depan. Bila keluhan tidak kunjung membaik atau justru semakin memberat, pertimbangkan untuk menjadwalkan konsultasi di Poli Psikologi RSUD Anutapura Palu.
-              </p>
-            </div>
-          </div>
-        `;
-      }
-    }
-
-    function calculateAndShowResults() {
-      const results = computeDassScores(answers);
-
-      document.getElementById("result-user-name").innerText = `Hasil skrining untuk ${screeningUserData.name || 'Pengguna'}`;
-
-      const depPct = Math.min(100, Math.round((results.depression.final / 42) * 100));
-      const anxPct = Math.min(100, Math.round((results.anxiety.final / 42) * 100));
-      const strPct = Math.min(100, Math.round((results.stress.final / 42) * 100));
-
-      document.getElementById("chart-dep-val").innerText = `${results.depression.final} (${results.depression.category})`;
-      document.getElementById("chart-dep-bar").style.width = `${depPct}%`;
-
-      document.getElementById("chart-anx-val").innerText = `${results.anxiety.final} (${results.anxiety.category})`;
-      document.getElementById("chart-anx-bar").style.width = `${anxPct}%`;
-
-      document.getElementById("chart-str-val").innerText = `${results.stress.final} (${results.stress.category})`;
-      document.getElementById("chart-str-bar").style.width = `${strPct}%`;
-
-      document.getElementById("score-dep-val").innerText = results.depression.final;
-      const depBadge = document.getElementById("badge-dep-category");
-      depBadge.innerText = results.depression.category;
-      depBadge.className = `px-2.5 py-1 text-xs font-bold rounded-full ${getBadgeClass(results.depression.category)}`;
-      document.getElementById("interpret-dep-text").innerText = getInterpretationText(results.depression.category);
-      document.getElementById("action-dep-box").innerHTML = renderDomainActionBox("depression", results.depression.category);
-
-      document.getElementById("score-anx-val").innerText = results.anxiety.final;
-      const anxBadge = document.getElementById("badge-anx-category");
-      anxBadge.innerText = results.anxiety.category;
-      anxBadge.className = `px-2.5 py-1 text-xs font-bold rounded-full ${getBadgeClass(results.anxiety.category)}`;
-      document.getElementById("interpret-anx-text").innerText = getInterpretationText(results.anxiety.category);
-      document.getElementById("action-anx-box").innerHTML = renderDomainActionBox("anxiety", results.anxiety.category);
-
-      document.getElementById("score-str-val").innerText = results.stress.final;
-      const strBadge = document.getElementById("badge-str-category");
-      strBadge.innerText = results.stress.category;
-      strBadge.className = `px-2.5 py-1 text-xs font-bold rounded-full ${getBadgeClass(results.stress.category)}`;
-      document.getElementById("interpret-str-text").innerText = getInterpretationText(results.stress.category);
-      document.getElementById("action-str-box").innerHTML = renderDomainActionBox("stress", results.stress.category);
-
-      renderOverallGuidance(results.depression.category, results.anxiety.category, results.stress.category);
-
-      recordNewScreeningAndSurvey(null, null);
-
-      goToScreeningStep("results");
-      lucide.createIcons();
-    }
-
-    function submitSatisfactionSurvey() {
-      const selectedRating = document.querySelector('input[name="rating-score"]:checked');
-      const commentText = document.getElementById("survey-comment").value;
-      const successAlert = document.getElementById("survey-success-alert");
-
-      if (!selectedRating) {
-        alert("Silakan pilih rating kepuasan terlebih dahulu (skala 1-10).");
-        return;
-      }
-
-      recordNewScreeningAndSurvey(selectedRating.value, commentText);
-      successAlert.classList.remove("hidden");
-      document.getElementById("satisfaction-form").reset();
-      setTimeout(() => {
-        successAlert.classList.add("hidden");
-      }, 4000);
-    }
-
-    function restartScreening() {
-      answers = new Array(21).fill(null);
-      currentQuestionIndex = 0;
-      goToScreeningStep("intro");
-    }
-
-    function renderPublicPsychologists() {
-      const container = document.getElementById("public-psychologist-grid");
-      if (!container) return;
-      const psychologists = getPsychologists();
-
-      container.innerHTML = psychologists
-        .filter(p => p.active !== false)
-        .map(p => {
-          const isAvail = p.availability;
-          const statusBadge = isAvail
-            ? `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Tersedia Hari Ini
-               </span>`
-            : `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500 border border-slate-200">
-                <span class="w-2 h-2 rounded-full bg-slate-400"></span> Tidak Tersedia Hari Ini
-               </span>`;
-
-          return `
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between hover:border-brand-teal transition">
-              <div>
-                <div class="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4 border border-slate-200">
-                  <i data-lucide="user" class="w-8 h-8"></i>
-                </div>
-                <div class="text-center mb-3">
-                  ${statusBadge}
-                </div>
-                <h2 class="text-sm font-bold text-brand-navy text-center mb-1 leading-snug">${p.name}</h2>
-                <p class="text-xs text-brand-teal font-semibold text-center mb-3">${p.specialization || 'Psikologi Klinis'}</p>
-                <p class="text-xs text-slate-500 text-center leading-relaxed">${p.bio || ''}</p>
-              </div>
-            </div>
-          `;
-        }).join("");
-
-      lucide.createIcons();
-    }
-
-    let isAdminAuthenticated = false;
-
-    function initAdminView() {
-      if (isAdminAuthenticated) {
-        document.getElementById("admin-login-panel").classList.add("hidden");
-        document.getElementById("admin-dashboard-panel").classList.remove("hidden");
-        renderAdminAvailabilityTable();
-        renderAdminPsychologistsList();
-        updateAdminAnalyticsDisplay();
-      } else {
-        document.getElementById("admin-login-panel").classList.remove("hidden");
-        document.getElementById("admin-dashboard-panel").classList.add("hidden");
-      }
-    }
-
-    function handleAdminLogin() {
-      const pin = document.getElementById("admin-pin").value;
-      const err = document.getElementById("admin-login-error");
-      if (pin === "admin123" || pin === "1234") {
-        isAdminAuthenticated = true;
-        err.classList.add("hidden");
-        initAdminView();
-      } else {
-        err.innerText = "PIN salah. Gunakan PIN: admin123";
-        err.classList.remove("hidden");
-      }
-    }
-
-    function handleAdminLogout() {
-      isAdminAuthenticated = false;
-      document.getElementById("admin-pin").value = "";
-      navigateTo("home");
-    }
-
-    function switchAdminTab(tabName) {
-      document.getElementById("admin-tab-availability").classList.add("hidden");
-      document.getElementById("admin-tab-psychologists").classList.add("hidden");
-      document.getElementById("admin-tab-analytics").classList.add("hidden");
-      document.getElementById("admin-tab-testing").classList.add("hidden");
-
-      document.getElementById("tab-btn-availability").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5 cursor-pointer";
-      document.getElementById("tab-btn-psychologists").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5 cursor-pointer";
-      document.getElementById("tab-btn-analytics").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5 cursor-pointer";
-      document.getElementById("tab-btn-testing").className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-50 flex items-center gap-2.5 cursor-pointer";
-
-      document.getElementById(`admin-tab-${tabName}`).classList.remove("hidden");
-      const activeBtn = document.getElementById(`tab-btn-${tabName}`);
-      if (activeBtn) {
-        activeBtn.className = "w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold bg-teal-50 text-brand-teal flex items-center gap-2.5 cursor-pointer";
-      }
-      lucide.createIcons();
-    }
-
-    function renderAdminAvailabilityTable() {
-      const tbody = document.getElementById("admin-availability-tbody");
-      if (!tbody) return;
-      const psychologists = getPsychologists();
-
-      tbody.innerHTML = psychologists.map(p => {
-        const isAvail = p.availability;
-        return `
-          <tr class="hover:bg-slate-50 transition">
-            <td class="py-3 px-4 font-bold text-slate-800">${p.name}</td>
-            <td class="py-3 px-4">
-              ${isAvail 
-                ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700">🟢 Tersedia Hari Ini</span>`
-                : `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">⚪ Tidak Tersedia Hari Ini</span>`
-              }
-            </td>
-            <td class="py-3 px-4 text-right">
-              <button onclick="togglePsychologistAvailability('${p.id}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold ${isAvail ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-brand-teal text-white hover:bg-brand-teal-dark'} transition cursor-pointer">
-                ${isAvail ? 'Set OFF' : 'Set ON'}
-              </button>
-            </td>
-          </tr>
-        `;
-      }).join("");
-    }
-
-    function togglePsychologistAvailability(id) {
-      const psychologists = getPsychologists();
-      const updated = psychologists.map(p => {
-        if (p.id === id) return { ...p, availability: !p.availability };
-        return p;
-      });
-      savePsychologists(updated);
-    }
-
-    function renderAdminPsychologistsList() {
-      const container = document.getElementById("admin-psychologist-cards");
-      if (!container) return;
-      const psychologists = getPsychologists();
-
-      container.innerHTML = psychologists.map(p => `
-        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
-          <div>
-            <h3 class="text-xs font-bold text-slate-800">${p.name}</h3>
-            <p class="text-[11px] text-slate-500">${p.specialization || 'Psikologi Klinis'} • ${p.active ? 'Aktif' : 'Nonaktif'}</p>
-          </div>
-          <button onclick="openEditPsychologistModal('${p.id}')" class="p-2 text-slate-600 hover:text-brand-teal hover:bg-white rounded-lg transition border border-transparent hover:border-slate-200 cursor-pointer">
-            <i data-lucide="edit-3" class="w-4 h-4"></i>
-          </button>
-        </div>
-      `).join("");
-
-      lucide.createIcons();
-    }
-
-    function openAddPsychologistModal() {
-      document.getElementById("modal-title").innerText = "Tambah Profil Psikolog";
-      document.getElementById("edit-psy-id").value = "";
-      document.getElementById("edit-psy-name").value = "";
-      document.getElementById("edit-psy-bio").value = "";
-      document.getElementById("edit-psy-spec").value = "";
-      document.getElementById("edit-psy-active").checked = true;
-      document.getElementById("psychologist-modal").classList.remove("hidden");
-    }
-
-    function openEditPsychologistModal(id) {
-      const psychologists = getPsychologists();
-      const p = psychologists.find(x => x.id === id);
-      if (!p) return;
-
-      document.getElementById("modal-title").innerText = "Edit Profil Psikolog";
-      document.getElementById("edit-psy-id").value = p.id;
-      document.getElementById("edit-psy-name").value = p.name;
-      document.getElementById("edit-psy-bio").value = p.bio || "";
-      document.getElementById("edit-psy-spec").value = p.specialization || "";
-      document.getElementById("edit-psy-active").checked = (p.active !== false);
-      document.getElementById("psychologist-modal").classList.remove("hidden");
-    }
-
-    function closePsychologistModal() {
-      document.getElementById("psychologist-modal").classList.add("hidden");
-    }
-
-    function savePsychologistData() {
-      const id = document.getElementById("edit-psy-id").value;
-      const name = document.getElementById("edit-psy-name").value.trim();
-      const bio = document.getElementById("edit-psy-bio").value.trim();
-      const specialization = document.getElementById("edit-psy-spec").value.trim();
-      const active = document.getElementById("edit-psy-active").checked;
-
-      let psychologists = getPsychologists();
-
-      if (id) {
-        psychologists = psychologists.map(p => {
-          if (p.id === id) return { ...p, name, bio, specialization, active };
-          return p;
-        });
-      } else {
-        psychologists.push({
-          id: "psy-" + Date.now(),
-          name,
-          degree: "M. Psi., Psikolog",
-          photo: null,
-          bio,
-          specialization,
-          availability: true,
-          active
-        });
-      }
-
-      savePsychologists(psychologists);
-      closePsychologistModal();
-    }
-
-    function runDassUnitTests() {
-      const container = document.getElementById("test-results-container");
-      const tests = [];
-
-      function assert(title, condition, detail) {
-        tests.push({ title, pass: !!condition, detail });
-      }
-
-      const all0 = computeDassScores(new Array(21).fill(0));
-      assert("1. Semua 0 (Dep:0, Anx:0, Str:0)", 
-        all0.depression.final === 0 && all0.depression.category === "Normal" &&
-        all0.anxiety.final === 0 && all0.stress.final === 0, 
-        `D:${all0.depression.final}, A:${all0.anxiety.final}, S:${all0.stress.final}`);
-
-      const all1 = computeDassScores(new Array(21).fill(1));
-      assert("2. Semua 1 (Raw 7 -> Final 14)", 
-        all1.depression.final === 14 && all1.depression.category === "Sedang" &&
-        all1.anxiety.final === 14 && all1.anxiety.category === "Sedang" &&
-        all1.stress.final === 14 && all1.stress.category === "Normal",
-        `D:${all1.depression.final} (${all1.depression.category}), S:${all1.stress.final} (${all1.stress.category})`);
-
-      const all2 = computeDassScores(new Array(21).fill(2));
-      assert("3. Semua 2 (Raw 14 -> Final 28)", 
-        all2.depression.final === 28 && all2.depression.category === "Sangat Berat" &&
-        all2.anxiety.final === 28 && all2.stress.final === 28 && all2.stress.category === "Berat",
-        `D:28, A:28, S:28`);
-
-      const all3 = computeDassScores(new Array(21).fill(3));
-      assert("4. Semua 3 (Raw 21 -> Final 42)", 
-        all3.depression.final === 42 && all3.anxiety.final === 42 && all3.stress.final === 42,
-        `D:42, A:42, S:42 (All Sangat Berat)`);
-
-      assert("5. Batas Depression 9 vs 10", 
-        getDepressionCategory(9) === "Normal" && getDepressionCategory(10) === "Ringan",
-        `9:${getDepressionCategory(9)}, 10:${getDepressionCategory(10)}`);
-
-      assert("6. Batas Anxiety 7 vs 8", 
-        getAnxietyCategory(7) === "Normal" && getAnxietyCategory(8) === "Ringan",
-        `7:${getAnxietyCategory(7)}, 8:${getAnxietyCategory(8)}`);
-
-      assert("7. Batas Stress 14 vs 15", 
-        getStressCategory(14) === "Normal" && getStressCategory(15) === "Ringan",
-        `14:${getStressCategory(14)}, 15:${getStressCategory(15)}`);
-
-      const testDepOnly = new Array(21).fill(0);
-      testDepOnly[2] = 3;
-      const resDepOnly = computeDassScores(testDepOnly);
-      assert("8. Mapping Item: Q3 Depresi tidak bocor ke domain lain", 
-        resDepOnly.depression.final === 6 && resDepOnly.anxiety.final === 0 && resDepOnly.stress.final === 0,
-        `D:6, A:0, S:0`);
-
-      const testStrOnly = new Array(21).fill(0);
-      testStrOnly[0] = 2;
-      const resStrOnly = computeDassScores(testStrOnly);
-      assert("9. Mapping Item: Q1 Stres tidak bocor ke domain lain", 
-        resStrOnly.stress.final === 4 && resStrOnly.depression.final === 0,
-        `S:4, D:0`);
-
-      assert("10. Perkalian Skor x2", 
-        (resDepOnly.depression.raw * 2 === resDepOnly.depression.final), 
-        `Raw ${resDepOnly.depression.raw} x 2 = ${resDepOnly.depression.final}`);
-
-      container.innerHTML = `
-        <div class="p-3 bg-slate-900 text-slate-100 rounded-xl mb-3 flex items-center justify-between font-sans">
-          <span class="font-bold text-xs">Hasil Pengujian Suite (${tests.filter(t => t.pass).length}/${tests.length} Lulus)</span>
-          <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500 text-white">100% VALID</span>
-        </div>
-        <div class="space-y-1.5">
-          ${tests.map(t => `
-            <div class="p-2.5 rounded-lg border text-xs flex items-center justify-between ${t.pass ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'}">
-              <div>
-                <span class="font-bold">${t.title}</span>
-                <span class="block text-[10px] text-slate-500 mt-0.5">${t.detail}</span>
-              </div>
-              <span class="font-extrabold text-xs">${t.pass ? '✓ PASS' : '✗ FAIL'}</span>
-            </div>
-          `).join("")}
-        </div>
-      `;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
-      getPsychologists();
-      renderPublicPsychologists();
-
-      const hash = window.location.hash.replace("#", "");
-      if (hash && document.getElementById("view-" + hash)) {
-        navigateTo(hash);
-      } else {
-        navigateTo("home");
-      }
-    });
-  </script>
-</body>
-</html>
+      const
