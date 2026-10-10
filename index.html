@@ -1019,7 +1019,7 @@
       <div id="step-results" class="screening-step hidden space-y-6">
         
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center relative">
-          <!-- Tombol Download Hasil Skrining bagi Pasien/Pengunjung -->
+          <!-- Tombol Download Hasil Skrining bagi Pasien/Pengunjung (Wajib Isi Feedback Dulu) -->
           <div class="absolute top-4 right-4 no-print">
             <button onclick="downloadPatientResultReport()" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition">
               <i data-lucide="download" class="w-4 h-4"></i> Download Hasil (PDF/Print)
@@ -1144,8 +1144,8 @@
           </div>
         </div>
 
-        <!-- SURVEI KEPUASAN -->
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5 no-print">
+        <!-- SURVEI KEPUASAN (Dibuat responsif skala 1-10 untuk HP & Tombol Kirim di Tengah) -->
+        <div id="survey-section" class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5 no-print scroll-mt-24">
           <div class="pb-3 border-b border-slate-100">
             <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Feedback Pengguna</span>
             <h2 class="text-base font-extrabold text-brand-navy mt-1">Survei Kepuasan Layanan Skrining SEHATI</h2>
@@ -1155,17 +1155,18 @@
           <form id="satisfaction-form" onsubmit="event.preventDefault(); submitSatisfactionSurvey();" class="space-y-4">
             <div>
               <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Seberapa puas Anda menggunakan layanan skrining ini? (Skala 1 - 10)</label>
-              <div class="flex items-center justify-between gap-1 sm:gap-2">
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="1" required class="mb-1 text-brand-teal focus:ring-brand-teal"> 1</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="2" class="mb-1 text-brand-teal focus:ring-brand-teal"> 2</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="3" class="mb-1 text-brand-teal focus:ring-brand-teal"> 3</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="4" class="mb-1 text-brand-teal focus:ring-brand-teal"> 4</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="5" class="mb-1 text-brand-teal focus:ring-brand-teal"> 5</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="6" class="mb-1 text-brand-teal focus:ring-brand-teal"> 6</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="7" class="mb-1 text-brand-teal focus:ring-brand-teal"> 7</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="8" class="mb-1 text-brand-teal focus:ring-brand-teal"> 8</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="9" class="mb-1 text-brand-teal focus:ring-brand-teal"> 9</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="10" class="mb-1 text-brand-teal focus:ring-brand-teal"> 10</label>
+              <!-- Skala 1-10 Dioptimalkan untuk Tampilan HP (grid 5 kolom di mobile, 10 kolom di desktop) -->
+              <div class="grid grid-cols-5 sm:flex sm:items-center sm:justify-between gap-1.5 sm:gap-2">
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="1" required class="mb-1 text-brand-teal focus:ring-brand-teal"> 1</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="2" class="mb-1 text-brand-teal focus:ring-brand-teal"> 2</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="3" class="mb-1 text-brand-teal focus:ring-brand-teal"> 3</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="4" class="mb-1 text-brand-teal focus:ring-brand-teal"> 4</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="5" class="mb-1 text-brand-teal focus:ring-brand-teal"> 5</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="6" class="mb-1 text-brand-teal focus:ring-brand-teal"> 6</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="7" class="mb-1 text-brand-teal focus:ring-brand-teal"> 7</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="8" class="mb-1 text-brand-teal focus:ring-brand-teal"> 8</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="9" class="mb-1 text-brand-teal focus:ring-brand-teal"> 9</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="10" class="mb-1 text-brand-teal focus:ring-brand-teal"> 10</label>
               </div>
               <div class="flex justify-between text-[10px] text-slate-400 mt-1 px-1">
                 <span>1 (Sangat Tidak Puas)</span>
@@ -1179,11 +1180,12 @@
             </div>
 
             <div id="survey-success-alert" class="hidden p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold">
-              Terima kasih! Penilaian dan komentar Anda berhasil direkam.
+              Terima kasih! Penilaian dan komentar Anda berhasil direkam. Tombol Download PDF kini telah diaktifkan.
             </div>
 
-            <div class="flex justify-end">
-              <button type="submit" class="px-6 py-2.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl transition">
+            <!-- Tombol Kirim Survei di Buat ke Tengah -->
+            <div class="flex justify-center pt-2">
+              <button type="submit" class="px-8 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition">
                 Kirim Survei Kepuasan
               </button>
             </div>
@@ -1618,7 +1620,7 @@
       return JSON.parse(stored);
     }
 
-    // Fungsi Sinkronisasi Real-Time ke Google Sheets
+    // Fungsi Sinkronisasi Real-Time ke Google Sheets dengan Payload Lengkap
     async function syncToGoogleSheets(payload) {
       if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) return;
       try {
@@ -1635,10 +1637,10 @@
 
     function recordNewScreeningAndSurvey(rating, comment, userData, results) {
       const data = getAccumulatedData();
-      data.totalScreenings += 1;
       
       let newRecord = null;
       if (userData && results) {
+        data.totalScreenings += 1;
         newRecord = {
           id: "resp-" + Date.now(),
           timestamp: new Date().toLocaleString("id-ID"),
@@ -1666,17 +1668,24 @@
       updateAdminAnalyticsDisplay();
       renderAdminRespondentsTable();
 
-      // Kirim data secara real-time ke Google Sheets
+      // Kirim data secara lengkap ke Google Sheets
       if (newRecord) {
         syncToGoogleSheets({
           type: "screening",
-          ...newRecord,
+          timestamp: newRecord.timestamp,
+          name: newRecord.name,
+          age: newRecord.age,
+          gender: newRecord.gender,
+          phone: newRecord.phone,
+          purpose: newRecord.purpose,
+          poli: newRecord.poli,
           depScore: results.depression.final,
           depCat: results.depression.category,
           anxScore: results.anxiety.final,
           anxCat: results.anxiety.category,
           strScore: results.stress.final,
-          strCat: results.stress.category
+          strCat: results.stress.category,
+          comment: newRecord.comment
         });
       } else if (rating) {
         syncToGoogleSheets({
@@ -1860,7 +1869,17 @@
       document.body.removeChild(link);
     }
 
+    let isSurveySubmitted = false;
+
     function downloadPatientResultReport() {
+      if (!isSurveySubmitted) {
+        alert("Mohon isi dan kirimkan survei kepuasan (feedback pengguna) di bagian bawah terlebih dahulu sebelum mendownload hasil PDF.");
+        const surveyEl = document.getElementById("survey-section");
+        if (surveyEl) {
+          surveyEl.scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+      }
       window.print();
     }
 
@@ -1893,6 +1912,7 @@
     }
 
     function startScreeningFlow() {
+      isSurveySubmitted = false; // Reset status feedback untuk skrining baru
       navigateTo("screening");
       goToScreeningStep("intro");
     }
@@ -2271,6 +2291,7 @@
       }
 
       recordNewScreeningAndSurvey(selectedRating.value, commentText, null, null);
+      isSurveySubmitted = true; // Tandai bahwa survei telah diisi sehingga tombol download PDF terbuka
       successAlert.classList.remove("hidden");
       document.getElementById("satisfaction-form").reset();
       setTimeout(() => {
@@ -2281,6 +2302,7 @@
     function restartScreening() {
       answers = new Array(21).fill(null);
       currentQuestionIndex = 0;
+      isSurveySubmitted = false;
       goToScreeningStep("intro");
     }
 
