@@ -894,7 +894,7 @@
             <input type="tel" id="bio-phone" required placeholder="cth. 08123456789" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-teal">
           </div>
 
-          <!-- Tambahan Baru: Tujuan Kedatangan -->
+          <!-- Tujuan Kedatangan -->
           <div>
             <label for="bio-purpose" class="block font-bold text-slate-700 uppercase mb-1">Tujuan Kedatangan *</label>
             <select id="bio-purpose" required onchange="handlePurposeChange()" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-teal bg-white mb-2">
@@ -906,10 +906,10 @@
             <input type="text" id="bio-purpose-custom" placeholder="Tuliskan keperluan lainnya..." class="hidden w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-teal">
           </div>
 
-          <!-- Tambahan Baru: Poli yang Dituju -->
+          <!-- Poli yang Dituju -->
           <div>
             <label for="bio-poli" class="block font-bold text-slate-700 uppercase mb-1">Poli yang Dituju *</label>
-            <input type="text" id="bio-poli" required placeholder="cth. Poli Psikologi, Poli Jiwa, Poli Umum, dll" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-teal">
+            <input type="text" id="bio-poli" required placeholder="cth. Poli Psikologi, Poli Jiwa, dll" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brand-teal">
             <span class="text-[11px] text-slate-400 block mt-1">Jika tidak ke poli, cukup berikan tanda (-).</span>
           </div>
 
@@ -1605,10 +1605,11 @@
     function getAccumulatedData() {
       const stored = localStorage.getItem("sehati_accumulated_data");
       if (!stored) {
+        // Direset bersih ke 0 karena belum ada yang mengisi skrining
         const initial = { 
-          totalScreenings: 142, 
-          ratings: [9, 8, 10, 9, 8], 
-          comments: ["Sangat membantu untuk skrining awal mandiri.", "Informasi alur rujukan jelas."],
+          totalScreenings: 0, 
+          ratings: [], 
+          comments: [],
           respondents: []
         };
         localStorage.setItem("sehati_accumulated_data", JSON.stringify(initial));
@@ -1694,9 +1695,13 @@
       const commentsListEl = document.getElementById("admin-survey-comments-list");
 
       if (totalEl) totalEl.innerText = data.totalScreenings;
-      if (avgEl && data.ratings.length > 0) {
-        const sum = data.ratings.reduce((a, b) => a + b, 0);
-        avgEl.innerText = (sum / data.ratings.length).toFixed(1);
+      if (avgEl) {
+        if (data.ratings.length > 0) {
+          const sum = data.ratings.reduce((a, b) => a + b, 0);
+          avgEl.innerText = (sum / data.ratings.length).toFixed(1);
+        } else {
+          avgEl.innerText = "0.0";
+        }
       }
       if (commentsListEl) {
         const allComments = [
@@ -2249,7 +2254,6 @@
 
       renderOverallGuidance(results.depression.category, results.anxiety.category, results.stress.category);
 
-      // Simpan dan kirim ke Google Sheets secara real-time
       recordNewScreeningAndSurvey(null, null, screeningUserData, results);
 
       goToScreeningStep("results");
@@ -2568,7 +2572,6 @@
       `;
     }
 
-    // Inisialisasi awal saat halaman dimuat atau di-refresh
     document.addEventListener("DOMContentLoaded", () => {
       lucide.createIcons();
       getPsychologists();
@@ -2581,7 +2584,6 @@
         navigateTo("home");
       }
 
-      // Mendengarkan perubahan hash URL saat tombol back/forward browser ditekan
       window.addEventListener("hashchange", () => {
         const newHash = window.location.hash.replace("#", "");
         if (newHash && document.getElementById("view-" + newHash)) {
