@@ -67,27 +67,19 @@
       background: #cbd5e1;
       border-radius: 4px;
     }
-
-    /* KODE CSS PRINT BARU YANG BERSIH */
     @media print {
-      /* Sembunyikan seluruh elemen body secara default saat dicetak */
       body * {
         visibility: hidden;
       }
-      
-      /* Hanya tampilkan elemen hasil skrining dan seluruh isinya */
       #step-results, #step-results * {
         visibility: visible;
       }
-      
       #step-results {
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
       }
-
-      /* Sembunyikan elemen dengan class no-print (seperti form survei, rekomendasi tindak lanjut, dan tombol-tombol) saat dicetak */
       .no-print {
         display: none !important;
         visibility: hidden !important;
@@ -524,7 +516,7 @@
         <p class="text-xs sm:text-sm text-slate-600 mb-6 max-w-xl mx-auto">
           Gunakan instrumen skrining standar untuk melihat gambaran kondisi emosional Anda selama 1 minggu terakhir.
         </p>
-        <button onclick="startScreeningFlow()" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition">
+        <button onclick="startScreeningFlow()" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl transition">
           Mulai Skrining
         </button>
       </div>
@@ -1027,9 +1019,16 @@
       <div id="step-results" class="screening-step hidden space-y-6">
         
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center relative">
-          <span class="text-xs font-bold uppercase tracking-widest text-brand-teal">Laporan Evaluasi SEHATI</span>
-          <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1">Hasil Skrining Awal Kesehatan Mental</h1>
-          <p id="result-user-name" class="text-slate-600 text-xs sm:text-sm mt-1 font-medium">Pengguna</p>
+          <!-- Tombol Download Hasil Skrining bagi Pasien/Pengunjung -->
+          <div class="absolute top-4 right-4 no-print">
+            <button onclick="downloadPatientResultReport()" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition">
+              <i data-lucide="download" class="w-4 h-4"></i> Download Hasil (PDF/Print)
+            </button>
+          </div>
+
+          <span class="text-xs font-bold uppercase tracking-widest text-brand-teal">Laporan Evaluasi Awal SEHATI</span>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1">Hasil Skrining Anda</h1>
+          <p id="result-user-name" class="text-slate-600 text-xs sm:text-sm mt-1 font-medium">Hasil skrining untuk Pengguna</p>
         </div>
 
         <!-- DIAGRAM / VISUALISASI GRAFIK BATANG SKOR -->
@@ -1128,6 +1127,9 @@
 
         </div>
 
+        <!-- REKOMENDASI -->
+        <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3"></div>
+
         <!-- DISCLAIMER -->
         <div class="bg-amber-50/90 p-6 sm:p-7 rounded-2xl border border-amber-200 text-amber-950 space-y-3">
           <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-900">
@@ -1142,7 +1144,7 @@
           </div>
         </div>
 
-        <!-- SURVEI KEPUASAN & KUNCI TOMBOL DOWNLOAD -->
+        <!-- SURVEI KEPUASAN -->
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5 no-print">
           <div class="pb-3 border-b border-slate-100">
             <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Feedback Pengguna</span>
@@ -1152,53 +1154,40 @@
 
           <form id="satisfaction-form" onsubmit="event.preventDefault(); submitSatisfactionSurvey();" class="space-y-4">
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Seberapa puas Anda menggunakan layanan skrining ini? (Skala 1 - 10) *</label>
-              <!-- Skala Survei Rapih untuk Mobile & Desktop -->
-              <div class="grid grid-cols-5 sm:grid-cols-10 gap-2">
-                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="1" required class="mb-1 text-brand-teal focus:ring-brand-teal"> 1</label>
-                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="2" class="mb-1 text-brand-teal focus:ring-brand-teal"> 2</label>
-                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="3" class="mb-1 text-brand-teal focus:ring-brand-teal"> 3</label>
-                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="4" class="mb-1 text-brand-teal focus:ring-brand-teal"> 4</label>
-                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="5" class="mb-1 text-brand-teal focus:ring-brand-teal"> 5</label>
-                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="6" class="mb-1 text-brand-teal focus:ring-brand-teal"> 6</label>
-                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="7" class="mb-1 text-brand-teal focus:ring-brand-teal"> 7</label>
-                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="8" class="mb-1 text-brand-teal focus:ring-brand-teal"> 8</label>
-                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="9" class="mb-1 text-brand-teal focus:ring-brand-teal"> 9</label>
-                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="10" class="mb-1 text-brand-teal focus:ring-brand-teal"> 10</label>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Seberapa puas Anda menggunakan layanan skrining ini? (Skala 1 - 10)</label>
+              <div class="flex items-center justify-between gap-1 sm:gap-2">
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="1" required class="mb-1 text-brand-teal focus:ring-brand-teal"> 1</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="2" class="mb-1 text-brand-teal focus:ring-brand-teal"> 2</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="3" class="mb-1 text-brand-teal focus:ring-brand-teal"> 3</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="4" class="mb-1 text-brand-teal focus:ring-brand-teal"> 4</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="5" class="mb-1 text-brand-teal focus:ring-brand-teal"> 5</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="6" class="mb-1 text-brand-teal focus:ring-brand-teal"> 6</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="7" class="mb-1 text-brand-teal focus:ring-brand-teal"> 7</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="8" class="mb-1 text-brand-teal focus:ring-brand-teal"> 8</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="9" class="mb-1 text-brand-teal focus:ring-brand-teal"> 9</label>
+                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="10" class="mb-1 text-brand-teal focus:ring-brand-teal"> 10</label>
               </div>
-              <div class="flex justify-between text-[10px] text-slate-400 mt-1.5 px-1">
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1 px-1">
                 <span>1 (Sangat Tidak Puas)</span>
                 <span>10 (Sangat Puas)</span>
               </div>
             </div>
 
             <div>
-              <label for="survey-comment" class="block text-xs font-bold text-slate-700 uppercase mb-1">Kolom Komentar / Masukan *</label>
-              <textarea id="survey-comment" rows="3" required placeholder="Tuliskan saran, kesan, atau masukan Anda terhadap platform SEHATI..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-teal"></textarea>
+              <label for="survey-comment" class="block text-xs font-bold text-slate-700 uppercase mb-1">Kolom Komentar / Masukan</label>
+              <textarea id="survey-comment" rows="3" placeholder="Tuliskan saran, kesan, atau masukan Anda terhadap platform SEHATI..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-teal"></textarea>
             </div>
 
-            <div id="survey-success-alert" class="hidden p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold text-center">
-              Terima kasih! Survei kepuasan berhasil direkam. Tombol Download Hasil Skrining kini telah diaktifkan.
+            <div id="survey-success-alert" class="hidden p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold">
+              Terima kasih! Penilaian dan komentar Anda berhasil direkam.
             </div>
 
-            <!-- Tombol Kirim Survei di Tengah -->
-            <div class="flex justify-center pt-2">
-              <button type="submit" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl transition shadow-sm">
+            <div class="flex justify-end">
+              <button type="submit" class="px-6 py-2.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl transition">
                 Kirim Survei Kepuasan
               </button>
             </div>
           </form>
-        </div>
-
-        <!-- REKOMENDASI TINDAK LANJUT (Hanya Tampil di Web, Tidak Tercetak di PDF) -->
-        <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3 no-print"></div>
-
-        <!-- TOMBOL DOWNLOAD HASIL (DIKUNCI SEBELUM ISI SURVEI) -->
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center no-print">
-          <p class="text-xs text-slate-500 mb-3 font-medium">Selesaikan survei kepuasan di atas terlebih dahulu untuk mengaktifkan tombol download.</p>
-          <button id="btn-download-report" disabled onclick="downloadPatientResultReport()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-300 text-slate-500 font-bold text-xs rounded-xl shadow-sm transition cursor-not-allowed">
-            <i data-lucide="download" class="w-4 h-4"></i> Download Hasil Skrining (PDF/Print)
-          </button>
         </div>
 
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center no-print">
@@ -1473,7 +1462,7 @@
         <div class="md:col-span-1">
           <div class="flex items-center gap-2 mb-2.5">
             <img src="logo-palu.png" alt="Logo Kota Palu" class="h-7 w-auto object-contain" onerror="this.src='https://via.placeholder.com/32?text=Palu';" />
-            <img src="RS.png" alt="Logo RSAP" class="h-7 w-auto object-contain" onerror="this.src='https://via.placeholder.com/32?text=RSAP';" />
+            <img src="RS.png" alt="Logo RSUD Anutapura Palu" class="h-7 w-auto object-contain" onerror="this.src='https://via.placeholder.com/32?text=RSAP';" />
             <div class="flex flex-col">
               <span class="text-xs font-black text-brand-teal">SEHATI</span>
               <span class="text-[10px] font-bold text-brand-navy">RSUD ANUTAPURA PALU</span>
@@ -1529,7 +1518,7 @@
   <!-- SCRIPT -->
   <script>
     // Konfigurasi endpoint Google Sheets Apps Script
-    const GOOGLE_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxA0WwtUDY5lC2XKb269-TB4iFNnNtzB6h4uiCWnioljp7ofE6ZI_-JXtJ_Vd3jmDNU/exec";
+    const GOOGLE_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbyky17ipWI0IMFgjMHh9cvziDuNbFRYOLh-iM4ZY4w3Tke27EssIdaQbKTFV3P3mRLI/exec";
 
     const DASS21_ITEMS = [
       { id: 1, text: "Saya merasa sulit untuk menenangkan diri", domain: "stress" },
@@ -1614,28 +1603,9 @@
       renderAdminPsychologistsList();
     }
 
-    let remoteAccumulatedCache = null;
-
-    async function fetchAccumulatedDataFromCloud() {
-      if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) {
-        return getLocalFallbackData();
-      }
-      try {
-        const response = await fetch(GOOGLE_SHEET_ENDPOINT);
-        const cloudData = await response.json();
-        if (cloudData && !cloudData.error) {
-          localStorage.setItem("sehati_accumulated_data", JSON.stringify(cloudData));
-          return cloudData;
-        }
-      } catch (err) {
-        console.warn("Gagal terhubung ke cloud, menggunakan data lokal:", err);
-      }
-      return getLocalFallbackData();
-    }
-
-    function getLocalFallbackData() {
+    function getAccumulatedData() {
       const stored = localStorage.getItem("sehati_accumulated_data");
-      if (!stored || JSON.parse(stored).totalScreenings === 142) {
+      if (!stored) {
         const initial = { 
           totalScreenings: 0, 
           ratings: [], 
@@ -1648,11 +1618,7 @@
       return JSON.parse(stored);
     }
 
-    function getAccumulatedData() {
-      if (remoteAccumulatedCache) return remoteAccumulatedCache;
-      return getLocalFallbackData();
-    }
-
+    // Fungsi Sinkronisasi Real-Time ke Google Sheets
     async function syncToGoogleSheets(payload) {
       if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) return;
       try {
@@ -1697,36 +1663,26 @@
       }
       
       localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
-      remoteAccumulatedCache = data;
       updateAdminAnalyticsDisplay();
       renderAdminRespondentsTable();
 
+      // Kirim data secara real-time ke Google Sheets
       if (newRecord) {
         syncToGoogleSheets({
-          timestamp: newRecord.timestamp,
-          name: newRecord.name,
-          age: newRecord.age,
-          gender: newRecord.gender,
-          phone: newRecord.phone,
-          tujuan: newRecord.purpose,
-          poli: newRecord.poli,
-          depressionScore: results.depression.final,
-          depressionCategory: results.depression.category,
-          anxietyScore: results.anxiety.final,
-          anxietyCategory: results.anxiety.category,
-          stressScore: results.stress.final,
-          stressCategory: results.stress.category,
-          satisfactionRating: "",
-          comment: newRecord.comment
+          type: "screening",
+          ...newRecord,
+          depScore: results.depression.final,
+          depCat: results.depression.category,
+          anxScore: results.anxiety.final,
+          anxCat: results.anxiety.category,
+          strScore: results.stress.final,
+          strCat: results.stress.category
         });
       } else if (rating) {
         syncToGoogleSheets({
+          type: "survey",
           timestamp: new Date().toLocaleString("id-ID"),
-          name: "", age: "", gender: "", phone: "", tujuan: "", poli: "",
-          depressionScore: "", depressionCategory: "",
-          anxietyScore: "", anxietyCategory: "",
-          stressScore: "", stressCategory: "",
-          satisfactionRating: rating,
+          rating: rating,
           comment: comment || "-"
         });
       }
@@ -1905,14 +1861,6 @@
     }
 
     function downloadPatientResultReport() {
-      // Pastikan form survei sudah diisi dan tombol aktif
-      const dlBtn = document.getElementById("btn-download-report");
-      if (dlBtn.disabled) {
-        alert("Silakan lengkapi dan kirim survei kepuasan terlebih dahulu untuk mengaktifkan unduhan hasil skrining.");
-        return;
-      }
-      
-      // Memanggil fungsi cetak/download PDF bawaan browser (Print to PDF)
       window.print();
     }
 
@@ -1921,6 +1869,7 @@
     let answers = new Array(21).fill(null);
     let latestComputedResults = null;
 
+    // Fungsi Navigasi Tab dengan Hash URL agar tidak kembali ke beranda saat di-refresh
     function navigateTo(viewId) {
       document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
       const target = document.getElementById("view-" + viewId);
@@ -2208,7 +2157,7 @@
       const guidanceContainer = document.getElementById("overall-guidance-card");
 
       if (hasHighSeverity) {
-        guidanceContainer.className = "p-6 rounded-2xl border border-amber-300 bg-amber-50/80 shadow-sm space-y-3 no-print";
+        guidanceContainer.className = "p-6 rounded-2xl border border-amber-300 bg-amber-50/80 shadow-sm space-y-3";
         guidanceContainer.innerHTML = `
           <div class="flex items-start gap-3">
             <div class="p-2 rounded-xl bg-amber-600 text-white flex-shrink-0 mt-0.5">
@@ -2231,7 +2180,7 @@
           </div>
         `;
       } else if (isAllNormal) {
-        guidanceContainer.className = "p-6 rounded-2xl border border-emerald-200 bg-emerald-50/70 shadow-sm space-y-2 no-print";
+        guidanceContainer.className = "p-6 rounded-2xl border border-emerald-200 bg-emerald-50/70 shadow-sm space-y-2";
         guidanceContainer.innerHTML = `
           <div class="flex items-start gap-3">
             <div class="p-2 rounded-xl bg-emerald-600 text-white flex-shrink-0 mt-0.5">
@@ -2246,7 +2195,7 @@
           </div>
         `;
       } else {
-        guidanceContainer.className = "p-6 rounded-2xl border border-blue-200 bg-blue-50/70 shadow-sm space-y-2 no-print";
+        guidanceContainer.className = "p-6 rounded-2xl border border-blue-200 bg-blue-50/70 shadow-sm space-y-2";
         guidanceContainer.innerHTML = `
           <div class="flex items-start gap-3">
             <div class="p-2 rounded-xl bg-blue-600 text-white flex-shrink-0 mt-0.5">
@@ -2305,10 +2254,7 @@
 
       renderOverallGuidance(results.depression.category, results.anxiety.category, results.stress.category);
 
-      // Reset status tombol download menjadi terkunci saat pertama kali masuk ke halaman hasil
-      const dlBtn = document.getElementById("btn-download-report");
-      dlBtn.disabled = true;
-      dlBtn.className = "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-300 text-slate-500 font-bold text-xs rounded-xl shadow-sm transition cursor-not-allowed";
+      recordNewScreeningAndSurvey(null, null, screeningUserData, results);
 
       goToScreeningStep("results");
       lucide.createIcons();
@@ -2323,19 +2269,10 @@
         alert("Silakan pilih rating kepuasan terlebih dahulu (skala 1-10).");
         return;
       }
-      if (!commentText || commentText.trim() === "") {
-        alert("Silakan isi kolom komentar/masukan terlebih dahulu.");
-        return;
-      }
 
       recordNewScreeningAndSurvey(selectedRating.value, commentText, null, null);
       successAlert.classList.remove("hidden");
-
-      // Buka kunci tombol download setelah survei berhasil dikirim
-      const dlBtn = document.getElementById("btn-download-report");
-      dlBtn.disabled = false;
-      dlBtn.className = "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition cursor-pointer";
-
+      document.getElementById("satisfaction-form").reset();
       setTimeout(() => {
         successAlert.classList.add("hidden");
       }, 4000);
@@ -2386,13 +2323,11 @@
 
     let isAdminAuthenticated = false;
 
-    async function initAdminView() {
+    // Inisialisasi awal saat halaman dimuat atau di-refresh
+    function initAdminView() {
       if (isAdminAuthenticated) {
         document.getElementById("admin-login-panel").classList.add("hidden");
         document.getElementById("admin-dashboard-panel").classList.remove("hidden");
-        
-        remoteAccumulatedCache = await fetchAccumulatedDataFromCloud();
-
         renderAdminAvailabilityTable();
         renderAdminPsychologistsList();
         updateAdminAnalyticsDisplay();
@@ -2583,88 +2518,3 @@
         all2.depression.final === 28 && all2.depression.category === "Sangat Berat" &&
         all2.anxiety.final === 28 && all2.stress.final === 28 && all2.stress.category === "Berat",
         `D:28, A:28, S:28`);
-
-      const all3 = computeDassScores(new Array(21).fill(3));
-      assert("4. Semua 3 (Raw 21 -> Final 42)", 
-        all3.depression.final === 42 && all3.anxiety.final === 42 && all3.stress.final === 42,
-        `D:42, A:42, S:42 (All Sangat Berat)`);
-
-      assert("5. Batas Depression 9 vs 10", 
-        getDepressionCategory(9) === "Normal" && getDepressionCategory(10) === "Ringan",
-        `9:${getDepressionCategory(9)}, 10:${getDepressionCategory(10)}`);
-
-      assert("6. Batas Anxiety 7 vs 8", 
-        getAnxietyCategory(7) === "Normal" && getAnxietyCategory(8) === "Ringan",
-        `7:${getAnxietyCategory(7)}, 8:${getAnxietyCategory(8)}`);
-
-      assert("7. Batas Stress 14 vs 15", 
-        getStressCategory(14) === "Normal" && getStressCategory(15) === "Ringan",
-        `14:${getStressCategory(14)}, 15:${getStressCategory(15)}`);
-
-      const testDepOnly = new Array(21).fill(0);
-      testDepOnly[2] = 3;
-      const resDepOnly = computeDassScores(testDepOnly);
-      assert("8. Mapping Item: Q3 Depresi tidak bocor ke domain lain", 
-        resDepOnly.depression.final === 6 && resDepOnly.anxiety.final === 0 && resDepOnly.stress.final === 0,
-        `D:6, A:0, S:0`);
-
-      const testStrOnly = new Array(21).fill(0);
-      testStrOnly[0] = 2;
-      const resStrOnly = computeDassScores(testStrOnly);
-      assert("9. Mapping Item: Q1 Stres tidak bocor ke domain lain", 
-        resStrOnly.stress.final === 4 && resStrOnly.depression.final === 0,
-        `S:4, D:0`);
-
-      assert("10. Perkalian Skor x2", 
-        (resDepOnly.depression.raw * 2 === resDepOnly.depression.final), 
-        `Raw ${resDepOnly.depression.raw} x 2 = ${resDepOnly.depression.final}`);
-
-      container.innerHTML = `
-        <div class="p-3 bg-slate-900 text-slate-100 rounded-xl mb-3 flex items-center justify-between font-sans">
-          <span class="font-bold text-xs">Hasil Pengujian Suite (${tests.filter(t => t.pass).length}/${tests.length} Lulus)</span>
-          <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500 text-white">100% VALID</span>
-        </div>
-        <div class="space-y-1.5">
-          ${tests.map(t => `
-            <div class="p-2.5 rounded-lg border text-xs flex items-center justify-between ${t.pass ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'}">
-              <div>
-                <span class="font-bold">${t.title}</span>
-                <span class="block text-[10px] text-slate-500 mt-0.5">${t.detail}</span>
-              </div>
-              <span class="font-extrabold text-xs">${t.pass ? '✓ PASS' : '✗ FAIL'}</span>
-            </div>
-          `).join("")}
-        </div>
-      `;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
-      getPsychologists();
-      renderPublicPsychologists();
-
-      const hash = window.location.hash.replace("#", "");
-      if (hash && document.getElementById("view-" + hash)) {
-        navigateTo(hash);
-      } else {
-        navigateTo("home");
-      }
-
-      window.addEventListener("hashchange", () => {
-        const newHash = window.location.hash.replace("#", "");
-        if (newHash && document.getElementById("view-" + newHash)) {
-          document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
-          document.getElementById("view-" + newHash).classList.remove("hidden");
-          if (newHash === "psikolog") renderPublicPsychologists();
-          if (newHash === "admin") {
-            initAdminView();
-            updateAdminAnalyticsDisplay();
-            renderAdminRespondentsTable();
-          }
-          lucide.createIcons();
-        }
-      });
-    });
-  </script>
-</body>
-</html>
