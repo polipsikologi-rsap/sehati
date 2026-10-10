@@ -1602,10 +1602,10 @@
       renderAdminPsychologistsList();
     }
 
-    function getAccumulatedData() {
+   function getAccumulatedData() {
       const stored = localStorage.getItem("sehati_accumulated_data");
-      if (!stored) {
-        // Direset bersih ke 0 karena belum ada yang mengisi skrining
+      // Jika data belum ada, atau data lama masih menggunakan nilai dummy (142), reset ke 0
+      if (!stored || JSON.parse(stored).totalScreenings === 142) {
         const initial = { 
           totalScreenings: 0, 
           ratings: [], 
