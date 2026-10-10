@@ -515,7 +515,7 @@
         <p class="text-xs sm:text-sm text-slate-600 mb-6 max-w-xl mx-auto">
           Gunakan instrumen skrining standar untuk melihat gambaran kondisi emosional Anda selama 1 minggu terakhir.
         </p>
-        <button onclick="startScreeningFlow()" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl transition">
+        <button onclick="startScreeningFlow()" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition">
           Mulai Skrining
         </button>
       </div>
@@ -1018,13 +1018,6 @@
       <div id="step-results" class="screening-step hidden space-y-6">
         
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center relative">
-          <!-- Tombol Download Hasil Skrining bagi Pasien/Pengunjung -->
-          <div class="absolute top-4 right-4 no-print">
-            <button onclick="downloadPatientResultReport()" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition">
-              <i data-lucide="download" class="w-4 h-4"></i> Download Hasil (PDF/Print)
-            </button>
-          </div>
-
           <span class="text-xs font-bold uppercase tracking-widest text-brand-teal">Laporan Evaluasi SEHATI</span>
           <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1">Hasil Skrining Awal Kesehatan Mental</h1>
           <p id="result-user-name" class="text-slate-600 text-xs sm:text-sm mt-1 font-medium">Pengguna</p>
@@ -1126,9 +1119,6 @@
 
         </div>
 
-        <!-- REKOMENDASI -->
-        <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3"></div>
-
         <!-- DISCLAIMER -->
         <div class="bg-amber-50/90 p-6 sm:p-7 rounded-2xl border border-amber-200 text-amber-950 space-y-3">
           <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-900">
@@ -1143,7 +1133,7 @@
           </div>
         </div>
 
-        <!-- SURVEI KEPUASAN -->
+        <!-- SURVEI KEPUASAN & KUNCI TOMBOL DOWNLOAD -->
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5 no-print">
           <div class="pb-3 border-b border-slate-100">
             <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Feedback Pengguna</span>
@@ -1153,40 +1143,53 @@
 
           <form id="satisfaction-form" onsubmit="event.preventDefault(); submitSatisfactionSurvey();" class="space-y-4">
             <div>
-              <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Seberapa puas Anda menggunakan layanan skrining ini? (Skala 1 - 10)</label>
-              <div class="flex items-center justify-between gap-1 sm:gap-2">
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="1" required class="mb-1 text-brand-teal focus:ring-brand-teal"> 1</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="2" class="mb-1 text-brand-teal focus:ring-brand-teal"> 2</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="3" class="mb-1 text-brand-teal focus:ring-brand-teal"> 3</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="4" class="mb-1 text-brand-teal focus:ring-brand-teal"> 4</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="5" class="mb-1 text-brand-teal focus:ring-brand-teal"> 5</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="6" class="mb-1 text-brand-teal focus:ring-brand-teal"> 6</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="7" class="mb-1 text-brand-teal focus:ring-brand-teal"> 7</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="8" class="mb-1 text-brand-teal focus:ring-brand-teal"> 8</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="9" class="mb-1 text-brand-teal focus:ring-brand-teal"> 9</label>
-                <label class="flex-1 flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="10" class="mb-1 text-brand-teal focus:ring-brand-teal"> 10</label>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Seberapa puas Anda menggunakan layanan skrining ini? (Skala 1 - 10) *</label>
+              <!-- Skala Survei Rapih untuk Mobile & Desktop -->
+              <div class="grid grid-cols-5 sm:grid-cols-10 gap-2">
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="1" required class="mb-1 text-brand-teal focus:ring-brand-teal"> 1</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="2" class="mb-1 text-brand-teal focus:ring-brand-teal"> 2</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="3" class="mb-1 text-brand-teal focus:ring-brand-teal"> 3</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="4" class="mb-1 text-brand-teal focus:ring-brand-teal"> 4</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="5" class="mb-1 text-brand-teal focus:ring-brand-teal"> 5</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="6" class="mb-1 text-brand-teal focus:ring-brand-teal"> 6</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="7" class="mb-1 text-brand-teal focus:ring-brand-teal"> 7</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="8" class="mb-1 text-brand-teal focus:ring-brand-teal"> 8</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="9" class="mb-1 text-brand-teal focus:ring-brand-teal"> 9</label>
+                <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="10" class="mb-1 text-brand-teal focus:ring-brand-teal"> 10</label>
               </div>
-              <div class="flex justify-between text-[10px] text-slate-400 mt-1 px-1">
+              <div class="flex justify-between text-[10px] text-slate-400 mt-1.5 px-1">
                 <span>1 (Sangat Tidak Puas)</span>
                 <span>10 (Sangat Puas)</span>
               </div>
             </div>
 
             <div>
-              <label for="survey-comment" class="block text-xs font-bold text-slate-700 uppercase mb-1">Kolom Komentar / Masukan</label>
-              <textarea id="survey-comment" rows="3" placeholder="Tuliskan saran, kesan, atau masukan Anda terhadap platform SEHATI..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-teal"></textarea>
+              <label for="survey-comment" class="block text-xs font-bold text-slate-700 uppercase mb-1">Kolom Komentar / Masukan *</label>
+              <textarea id="survey-comment" rows="3" required placeholder="Tuliskan saran, kesan, atau masukan Anda terhadap platform SEHATI..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-teal"></textarea>
             </div>
 
-            <div id="survey-success-alert" class="hidden p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold">
-              Terima kasih! Penilaian dan komentar Anda berhasil direkam dan dikirim ke sistem.
+            <div id="survey-success-alert" class="hidden p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold text-center">
+              Terima kasih! Survei kepuasan berhasil direkam. Tombol Download Hasil Skrining kini telah diaktifkan.
             </div>
 
-            <div class="flex justify-end">
-              <button type="submit" class="px-6 py-2.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl transition">
+            <!-- Tombol Kirim Survei di Tengah -->
+            <div class="flex justify-center pt-2">
+              <button type="submit" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl transition shadow-sm">
                 Kirim Survei Kepuasan
               </button>
             </div>
           </form>
+        </div>
+
+        <!-- REKOMENDASI TINDAK LANJUT (Hanya Tampil di Web, Tidak Tercetak di PDF) -->
+        <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3 no-print"></div>
+
+        <!-- TOMBOL DOWNLOAD HASIL (DIKUNCI SEBELUM ISI SURVEI) -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center no-print">
+          <p class="text-xs text-slate-500 mb-3 font-medium">Selesaikan survei kepuasan di atas terlebih dahulu untuk mengaktifkan tombol download.</p>
+          <button id="btn-download-report" disabled onclick="downloadPatientResultReport()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-300 text-slate-500 font-bold text-xs rounded-xl shadow-sm transition cursor-not-allowed">
+            <i data-lucide="download" class="w-4 h-4"></i> Download Hasil Skrining (PDF/Print)
+          </button>
         </div>
 
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center no-print">
@@ -1602,10 +1605,8 @@
       renderAdminPsychologistsList();
     }
 
-    // Variabel penampung data sementara di memori browser
     let remoteAccumulatedCache = null;
 
-    // Fungsi asynchronous untuk mengambil data real-time dari Google Sheet (Cross-Device Real-Time Sync)
     async function fetchAccumulatedDataFromCloud() {
       if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) {
         return getLocalFallbackData();
@@ -1614,7 +1615,6 @@
         const response = await fetch(GOOGLE_SHEET_ENDPOINT);
         const cloudData = await response.json();
         if (cloudData && !cloudData.error) {
-          // Simpan ke cache lokal agar tetap responsif
           localStorage.setItem("sehati_accumulated_data", JSON.stringify(cloudData));
           return cloudData;
         }
@@ -1639,13 +1639,11 @@
       return JSON.parse(stored);
     }
 
-    // Ubah fungsi getAccumulatedData menjadi pemanggil cloud
     function getAccumulatedData() {
       if (remoteAccumulatedCache) return remoteAccumulatedCache;
       return getLocalFallbackData();
     }
 
-    // Fungsi Sinkronisasi Real-Time ke Google Sheets
     async function syncToGoogleSheets(payload) {
       if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) return;
       try {
@@ -1690,11 +1688,10 @@
       }
       
       localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
-      remoteAccumulatedCache = data; // Update cache memori
+      remoteAccumulatedCache = data;
       updateAdminAnalyticsDisplay();
       renderAdminRespondentsTable();
 
-      // Kirim payload dengan format kunci yang cocok persis dengan Apps Script Kolom A - O
       if (newRecord) {
         syncToGoogleSheets({
           timestamp: newRecord.timestamp,
@@ -1702,16 +1699,16 @@
           age: newRecord.age,
           gender: newRecord.gender,
           phone: newRecord.phone,
-          tujuan: newRecord.purpose,               // Kolom F
-          poli: newRecord.poli,                     // Kolom G
-          depressionScore: results.depression.final,// Kolom H
-          depressionCategory: results.depression.category, // Kolom I
-          anxietyScore: results.anxiety.final,      // Kolom J
-          anxietyCategory: results.anxiety.category,// Kolom K
-          stressScore: results.stress.final,        // Kolom L
-          stressCategory: results.stress.category,  // Kolom M
-          satisfactionRating: "",                   // Kolom N (Kosong saat skrining)
-          comment: newRecord.comment                // Kolom O
+          tujuan: newRecord.purpose,
+          poli: newRecord.poli,
+          depressionScore: results.depression.final,
+          depressionCategory: results.depression.category,
+          anxietyScore: results.anxiety.final,
+          anxietyCategory: results.anxiety.category,
+          stressScore: results.stress.final,
+          stressCategory: results.stress.category,
+          satisfactionRating: "",
+          comment: newRecord.comment
         });
       } else if (rating) {
         syncToGoogleSheets({
@@ -1720,8 +1717,8 @@
           depressionScore: "", depressionCategory: "",
           anxietyScore: "", anxietyCategory: "",
           stressScore: "", stressCategory: "",
-          satisfactionRating: rating,               // Kolom N (Terisi nilai survei 1-10)
-          comment: comment || "-"                   // Kolom O
+          satisfactionRating: rating,
+          comment: comment || "-"
         });
       }
     }
@@ -1907,7 +1904,6 @@
     let answers = new Array(21).fill(null);
     let latestComputedResults = null;
 
-    // Fungsi Navigasi Tab dengan Hash URL agar tidak kembali ke beranda saat di-refresh
     function navigateTo(viewId) {
       document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
       const target = document.getElementById("view-" + viewId);
@@ -2195,7 +2191,7 @@
       const guidanceContainer = document.getElementById("overall-guidance-card");
 
       if (hasHighSeverity) {
-        guidanceContainer.className = "p-6 rounded-2xl border border-amber-300 bg-amber-50/80 shadow-sm space-y-3";
+        guidanceContainer.className = "p-6 rounded-2xl border border-amber-300 bg-amber-50/80 shadow-sm space-y-3 no-print";
         guidanceContainer.innerHTML = `
           <div class="flex items-start gap-3">
             <div class="p-2 rounded-xl bg-amber-600 text-white flex-shrink-0 mt-0.5">
@@ -2218,7 +2214,7 @@
           </div>
         `;
       } else if (isAllNormal) {
-        guidanceContainer.className = "p-6 rounded-2xl border border-emerald-200 bg-emerald-50/70 shadow-sm space-y-2";
+        guidanceContainer.className = "p-6 rounded-2xl border border-emerald-200 bg-emerald-50/70 shadow-sm space-y-2 no-print";
         guidanceContainer.innerHTML = `
           <div class="flex items-start gap-3">
             <div class="p-2 rounded-xl bg-emerald-600 text-white flex-shrink-0 mt-0.5">
@@ -2233,7 +2229,7 @@
           </div>
         `;
       } else {
-        guidanceContainer.className = "p-6 rounded-2xl border border-blue-200 bg-blue-50/70 shadow-sm space-y-2";
+        guidanceContainer.className = "p-6 rounded-2xl border border-blue-200 bg-blue-50/70 shadow-sm space-y-2 no-print";
         guidanceContainer.innerHTML = `
           <div class="flex items-start gap-3">
             <div class="p-2 rounded-xl bg-blue-600 text-white flex-shrink-0 mt-0.5">
@@ -2292,7 +2288,10 @@
 
       renderOverallGuidance(results.depression.category, results.anxiety.category, results.stress.category);
 
-      recordNewScreeningAndSurvey(null, null, screeningUserData, results);
+      // Reset status tombol download menjadi terkunci saat pertama kali masuk ke halaman hasil
+      const dlBtn = document.getElementById("btn-download-report");
+      dlBtn.disabled = true;
+      dlBtn.className = "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-300 text-slate-500 font-bold text-xs rounded-xl shadow-sm transition cursor-not-allowed";
 
       goToScreeningStep("results");
       lucide.createIcons();
@@ -2307,10 +2306,19 @@
         alert("Silakan pilih rating kepuasan terlebih dahulu (skala 1-10).");
         return;
       }
+      if (!commentText || commentText.trim() === "") {
+        alert("Silakan isi kolom komentar/masukan terlebih dahulu.");
+        return;
+      }
 
       recordNewScreeningAndSurvey(selectedRating.value, commentText, null, null);
       successAlert.classList.remove("hidden");
-      document.getElementById("satisfaction-form").reset();
+
+      // Buka kunci tombol download setelah survei berhasil dikirim
+      const dlBtn = document.getElementById("btn-download-report");
+      dlBtn.disabled = false;
+      dlBtn.className = "w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition cursor-pointer";
+
       setTimeout(() => {
         successAlert.classList.add("hidden");
       }, 4000);
@@ -2361,13 +2369,11 @@
 
     let isAdminAuthenticated = false;
 
-    // Diperbarui agar menarik data real-time dari cloud Google Sheets saat admin login
     async function initAdminView() {
       if (isAdminAuthenticated) {
         document.getElementById("admin-login-panel").classList.add("hidden");
         document.getElementById("admin-dashboard-panel").classList.remove("hidden");
         
-        // Tarik data terbaru dari Google Sheets secara real-time lintas device
         remoteAccumulatedCache = await fetchAccumulatedDataFromCloud();
 
         renderAdminAvailabilityTable();
