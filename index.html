@@ -1019,7 +1019,7 @@
       <div id="step-results" class="screening-step hidden space-y-6">
         
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center relative">
-          <!-- Tombol Download Hasil Skrining bagi Pasien/Pengunjung (Wajib Isi Feedback Dulu) -->
+          <!-- Tombol Download Hasil Skrining (Wajib Mengisi Feedback/Survei Dulu) -->
           <div class="absolute top-4 right-4 no-print">
             <button onclick="downloadPatientResultReport()" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition">
               <i data-lucide="download" class="w-4 h-4"></i> Download Hasil (PDF/Print)
@@ -1073,7 +1073,7 @@
           </div>
           
           <div class="pt-2 text-[11px] text-slate-500 italic text-center">
-            Akumulasi data keseluruhan peserta skrining secara kolektif telah dicatat dan disinkronkan ke Google Sheets secara real-time.
+            Akumulasi data keseluruhan peserta skrining secara kolektif akan dicatat dan disinkronkan ke Google Sheets setelah survei dikirimkan.
           </div>
         </div>
 
@@ -1144,7 +1144,7 @@
           </div>
         </div>
 
-        <!-- SURVEI KEPUASAN (Dibuat responsif skala 1-10 untuk HP & Tombol Kirim di Tengah) -->
+        <!-- SURVEI KEPUASAN (Skala 1-10 responsif untuk HP, Tombol Kirim di Tengah) -->
         <div id="survey-section" class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-5 no-print scroll-mt-24">
           <div class="pb-3 border-b border-slate-100">
             <span class="text-xs font-bold uppercase tracking-wider text-brand-teal">Feedback Pengguna</span>
@@ -1155,7 +1155,7 @@
           <form id="satisfaction-form" onsubmit="event.preventDefault(); submitSatisfactionSurvey();" class="space-y-4">
             <div>
               <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Seberapa puas Anda menggunakan layanan skrining ini? (Skala 1 - 10)</label>
-              <!-- Skala 1-10 Dioptimalkan untuk Tampilan HP (grid 5 kolom di mobile, 10 kolom di desktop) -->
+              <!-- Tata letak skala 1-10 responsif di HP -->
               <div class="grid grid-cols-5 sm:flex sm:items-center sm:justify-between gap-1.5 sm:gap-2">
                 <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="1" required class="mb-1 text-brand-teal focus:ring-brand-teal"> 1</label>
                 <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="2" class="mb-1 text-brand-teal focus:ring-brand-teal"> 2</label>
@@ -1183,7 +1183,7 @@
               Terima kasih! Penilaian dan komentar Anda berhasil direkam. Tombol Download PDF kini telah diaktifkan.
             </div>
 
-            <!-- Tombol Kirim Survei di Buat ke Tengah -->
+            <!-- Tombol Kirim Survei di Tengah -->
             <div class="flex justify-center pt-2">
               <button type="submit" class="px-8 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition">
                 Kirim Survei Kepuasan
@@ -1620,7 +1620,7 @@
       return JSON.parse(stored);
     }
 
-    // Fungsi Sinkronisasi Real-Time ke Google Sheets dengan Payload Lengkap
+    // Fungsi Sinkronisasi Real-Time ke Google Sheets
     async function syncToGoogleSheets(payload) {
       if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) return;
       try {
@@ -1635,66 +1635,76 @@
       }
     }
 
-    function recordNewScreeningAndSurvey(rating, comment, userData, results) {
-      const data = getAccumulatedData();
-      
-      let newRecord = null;
-      if (userData && results) {
-        data.totalScreenings += 1;
-        newRecord = {
-          id: "resp-" + Date.now(),
-          timestamp: new Date().toLocaleString("id-ID"),
-          name: userData.name,
-          age: userData.age,
-          gender: userData.gender,
-          phone: userData.phone,
-          purpose: userData.purpose,
-          poli: userData.poli,
-          results: results,
-          comment: comment || "-"
-        };
-        if (!data.respondents) data.respondents = [];
-        data.respondents.unshift(newRecord);
+    let isSurveySubmitted = false;
+
+    function submitSatisfactionSurvey() {
+      const selectedRating = document.querySelector('input[name="rating-score"]:checked');
+      const commentText = document.getElementById("survey-comment").value;
+      const successAlert = document.getElementById("survey-success-alert");
+
+      if (!selectedRating) {
+        alert("Silakan pilih rating kepuasan terlebih dahulu (skala 1-10).");
+        return;
       }
+
+      isSurveySubmitted = true;
+      recordCompleteRespondentData(selectedRating.value, commentText);
+
+      successAlert.classList.remove("hidden");
+      document.getElementById("satisfaction-form").reset();
+      setTimeout(() => {
+        successAlert.classList.add("hidden");
+      }, 4000);
+    }
+
+    function recordCompleteRespondentData(rating, comment) {
+      const data = getAccumulatedData();
+      data.totalScreenings += 1;
+      
+      const newRecord = {
+        id: "resp-" + Date.now(),
+        timestamp: new Date().toLocaleString("id-ID"),
+        name: screeningUserData.name,
+        age: screeningUserData.age,
+        gender: screeningUserData.gender,
+        phone: screeningUserData.phone,
+        purpose: screeningUserData.purpose,
+        poli: screeningUserData.poli,
+        results: latestComputedResults,
+        rating: rating,
+        comment: comment || "-"
+      };
+
+      if (!data.respondents) data.respondents = [];
+      data.respondents.unshift(newRecord);
 
       if (rating) {
         data.ratings.push(parseInt(rating));
-      }
-      if (comment && comment.trim() !== "" && !userData) {
-        data.comments.unshift(comment.trim());
       }
       
       localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
       updateAdminAnalyticsDisplay();
       renderAdminRespondentsTable();
 
-      // Kirim data secara lengkap ke Google Sheets
-      if (newRecord) {
-        syncToGoogleSheets({
-          type: "screening",
-          timestamp: newRecord.timestamp,
-          name: newRecord.name,
-          age: newRecord.age,
-          gender: newRecord.gender,
-          phone: newRecord.phone,
-          purpose: newRecord.purpose,
-          poli: newRecord.poli,
-          depScore: results.depression.final,
-          depCat: results.depression.category,
-          anxScore: results.anxiety.final,
-          anxCat: results.anxiety.category,
-          strScore: results.stress.final,
-          strCat: results.stress.category,
-          comment: newRecord.comment
-        });
-      } else if (rating) {
-        syncToGoogleSheets({
-          type: "survey",
-          timestamp: new Date().toLocaleString("id-ID"),
-          rating: rating,
-          comment: comment || "-"
-        });
-      }
+      // Kirim lengkap secara serentak ke Google Sheets dalam 1 baris
+      syncToGoogleSheets({
+        type: "complete_screening",
+        timestamp: newRecord.timestamp,
+        name: newRecord.name,
+        age: newRecord.age,
+        gender: newRecord.gender,
+        phone: newRecord.phone,
+        purpose: newRecord.purpose,
+        poli: newRecord.poli,
+        depScore: latestComputedResults.depression.final,
+        depCat: latestComputedResults.depression.category,
+        anxScore: latestComputedResults.anxiety.final,
+        anxCat: latestComputedResults.anxiety.category,
+        strScore: latestComputedResults.stress.final,
+        strCat: latestComputedResults.stress.category,
+        rating: rating,
+        comment: newRecord.comment
+      });
     }
 
     function updateAdminAnalyticsDisplay() {
@@ -1869,8 +1879,6 @@
       document.body.removeChild(link);
     }
 
-    let isSurveySubmitted = false;
-
     function downloadPatientResultReport() {
       if (!isSurveySubmitted) {
         alert("Mohon isi dan kirimkan survei kepuasan (feedback pengguna) di bagian bawah terlebih dahulu sebelum mendownload hasil PDF.");
@@ -1888,7 +1896,6 @@
     let answers = new Array(21).fill(null);
     let latestComputedResults = null;
 
-    // Fungsi Navigasi Tab dengan Hash URL agar tidak kembali ke beranda saat di-refresh
     function navigateTo(viewId) {
       document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
       const target = document.getElementById("view-" + viewId);
@@ -1912,7 +1919,7 @@
     }
 
     function startScreeningFlow() {
-      isSurveySubmitted = false; // Reset status feedback untuk skrining baru
+      isSurveySubmitted = false;
       navigateTo("screening");
       goToScreeningStep("intro");
     }
@@ -2274,29 +2281,8 @@
 
       renderOverallGuidance(results.depression.category, results.anxiety.category, results.stress.category);
 
-      recordNewScreeningAndSurvey(null, null, screeningUserData, results);
-
       goToScreeningStep("results");
       lucide.createIcons();
-    }
-
-    function submitSatisfactionSurvey() {
-      const selectedRating = document.querySelector('input[name="rating-score"]:checked');
-      const commentText = document.getElementById("survey-comment").value;
-      const successAlert = document.getElementById("survey-success-alert");
-
-      if (!selectedRating) {
-        alert("Silakan pilih rating kepuasan terlebih dahulu (skala 1-10).");
-        return;
-      }
-
-      recordNewScreeningAndSurvey(selectedRating.value, commentText, null, null);
-      isSurveySubmitted = true; // Tandai bahwa survei telah diisi sehingga tombol download PDF terbuka
-      successAlert.classList.remove("hidden");
-      document.getElementById("satisfaction-form").reset();
-      setTimeout(() => {
-        successAlert.classList.add("hidden");
-      }, 4000);
     }
 
     function restartScreening() {
@@ -2345,7 +2331,6 @@
 
     let isAdminAuthenticated = false;
 
-    // Inisialisasi awal saat halaman dimuat atau di-refresh
     function initAdminView() {
       if (isAdminAuthenticated) {
         document.getElementById("admin-login-panel").classList.add("hidden");
