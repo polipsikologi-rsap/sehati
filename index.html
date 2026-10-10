@@ -67,21 +67,30 @@
       background: #cbd5e1;
       border-radius: 4px;
     }
+
+    /* KODE CSS PRINT BARU YANG BERSIH */
     @media print {
+      /* Sembunyikan seluruh elemen body secara default saat dicetak */
       body * {
         visibility: hidden;
       }
+      
+      /* Hanya tampilkan elemen hasil skrining dan seluruh isinya */
       #step-results, #step-results * {
         visibility: visible;
       }
+      
       #step-results {
         position: absolute;
         left: 0;
         top: 0;
         width: 100%;
       }
+
+      /* Sembunyikan elemen dengan class no-print (seperti form survei, rekomendasi tindak lanjut, dan tombol-tombol) saat dicetak */
       .no-print {
         display: none !important;
+        visibility: hidden !important;
       }
     }
   </style>
