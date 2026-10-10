@@ -515,7 +515,7 @@
         <p class="text-xs sm:text-sm text-slate-600 mb-6 max-w-xl mx-auto">
           Gunakan instrumen skrining standar untuk melihat gambaran kondisi emosional Anda selama 1 minggu terakhir.
         </p>
-        <button onclick="startScreeningFlow()" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition">
+        <button onclick="startScreeningFlow()" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl transition">
           Mulai Skrining
         </button>
       </div>
@@ -1602,9 +1602,30 @@
       renderAdminPsychologistsList();
     }
 
-   function getAccumulatedData() {
+    // Variabel penampung data sementara di memori browser
+    let remoteAccumulatedCache = null;
+
+    // Fungsi asynchronous untuk mengambil data real-time dari Google Sheet (Cross-Device Real-Time Sync)
+    async function fetchAccumulatedDataFromCloud() {
+      if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) {
+        return getLocalFallbackData();
+      }
+      try {
+        const response = await fetch(GOOGLE_SHEET_ENDPOINT);
+        const cloudData = await response.json();
+        if (cloudData && !cloudData.error) {
+          // Simpan ke cache lokal agar tetap responsif
+          localStorage.setItem("sehati_accumulated_data", JSON.stringify(cloudData));
+          return cloudData;
+        }
+      } catch (err) {
+        console.warn("Gagal terhubung ke cloud, menggunakan data lokal:", err);
+      }
+      return getLocalFallbackData();
+    }
+
+    function getLocalFallbackData() {
       const stored = localStorage.getItem("sehati_accumulated_data");
-      // Jika data belum ada, atau data lama masih menggunakan nilai dummy (142), reset ke 0
       if (!stored || JSON.parse(stored).totalScreenings === 142) {
         const initial = { 
           totalScreenings: 0, 
@@ -1616,6 +1637,12 @@
         return initial;
       }
       return JSON.parse(stored);
+    }
+
+    // Ubah fungsi getAccumulatedData menjadi pemanggil cloud
+    function getAccumulatedData() {
+      if (remoteAccumulatedCache) return remoteAccumulatedCache;
+      return getLocalFallbackData();
     }
 
     // Fungsi Sinkronisasi Real-Time ke Google Sheets
@@ -1663,27 +1690,38 @@
       }
       
       localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
+      remoteAccumulatedCache = data; // Update cache memori
       updateAdminAnalyticsDisplay();
       renderAdminRespondentsTable();
 
-      // Kirim data secara real-time ke Google Sheets
+      // Kirim payload dengan format kunci yang cocok persis dengan Apps Script Kolom A - O
       if (newRecord) {
         syncToGoogleSheets({
-          type: "screening",
-          ...newRecord,
-          depScore: results.depression.final,
-          depCat: results.depression.category,
-          anxScore: results.anxiety.final,
-          anxCat: results.anxiety.category,
-          strScore: results.stress.final,
-          strCat: results.stress.category
+          timestamp: newRecord.timestamp,
+          name: newRecord.name,
+          age: newRecord.age,
+          gender: newRecord.gender,
+          phone: newRecord.phone,
+          tujuan: newRecord.purpose,               // Kolom F
+          poli: newRecord.poli,                     // Kolom G
+          depressionScore: results.depression.final,// Kolom H
+          depressionCategory: results.depression.category, // Kolom I
+          anxietyScore: results.anxiety.final,      // Kolom J
+          anxietyCategory: results.anxiety.category,// Kolom K
+          stressScore: results.stress.final,        // Kolom L
+          stressCategory: results.stress.category,  // Kolom M
+          satisfactionRating: "",                   // Kolom N (Kosong saat skrining)
+          comment: newRecord.comment                // Kolom O
         });
       } else if (rating) {
         syncToGoogleSheets({
-          type: "survey",
           timestamp: new Date().toLocaleString("id-ID"),
-          rating: rating,
-          comment: comment || "-"
+          name: "", age: "", gender: "", phone: "", tujuan: "", poli: "",
+          depressionScore: "", depressionCategory: "",
+          anxietyScore: "", anxietyCategory: "",
+          stressScore: "", stressCategory: "",
+          satisfactionRating: rating,               // Kolom N (Terisi nilai survei 1-10)
+          comment: comment || "-"                   // Kolom O
         });
       }
     }
@@ -2323,10 +2361,15 @@
 
     let isAdminAuthenticated = false;
 
-    function initAdminView() {
+    // Diperbarui agar menarik data real-time dari cloud Google Sheets saat admin login
+    async function initAdminView() {
       if (isAdminAuthenticated) {
         document.getElementById("admin-login-panel").classList.add("hidden");
         document.getElementById("admin-dashboard-panel").classList.remove("hidden");
+        
+        // Tarik data terbaru dari Google Sheets secara real-time lintas device
+        remoteAccumulatedCache = await fetchAccumulatedDataFromCloud();
+
         renderAdminAvailabilityTable();
         renderAdminPsychologistsList();
         updateAdminAnalyticsDisplay();
