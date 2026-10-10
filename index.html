@@ -68,14 +68,12 @@
       border-radius: 4px;
     }
 
-    /* KODE CSS PRINT BARU YANG BERSIH */
+    /* KODE CSS PRINT / PDF YANG BERSIH */
     @media print {
-      /* Sembunyikan seluruh elemen body secara default saat dicetak */
       body * {
         visibility: hidden;
       }
       
-      /* Hanya tampilkan elemen hasil skrining dan seluruh isinya */
       #step-results, #step-results * {
         visibility: visible;
       }
@@ -87,7 +85,6 @@
         width: 100%;
       }
 
-      /* Sembunyikan elemen dengan class no-print (seperti form survei, rekomendasi tindak lanjut, dan tombol-tombol) saat dicetak */
       .no-print {
         display: none !important;
         visibility: hidden !important;
@@ -524,7 +521,7 @@
         <p class="text-xs sm:text-sm text-slate-600 mb-6 max-w-xl mx-auto">
           Gunakan instrumen skrining standar untuk melihat gambaran kondisi emosional Anda selama 1 minggu terakhir.
         </p>
-        <button onclick="startScreeningFlow()" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl shadow-sm transition">
+        <button onclick="startScreeningFlow()" class="px-7 py-3 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs sm:text-sm rounded-xl transition">
           Mulai Skrining
         </button>
       </div>
@@ -1153,7 +1150,6 @@
           <form id="satisfaction-form" onsubmit="event.preventDefault(); submitSatisfactionSurvey();" class="space-y-4">
             <div>
               <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Seberapa puas Anda menggunakan layanan skrining ini? (Skala 1 - 10) *</label>
-              <!-- Skala Survei Rapih untuk Mobile & Desktop -->
               <div class="grid grid-cols-5 sm:grid-cols-10 gap-2">
                 <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="1" required class="mb-1 text-brand-teal focus:ring-brand-teal"> 1</label>
                 <label class="flex flex-col items-center p-2 rounded-xl border border-slate-200 hover:bg-teal-50 cursor-pointer text-xs font-bold text-slate-700"><input type="radio" name="rating-score" value="2" class="mb-1 text-brand-teal focus:ring-brand-teal"> 2</label>
@@ -1193,7 +1189,7 @@
         <!-- REKOMENDASI TINDAK LANJUT (Hanya Tampil di Web, Tidak Tercetak di PDF) -->
         <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3 no-print"></div>
 
-        <!-- TOMBOL DOWNLOAD HASIL (DIKUNCI SEBELUM ISI SURVEI) -->
+        <!-- TOMBOL DOWNLOAD HASIL -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-center no-print">
           <p class="text-xs text-slate-500 mb-3 font-medium">Selesaikan survei kepuasan di atas terlebih dahulu untuk mengaktifkan tombol download.</p>
           <button id="btn-download-report" disabled onclick="downloadPatientResultReport()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-300 text-slate-500 font-bold text-xs rounded-xl shadow-sm transition cursor-not-allowed">
@@ -1528,8 +1524,7 @@
 
   <!-- SCRIPT -->
   <script>
-    // Konfigurasi endpoint Google Sheets Apps Script
-    const GOOGLE_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxA0WwtUDY5lC2XKb269-TB4iFNnNtzB6h4uiCWnioljp7ofE6ZI_-JXtJ_Vd3jmDNU/exec";
+    const GOOGLE_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbz9ygJRrSY1XNshxuIH3dU3eEkppVmQfLkg7aRtSEFrENv9z9J9xXtsEweDQV91ozN4/exec";
 
     const DASS21_ITEMS = [
       { id: 1, text: "Saya merasa sulit untuk menenangkan diri", domain: "stress" },
@@ -1669,10 +1664,10 @@
 
     function recordNewScreeningAndSurvey(rating, comment, userData, results) {
       const data = getAccumulatedData();
-      data.totalScreenings += 1;
       
       let newRecord = null;
       if (userData && results) {
+        data.totalScreenings += 1;
         newRecord = {
           id: "resp-" + Date.now(),
           timestamp: new Date().toLocaleString("id-ID"),
@@ -1683,26 +1678,14 @@
           purpose: userData.purpose,
           poli: userData.poli,
           results: results,
-          comment: comment || "-"
+          comment: "-"
         };
         if (!data.respondents) data.respondents = [];
         data.respondents.unshift(newRecord);
-      }
 
-      if (rating) {
-        data.ratings.push(parseInt(rating));
-      }
-      if (comment && comment.trim() !== "" && !userData) {
-        data.comments.unshift(comment.trim());
-      }
-      
-      localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
-      remoteAccumulatedCache = data;
-      updateAdminAnalyticsDisplay();
-      renderAdminRespondentsTable();
-
-      if (newRecord) {
+        // Kirim data skrining lengkap (biodata + skor) ke Google Sheets sekaligus
         syncToGoogleSheets({
+          action: "new_screening",
           timestamp: newRecord.timestamp,
           name: newRecord.name,
           age: newRecord.age,
@@ -1717,19 +1700,31 @@
           stressScore: results.stress.final,
           stressCategory: results.stress.category,
           satisfactionRating: "",
-          comment: newRecord.comment
+          comment: "-"
         });
-      } else if (rating) {
+      }
+
+      if (rating) {
+        data.ratings.push(parseInt(rating));
+        if (comment && comment.trim() !== "") {
+          data.comments.unshift(comment.trim());
+          if (data.respondents && data.respondents.length > 0) {
+            data.respondents[0].comment = comment.trim();
+          }
+        }
+        
+        // Kirim update survei (rating & komentar) untuk melengkapi baris terakhir di Google Sheets
         syncToGoogleSheets({
-          timestamp: new Date().toLocaleString("id-ID"),
-          name: "", age: "", gender: "", phone: "", tujuan: "", poli: "",
-          depressionScore: "", depressionCategory: "",
-          anxietyScore: "", anxietyCategory: "",
-          stressScore: "", stressCategory: "",
+          action: "update_survey",
           satisfactionRating: rating,
           comment: comment || "-"
         });
       }
+      
+      localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
+      remoteAccumulatedCache = data;
+      updateAdminAnalyticsDisplay();
+      renderAdminRespondentsTable();
     }
 
     function updateAdminAnalyticsDisplay() {
@@ -1905,14 +1900,11 @@
     }
 
     function downloadPatientResultReport() {
-      // Pastikan form survei sudah diisi dan tombol aktif
       const dlBtn = document.getElementById("btn-download-report");
       if (dlBtn.disabled) {
         alert("Silakan lengkapi dan kirim survei kepuasan terlebih dahulu untuk mengaktifkan unduhan hasil skrining.");
         return;
       }
-      
-      // Memanggil fungsi cetak/download PDF bawaan browser (Print to PDF)
       window.print();
     }
 
@@ -2305,6 +2297,9 @@
 
       renderOverallGuidance(results.depression.category, results.anxiety.category, results.stress.category);
 
+      // Catat data skrining (biodata & hasil) ke local storage dan kirim ke Google Sheets sekaligus
+      recordNewScreeningAndSurvey(null, null, screeningUserData, results);
+
       // Reset status tombol download menjadi terkunci saat pertama kali masuk ke halaman hasil
       const dlBtn = document.getElementById("btn-download-report");
       dlBtn.disabled = true;
@@ -2313,6 +2308,8 @@
       goToScreeningStep("results");
       lucide.createIcons();
     }
+
+    let adminLastSubmittedData = null;
 
     function submitSatisfactionSurvey() {
       const selectedRating = document.querySelector('input[name="rating-score"]:checked');
@@ -2328,6 +2325,7 @@
         return;
       }
 
+      // Kirim rating dan komentar untuk melengkapi data di Google Sheets (Update baris)
       recordNewScreeningAndSurvey(selectedRating.value, commentText, null, null);
       successAlert.classList.remove("hidden");
 
@@ -2603,68 +2601,4 @@
 
       const testDepOnly = new Array(21).fill(0);
       testDepOnly[2] = 3;
-      const resDepOnly = computeDassScores(testDepOnly);
-      assert("8. Mapping Item: Q3 Depresi tidak bocor ke domain lain", 
-        resDepOnly.depression.final === 6 && resDepOnly.anxiety.final === 0 && resDepOnly.stress.final === 0,
-        `D:6, A:0, S:0`);
-
-      const testStrOnly = new Array(21).fill(0);
-      testStrOnly[0] = 2;
-      const resStrOnly = computeDassScores(testStrOnly);
-      assert("9. Mapping Item: Q1 Stres tidak bocor ke domain lain", 
-        resStrOnly.stress.final === 4 && resStrOnly.depression.final === 0,
-        `S:4, D:0`);
-
-      assert("10. Perkalian Skor x2", 
-        (resDepOnly.depression.raw * 2 === resDepOnly.depression.final), 
-        `Raw ${resDepOnly.depression.raw} x 2 = ${resDepOnly.depression.final}`);
-
-      container.innerHTML = `
-        <div class="p-3 bg-slate-900 text-slate-100 rounded-xl mb-3 flex items-center justify-between font-sans">
-          <span class="font-bold text-xs">Hasil Pengujian Suite (${tests.filter(t => t.pass).length}/${tests.length} Lulus)</span>
-          <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500 text-white">100% VALID</span>
-        </div>
-        <div class="space-y-1.5">
-          ${tests.map(t => `
-            <div class="p-2.5 rounded-lg border text-xs flex items-center justify-between ${t.pass ? 'bg-emerald-50 border-emerald-200 text-emerald-900' : 'bg-rose-50 border-rose-200 text-rose-900'}">
-              <div>
-                <span class="font-bold">${t.title}</span>
-                <span class="block text-[10px] text-slate-500 mt-0.5">${t.detail}</span>
-              </div>
-              <span class="font-extrabold text-xs">${t.pass ? '✓ PASS' : '✗ FAIL'}</span>
-            </div>
-          `).join("")}
-        </div>
-      `;
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      lucide.createIcons();
-      getPsychologists();
-      renderPublicPsychologists();
-
-      const hash = window.location.hash.replace("#", "");
-      if (hash && document.getElementById("view-" + hash)) {
-        navigateTo(hash);
-      } else {
-        navigateTo("home");
-      }
-
-      window.addEventListener("hashchange", () => {
-        const newHash = window.location.hash.replace("#", "");
-        if (newHash && document.getElementById("view-" + newHash)) {
-          document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
-          document.getElementById("view-" + newHash).classList.remove("hidden");
-          if (newHash === "psikolog") renderPublicPsychologists();
-          if (newHash === "admin") {
-            initAdminView();
-            updateAdminAnalyticsDisplay();
-            renderAdminRespondentsTable();
-          }
-          lucide.createIcons();
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+      const resDepOnly = computeDassScores(
