@@ -96,27 +96,27 @@
       <div class="flex items-center justify-between h-20">
         
         <!-- Logo & Identitas Resmi -->
-        <button onclick="navigateTo('home')" class="flex items-center gap-1.5 sm:gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-teal rounded-lg p-0.5 sm:p-1 bg-transparent border-0 cursor-pointer">
+        <a href="#home" onclick="event.preventDefault(); navigateTo('home')" class="flex items-center gap-1.5 sm:gap-3 group focus:outline-none focus:ring-2 focus:ring-brand-teal rounded-lg p-0.5 sm:p-1">
           <div class="flex items-center gap-1 flex-shrink-0">
             <img src="logo-palu.png" alt="Logo Pemerintah Kota Palu" class="h-7 sm:h-10 w-auto object-contain drop-shadow-sm" onerror="this.src='https://via.placeholder.com/40?text=Palu';" />
             <img src="RS.png" alt="Logo RSUD Anutapura Palu" class="h-7 sm:h-10 w-auto object-contain drop-shadow-sm" onerror="this.src='https://via.placeholder.com/40?text=RSAP';" />
           </div>
-          <div class="flex flex-col border-l border-slate-200 pl-1.5 sm:pl-3 min-w-0 text-left">
+          <div class="flex flex-col border-l border-slate-200 pl-1.5 sm:pl-3 min-w-0">
             <div class="flex items-center gap-1">
               <span class="text-sm sm:text-lg font-black text-brand-teal tracking-tight">SEHATI</span>
               <span class="text-[8px] sm:text-[10px] font-bold px-1 py-0.2 rounded bg-teal-50 text-brand-teal border border-brand-teal/20">RSAP</span>
             </div>
             <span class="text-[9px] sm:text-[11px] font-semibold text-slate-500 leading-tight truncate">Poli Psikologi RSUD Anutapura Palu</span>
           </div>
-        </button>
+        </a>
 
         <!-- Menu Navigasi Desktop -->
         <nav class="hidden lg:flex items-center gap-1" aria-label="Menu Utama">
-          <button onclick="navigateTo('home')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition cursor-pointer">Beranda</button>
-          <button onclick="navigateTo('edukasi')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition cursor-pointer">Psikoedukasi</button>
-          <button onclick="navigateTo('layanan')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition cursor-pointer">Layanan & Rujukan</button>
-          <button onclick="navigateTo('psikolog')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition cursor-pointer">Psikolog Klinis</button>
-          <button onclick="navigateTo('tentang')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition cursor-pointer">Tentang SEHATI</button>
+          <a href="#home" onclick="event.preventDefault(); navigateTo('home')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Beranda</a>
+          <a href="#edukasi" onclick="event.preventDefault(); navigateTo('edukasi')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Psikoedukasi</a>
+          <a href="#layanan" onclick="event.preventDefault(); navigateTo('layanan')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Layanan & Rujukan</a>
+          <a href="#psikolog" onclick="event.preventDefault(); navigateTo('psikolog')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Psikolog Klinis</a>
+          <a href="#tentang" onclick="event.preventDefault(); navigateTo('tentang')" class="px-3 py-2 rounded-lg text-xs font-bold text-slate-700 hover:text-brand-teal hover:bg-slate-50 transition">Tentang SEHATI</a>
         </nav>
 
         <!-- CTA & Admin -->
@@ -125,9 +125,9 @@
             <i data-lucide="clipboard-check" class="w-4 h-4"></i>
             <span>Mulai Skrining</span>
           </button>
-          <button onclick="navigateTo('admin')" title="Panel Admin" class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition cursor-pointer bg-transparent border-0">
+          <a href="#admin" onclick="event.preventDefault(); navigateTo('admin')" title="Panel Admin" class="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition">
             <i data-lucide="shield" class="w-4 h-4"></i>
-          </button>
+          </a>
         </div>
 
         <!-- Tombol Menu Mobile -->
@@ -144,16 +144,16 @@
 
   <!-- Menu Dropdown Mobile -->
   <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-100 bg-white px-4 pt-3 pb-6 space-y-2 shadow-lg">
-    <button onclick="navigateTo('home'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Beranda</button>
-    <button onclick="navigateTo('edukasi'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikoedukasi</button>
-    <button onclick="navigateTo('layanan'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Layanan & Rujukan</button>
-    <button onclick="navigateTo('psikolog'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikolog Klinis</button>
-    <button onclick="navigateTo('tentang'); toggleMobileMenu()" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Tentang SEHATI</button>
+    <a href="#home" onclick="event.preventDefault(); navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Beranda</a>
+    <a href="#edukasi" onclick="event.preventDefault(); navigateTo('edukasi'); toggleMobileMenu()" class="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikoedukasi</a>
+    <a href="#layanan" onclick="event.preventDefault(); navigateTo('layanan'); toggleMobileMenu()" class="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Layanan & Rujukan</a>
+    <a href="#psikolog" onclick="event.preventDefault(); navigateTo('psikolog'); toggleMobileMenu()" class="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Psikolog Klinis</a>
+    <a href="#tentang" onclick="event.preventDefault(); navigateTo('tentang'); toggleMobileMenu()" class="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-50">Tentang SEHATI</a>
     <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
       <button onclick="startScreeningFlow(); toggleMobileMenu()" class="w-full py-2.5 bg-brand-teal text-white rounded-xl text-xs font-bold text-center">Mulai Skrining</button>
-      <button onclick="navigateTo('admin'); toggleMobileMenu()" class="w-full py-2 text-slate-500 hover:text-slate-800 text-xs font-semibold text-center flex items-center justify-center gap-1">
+      <a href="#admin" onclick="event.preventDefault(); navigateTo('admin'); toggleMobileMenu()" class="w-full py-2 text-slate-500 hover:text-slate-800 text-xs font-semibold text-center flex items-center justify-center gap-1">
         <i data-lucide="shield" class="w-3.5 h-3.5"></i> Admin Dashboard
-      </button>
+      </a>
     </div>
   </div>
 
@@ -200,9 +200,9 @@
                 <span>Mulai Skrining</span>
               </button>
               
-              <button onclick="navigateTo('edukasi')" class="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-bold text-sm rounded-xl border border-slate-300 shadow-sm transition cursor-pointer">
+              <a href="#edukasi" onclick="event.preventDefault(); navigateTo('edukasi')" class="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-bold text-sm rounded-xl border border-slate-300 shadow-sm transition text-center">
                 Psikoedukasi
-              </button>
+              </a>
             </div>
 
             <p class="mt-4 text-[11px] text-slate-400 font-medium">
@@ -1525,7 +1525,7 @@
 
   <!-- SCRIPT -->
   <script>
-    // URL Web App Google Apps Script Anda (Ganti dengan link deployment Google Sheets Anda)
+    // URL Web App Google Apps Script Anda
     const GOOGLE_SHEET_WEB_URL = "PASTE_WEB_APP_URL_GOOGLE_APPS_SCRIPT_DI_SINI";
 
     const DASS21_ITEMS = [
@@ -1743,303 +1743,4 @@
             <strong>Tujuan:</strong> ${r.tujuan}<br>
             <strong>Poli:</strong> ${r.poli}
           </td>
-          <td class="py-3 px-3">
-            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-teal-50 text-brand-teal mb-0.5">Dep: ${r.results.depression.final} (${r.results.depression.category})</span><br>
-            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-sky-50 text-sky-700 mb-0.5">Anx: ${r.results.anxiety.final} (${r.results.anxiety.category})</span><br>
-            <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700">Str: ${r.results.stress.final} (${r.results.stress.category})</span>
-          </td>
-          <td class="py-3 px-3 text-right">
-            <button onclick="openAdminRespondentDetail('${r.id}')" class="px-3 py-1.5 bg-brand-teal text-white rounded-lg text-xs font-bold hover:bg-brand-teal-dark transition cursor-pointer">
-              Lihat Diagram
-            </button>
-          </td>
-        </tr>
-      `).join("");
-    }
-
-    function openAdminRespondentDetail(id) {
-      const data = getAccumulatedData();
-      const r = (data.respondents || []).find(x => x.id === id);
-      if (!r) return;
-
-      const depPct = Math.min(100, Math.round((r.results.depression.final / 42) * 100));
-      const anxPct = Math.min(100, Math.round((r.results.anxiety.final / 42) * 100));
-      const strPct = Math.min(100, Math.round((r.results.stress.final / 42) * 100));
-
-      const modalContent = document.getElementById("admin-modal-content");
-      modalContent.innerHTML = `
-        <div class="p-3 bg-slate-50 rounded-xl space-y-1">
-          <p><strong>Nama:</strong> ${r.name} (${r.age} tahun, ${r.gender})</p>
-          <p><strong>No. Telp / WA:</strong> ${r.phone}</p>
-          <p><strong>Tujuan Kedatangan:</strong> ${r.tujuan}</p>
-          <p><strong>Poli yang Dituju:</strong> ${r.poli}</p>
-          <p><strong>Waktu Skrining:</strong> ${r.timestamp}</p>
-          <p><strong>Komentar Survei:</strong> "${r.comment}"</p>
-        </div>
-
-        <div class="space-y-3 pt-2">
-          <h4 class="font-bold text-slate-800">Visualisasi Diagram Skor DASS-21</h4>
-          
-          <div>
-            <div class="flex justify-between font-bold mb-1">
-              <span>Depresi: ${r.results.depression.final}</span>
-              <span class="text-brand-teal">${r.results.depression.category}</span>
-            </div>
-            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div class="bg-brand-teal h-full" style="width: ${depPct}%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="flex justify-between font-bold mb-1">
-              <span>Kecemasan: ${r.results.anxiety.final}</span>
-              <span class="text-sky-600">${r.results.anxiety.category}</span>
-            </div>
-            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div class="bg-sky-500 h-full" style="width: ${anxPct}%"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="flex justify-between font-bold mb-1">
-              <span>Stres: ${r.results.stress.final}</span>
-              <span class="text-amber-600">${r.results.stress.category}</span>
-            </div>
-            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
-              <div class="bg-amber-500 h-full" style="width: ${strPct}%"></div>
-            </div>
-          </div>
-        </div>
-      `;
-
-      document.getElementById("admin-detail-modal").classList.remove("hidden");
-    }
-
-    function closeAdminDetailModal() {
-      document.getElementById("admin-detail-modal").classList.add("hidden");
-    }
-
-    function exportRespondentsCSV() {
-      const data = getAccumulatedData();
-      const respondents = data.respondents || [];
-      if (respondents.length === 0) {
-        alert("Belum ada data responden untuk diexport.");
-        return;
-      }
-
-      let csvContent = "data:text/csv;charset=utf-8,Waktu,Nama,Usia,Jenis Kelamin,Telepon,Tujuan Kedatangan,Poli Dituju,Depresi Skor,Depresi Kategori,Kecemasan Skor,Kecemasan Kategori,Stres Skor,Stres Kategori,Komentar\r\n";
-      
-      respondents.forEach(r => {
-        const row = [
-          `"${r.timestamp}"`,
-          `"${r.name}"`,
-          r.age,
-          `"${r.gender}"`,
-          `"${r.phone}"`,
-          `"${r.tujuan}"`,
-          `"${r.poli}"`,
-          r.results.depression.final,
-          `"${r.results.depression.category}"`,
-          r.results.anxiety.final,
-          `"${r.results.anxiety.category}"`,
-          r.results.stress.final,
-          `"${r.results.stress.category}"`,
-          `"${r.comment}"`
-        ];
-        csvContent += row.join(",") + "\r\n";
-      });
-
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `data_responden_sehati_${Date.now()}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-    function downloadPatientResultReport() {
-      window.print();
-    }
-
-    let screeningUserData = { name: "", age: "", gender: "", phone: "", tujuan: "", poli: "" };
-    let currentQuestionIndex = 0;
-    let answers = new Array(21).fill(null);
-    let latestComputedResults = null;
-
-    function navigateTo(viewId) {
-      document.querySelectorAll(".view-section").forEach(sec => sec.classList.add("hidden"));
-      const target = document.getElementById("view-" + viewId);
-      if (target) {
-        target.classList.remove("hidden");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        window.location.hash = viewId;
-      }
-      if (viewId === "psikolog") renderPublicPsychologists();
-      if (viewId === "admin") {
-        initAdminView();
-        updateAdminAnalyticsDisplay();
-        renderAdminRespondentsTable();
-      }
-      lucide.createIcons();
-    }
-
-    function toggleMobileMenu() {
-      const menu = document.getElementById("mobile-menu");
-      menu.classList.toggle("hidden");
-    }
-
-    function startScreeningFlow() {
-      navigateTo("screening");
-      goToScreeningStep("intro");
-    }
-
-    function goToScreeningStep(stepName) {
-      document.querySelectorAll(".screening-step").forEach(step => step.classList.add("hidden"));
-      const target = document.getElementById("step-" + stepName);
-      if (target) {
-        target.classList.remove("hidden");
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-      lucide.createIcons();
-    }
-
-    function validateConsentForm() {
-      const c1 = document.getElementById("consent-check-1").checked;
-      const c2 = document.getElementById("consent-check-2").checked;
-      document.getElementById("consent-next-btn").disabled = !(c1 && c2);
-    }
-
-    function validatePrivacyForm() {
-      const p = document.getElementById("privacy-check").checked;
-      document.getElementById("privacy-next-btn").disabled = !p;
-    }
-
-    function handleTujuanChange(val) {
-      const wrapper = document.getElementById("tujuan-lainnya-wrapper");
-      const input = document.getElementById("bio-tujuan-lainnya");
-      if (val === "Lainnya") {
-        wrapper.classList.remove("hidden");
-        input.required = true;
-      } else {
-        wrapper.classList.add("hidden");
-        input.required = false;
-        input.value = "";
-      }
-    }
-
-    function handlePoliChange(val) {
-      const wrapper = document.getElementById("poli-lainnya-wrapper");
-      const input = document.getElementById("bio-poli-lainnya");
-      if (val === "Poli Lainnya") {
-        wrapper.classList.remove("hidden");
-        input.required = true;
-      } else {
-        wrapper.classList.add("hidden");
-        input.required = false;
-        input.value = "";
-      }
-    }
-
-    function submitBiodata() {
-      const name = document.getElementById("bio-name").value.trim();
-      const age = document.getElementById("bio-age").value.trim();
-      const gender = document.getElementById("bio-gender").value;
-      const phone = document.getElementById("bio-phone").value.trim();
-      
-      const tujuanSelect = document.getElementById("bio-tujuan").value;
-      let tujuanFinal = tujuanSelect;
-      if (tujuanSelect === "Lainnya") {
-        tujuanFinal = document.getElementById("bio-tujuan-lainnya").value.trim();
-      }
-
-      const poliSelect = document.getElementById("bio-poli").value;
-      let poliFinal = poliSelect;
-      if (poliSelect === "Poli Lainnya") {
-        poliFinal = document.getElementById("bio-poli-lainnya").value.trim();
-      }
-
-      const alertBox = document.getElementById("biodata-alert");
-
-      if (!name || !age || !gender || !phone || !tujuanFinal || !poliFinal || isNaN(age) || parseInt(age) < 5) {
-        alertBox.classList.remove("hidden");
-        return;
-      }
-
-      alertBox.classList.add("hidden");
-      screeningUserData = { name, age, gender, phone, tujuan: tujuanFinal, poli: poliFinal };
-      goToScreeningStep("instructions");
-    }
-
-    function startQuestions() {
-      currentQuestionIndex = 0;
-      answers = new Array(21).fill(null);
-      goToScreeningStep("questions");
-      renderCurrentQuestion();
-    }
-
-    function renderCurrentQuestion() {
-      const item = DASS21_ITEMS[currentQuestionIndex];
-      const qNum = currentQuestionIndex + 1;
-      
-      document.getElementById("question-counter").innerText = `Pertanyaan ${qNum} dari 21`;
-      const pct = Math.round((qNum / 21) * 100);
-      document.getElementById("progress-percent").innerText = `${pct}%`;
-      document.getElementById("progress-bar-fill").style.width = `${pct}%`;
-      
-      document.getElementById("question-text").innerText = item.text;
-
-      const radioInputs = document.getElementsByName("dass-answer");
-      const currentAns = answers[currentQuestionIndex];
-      
-      radioInputs.forEach(radio => {
-        radio.checked = (currentAns !== null && parseInt(radio.value) === currentAns);
-      });
-
-      document.getElementById("btn-prev-question").disabled = (currentQuestionIndex === 0);
-      
-      const nextBtn = document.getElementById("btn-next-question");
-      if (currentQuestionIndex === 20) {
-        nextBtn.innerHTML = `<span>Lihat Hasil Skrining</span>`;
-      } else {
-        nextBtn.innerHTML = `<span>Berikutnya</span>`;
-      }
-      nextBtn.disabled = (answers[currentQuestionIndex] === null);
-
-      lucide.createIcons();
-    }
-
-    function selectAnswer(val) {
-      answers[currentQuestionIndex] = val;
-      document.getElementById("btn-next-question").disabled = false;
-    }
-
-    function prevQuestion() {
-      if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        renderCurrentQuestion();
-      }
-    }
-
-    function nextQuestion() {
-      if (answers[currentQuestionIndex] === null) return;
-
-      if (currentQuestionIndex < 20) {
-        currentQuestionIndex++;
-        renderCurrentQuestion();
-      } else {
-        const allAnswered = answers.every(a => a !== null);
-        if (!allAnswered) {
-          alert("Harap jawab seluruh 21 pertanyaan sebelum melihat hasil.");
-          return;
-        }
-        calculateAndShowResults();
-      }
-    }
-
-    function computeDassScores(answersArray) {
-      const depressionIndices = [2, 4, 9, 12, 15, 16, 20];
-      const anxietyIndices    = [1, 3, 6, 8, 14, 18, 19];
-      const stressIndices     = [0, 5, 7, 10, 11, 13, 17];
-
-      const
+          <td class="
