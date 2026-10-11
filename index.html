@@ -2385,11 +2385,9 @@
     }
 
     async function renderPublicPsychologists() {
-  const container = document.getElementById("public-psychologist-grid");
-  if (!container) return;
-  const psychologists = await getPsychologists();
-  // ... sisa kode render ...
-}
+      const container = document.getElementById("public-psychologist-grid");
+      if (!container) return;
+      const psychologists = await getPsychologists();
 
       container.innerHTML = psychologists
         .filter(p => p.active !== false)
@@ -2422,7 +2420,6 @@
 
       lucide.createIcons();
     }
-
     let isAdminAuthenticated = false;
 
     function initAdminView() {
