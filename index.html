@@ -2453,40 +2453,43 @@
     }
 
     async function renderAdminAvailabilityTable() {
-      const tbody = document.getElementById("admin-availability-tbody");
-      if (!tbody) return;
-      const psychologists = await getPsychologists();
+  const tbody = document.getElementById("admin-availability-tbody");
+  if (!tbody) return;
+  const psychologists = await getPsychologists();
 
-      tbody.innerHTML = psychologists.map(p => {
-        const isAvail = p.availability;
-        return `
-          <tr class="hover:bg-slate-50 transition">
-            <td class="py-3 px-4 font-bold text-slate-800">${p.name}</td>
-            <td class="py-3 px-4">
-              ${isAvail 
-                ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700">🟢 Tersedia Hari Ini</span>`
-                : `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">⚪ Tidak Tersedia Hari Ini</span>`
-              }
-            </td>
-            <td class="py-3 px-4 text-right">
-              <button onclick="togglePsychologistAvailability('${p.id}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold ${isAvail ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-brand-teal text-white hover:bg-brand-teal-dark'} transition">
-                ${isAvail ? 'Set OFF' : 'Set ON'}
-              </button>
-            </td>
-          </tr>
-        `;
-      }).join("");
-      lucide.createIcons();
-    }
+  tbody.innerHTML = psychologists.map(p => {
+    const isAvail = p.availability;
+    return `
+      <tr class="hover:bg-slate-50 transition">
+        <td class="py-3 px-4 font-bold text-slate-800">${p.name}</td>
+        <td class="py-3 px-4">
+          ${isAvail 
+            ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700">🟢 Tersedia Hari Ini</span>`
+            : `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">⚪ Tidak Tersedia Hari Ini</span>`
+          }
+        </td>
+        <td class="py-3 px-4 text-right">
+          <button onclick="togglePsychologistAvailability('${p.id}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold ${isAvail ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-brand-teal text-white hover:bg-brand-teal-dark'} transition">
+            ${isAvail ? 'Set OFF' : 'Set ON'}
+          </button>
+        </td>
+      </tr>
+    `;
+  }).join("");
+  lucide.createIcons();
+}
 
     async function togglePsychologistAvailability(id) {
-      const psychologists = await getPsychologists();
-      const updated = psychologists.map(p => {
-        if (p.id === id) return { ...p, availability: !p.availability };
-        return p;
-      });
-      await savePsychologists(updated);
+  const psychologists = await getPsychologists();
+  const updated = psychologists.map(p => {
+    if (p.id === id) {
+      // Membalik status availability (true <-> false)
+      return { ...p, availability: !p.availability };
     }
+    return p;
+  });
+  await savePsychologists(updated);
+}
 
     async function renderAdminPsychologistsList() {
       const container = document.getElementById("admin-psychologist-cards");
