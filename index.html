@@ -1617,41 +1617,38 @@
     ];
 
     async function getPsychologists() {
-  // Coba ambil data terbaru dari Google Sheets
-  if (GOOGLE_SHEET_ENDPOINT && !GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) {
-    try {
-      const response = await fetch(GOOGLE_SHEET_ENDPOINT + "?type=get_psychologists");
-      const data = await response.json();
-      if (data && data.psychologists && data.psychologists.length > 0) {
-        localStorage.setItem("sehati_psychologists", JSON.stringify(data.psychologists));
-        return data.psychologists;
+      if (GOOGLE_SHEET_ENDPOINT && !GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) {
+        try {
+          const response = await fetch(GOOGLE_SHEET_ENDPOINT + "?type=get_psychologists");
+          const data = await response.json();
+          if (data && data.psychologists && data.psychologists.length > 0) {
+            localStorage.setItem("sehati_psychologists", JSON.stringify(data.psychologists));
+            return data.psychologists;
+          }
+        } catch (err) {
+          console.log("Gagal memuat dari server, menggunakan cache lokal.", err);
+        }
       }
-    } catch (err) {
-      console.log("Gagal memuat dari server, menggunakan cache lokal.", err);
+      
+      const stored = localStorage.getItem("sehati_psychologists");
+      if (!stored) {
+        localStorage.setItem("sehati_psychologists", JSON.stringify(INITIAL_PSYCHOLOGISTS));
+        return INITIAL_PSYCHOLOGISTS;
+      }
+      return JSON.parse(stored);
     }
-  }
-  
-  // Fallback ke localStorage jika offline
-  const stored = localStorage.getItem("sehati_psychologists");
-  if (!stored) {
-    localStorage.setItem("sehati_psychologists", JSON.stringify(INITIAL_PSYCHOLOGISTS));
-    return INITIAL_PSYCHOLOGISTS;
-  }
-  return JSON.parse(stored);
-}
 
     async function savePsychologists(data) {
-  localStorage.setItem("sehati_psychologists", JSON.stringify(data));
-  renderPublicPsychologists();
-  renderAdminAvailabilityTable();
-  renderAdminPsychologistsList();
+      localStorage.setItem("sehati_psychologists", JSON.stringify(data));
+      renderPublicPsychologists();
+      renderAdminAvailabilityTable();
+      renderAdminPsychologistsList();
 
-  // Kirim data ke Google Sheets agar sinkron ke HP / device lain
-  await syncToGoogleSheets({
-    type: "update_psychologists",
-    psychologists: data
-  });
-}
+      await syncToGoogleSheets({
+        type: "update_psychologists",
+        psychologists: data
+      });
+    }
 
     function getAccumulatedData() {
       const stored = localStorage.getItem("sehati_accumulated_data");
@@ -1668,7 +1665,6 @@
       return JSON.parse(stored);
     }
 
-    // Fungsi Sinkronisasi Real-Time ke Google Sheets
     async function syncToGoogleSheets(payload) {
       if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) return;
       try {
@@ -1683,7 +1679,6 @@
       }
     }
 
-    // Sinkronisasi dan pembersihan data/komentar agar sepenuhnya sinkron dengan Google Sheets
     async function fetchDataFromGoogleSheets() {
       if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) {
         alert("Endpoint Google Sheets belum dikonfigurasi.");
@@ -1697,7 +1692,6 @@
           localData.respondents = json.respondents;
           localData.totalScreenings = json.respondents.length;
           if (json.ratings) localData.ratings = json.ratings;
-          // Menyaring komentar agar hanya mengambil komentar dari data responden yang masih aktif/ada di Google Sheets
           localData.comments = json.respondents.map(r => r.comment).filter(c => c && c !== "-");
           localStorage.setItem("sehati_accumulated_data", JSON.stringify(localData));
           updateAdminAnalyticsDisplay();
@@ -1706,7 +1700,6 @@
         }
       } catch (err) {
         console.log("Menggunakan state lokal tersimpan.", err);
-        // Sinkronisasi pembersihan komentar lokal berdasarkan daftar responden yang ada
         const localData = getAccumulatedData();
         if (localData.respondents) {
           localData.comments = localData.respondents.map(r => r.comment).filter(c => c && c !== "-");
@@ -1729,14 +1722,12 @@
         return;
       }
 
-      // Pastikan status terekam dengan benar
       isSurveySubmitted = true;
       recordCompleteRespondentData(selectedRating.value, commentText);
 
       successAlert.classList.remove("hidden");
       document.getElementById("satisfaction-form").reset();
       
-      // Gulir layar kembali ke atas atau ke tombol download agar pengguna tahu tombol sudah aktif
       window.scrollTo({ top: 100, behavior: 'smooth' });
 
       setTimeout(() => {
@@ -1745,7 +1736,6 @@
     }
 
     function downloadPatientResultReport() {
-      // Pastikan variabel status terdeteksi aktif
       if (!isSurveySubmitted) {
         alert("Mohon isi dan kirimkan survei kepuasan (feedback pengguna) di bagian bawah terlebih dahulu sebelum mendownload hasil PDF.");
         const surveyEl = document.getElementById("survey-section");
@@ -1782,14 +1772,12 @@
         data.ratings.push(parseInt(rating));
       }
 
-      // Perbarui daftar komentar dari responden aktif
       data.comments = data.respondents.map(r => r.comment).filter(c => c && c !== "-");
       
       localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
       updateAdminAnalyticsDisplay();
       renderAdminRespondentsTable();
 
-      // Kirim lengkap secara serentak ke Google Sheets dalam 1 baris
       syncToGoogleSheets({
         type: "complete_screening",
         timestamp: newRecord.timestamp,
@@ -1977,18 +1965,6 @@
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    }
-
-    function downloadPatientResultReport() {
-      if (!isSurveySubmitted) {
-        alert("Mohon isi dan kirimkan survei kepuasan (feedback pengguna) di bagian bawah terlebih dahulu sebelum mendownload hasil PDF.");
-        const surveyEl = document.getElementById("survey-section");
-        if (surveyEl) {
-          surveyEl.scrollIntoView({ behavior: 'smooth' });
-        }
-        return;
-      }
-      window.print();
     }
 
     let screeningUserData = { name: "", age: "", gender: "", phone: "", purpose: "", poli: "" };
@@ -2334,7 +2310,6 @@
       const results = computeDassScores(answers);
       latestComputedResults = results;
 
-      // Menampilkan nama pengguna di tengah tanpa awalan
       document.getElementById("result-user-name").innerText = screeningUserData.name || 'Pengguna';
 
       const depPct = Math.min(100, Math.round((results.depression.final / 42) * 100));
@@ -2420,6 +2395,7 @@
 
       lucide.createIcons();
     }
+
     let isAdminAuthenticated = false;
 
     function initAdminView() {
@@ -2477,11 +2453,9 @@
     }
 
     async function renderAdminAvailabilityTable() {
-  const tbody = document.getElementById("admin-availability-tbody");
-  if (!tbody) return;
-  const psychologists = await getPsychologists();
-  // ... sisa kode render ...
-}
+      const tbody = document.getElementById("admin-availability-tbody");
+      if (!tbody) return;
+      const psychologists = await getPsychologists();
 
       tbody.innerHTML = psychologists.map(p => {
         const isAvail = p.availability;
@@ -2502,23 +2476,22 @@
           </tr>
         `;
       }).join("");
+      lucide.createIcons();
     }
 
     async function togglePsychologistAvailability(id) {
-  const psychologists = await getPsychologists();
-  const updated = psychologists.map(p => {
-    if (p.id === id) return { ...p, availability: !p.availability };
-    return p;
-  });
-  await savePsychologists(updated);
-}
+      const psychologists = await getPsychologists();
+      const updated = psychologists.map(p => {
+        if (p.id === id) return { ...p, availability: !p.availability };
+        return p;
+      });
+      await savePsychologists(updated);
+    }
 
     async function renderAdminPsychologistsList() {
-  const container = document.getElementById("admin-psychologist-cards");
-  if (!container) return;
-  const psychologists = await getPsychologists();
-  // ... sisa kode render ...
-}
+      const container = document.getElementById("admin-psychologist-cards");
+      if (!container) return;
+      const psychologists = await getPsychologists();
 
       container.innerHTML = psychologists.map(p => `
         <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
@@ -2543,56 +2516,58 @@
       document.getElementById("edit-psy-spec").value = "";
       document.getElementById("edit-psy-active").checked = true;
       document.getElementById("psychologist-modal").classList.remove("hidden");
+      lucide.createIcons();
     }
 
     async function openEditPsychologistModal(id) {
-  const psychologists = await getPsychologists();
-  const p = psychologists.find(x => x.id === id);
-  if (!p) return;
+      const psychologists = await getPsychologists();
+      const p = psychologists.find(x => x.id === id);
+      if (!p) return;
 
-  document.getElementById("modal-title").innerText = "Edit Profil Psikolog";
-  document.getElementById("edit-psy-id").value = p.id;
-  document.getElementById("edit-psy-name").value = p.name;
-  document.getElementById("edit-psy-bio").value = p.bio || "";
-  document.getElementById("edit-psy-spec").value = p.specialization || "";
-  document.getElementById("edit-psy-active").checked = (p.active !== false);
-  document.getElementById("psychologist-modal").classList.remove("hidden");
-}
+      document.getElementById("modal-title").innerText = "Edit Profil Psikolog";
+      document.getElementById("edit-psy-id").value = p.id;
+      document.getElementById("edit-psy-name").value = p.name;
+      document.getElementById("edit-psy-bio").value = p.bio || "";
+      document.getElementById("edit-psy-spec").value = p.specialization || "";
+      document.getElementById("edit-psy-active").checked = (p.active !== false);
+      document.getElementById("psychologist-modal").classList.remove("hidden");
+      lucide.createIcons();
+    }
 
     function closePsychologistModal() {
       document.getElementById("psychologist-modal").classList.add("hidden");
     }
 
     async function savePsychologistData() {
-  const id = document.getElementById("edit-psy-id").value;
-  const name = document.getElementById("edit-psy-name").value.trim();
-  const bio = document.getElementById("edit-psy-bio").value.trim();
-  const specialization = document.getElementById("edit-psy-spec").value.trim();
-  const active = document.getElementById("edit-psy-active").checked;
+      const id = document.getElementById("edit-psy-id").value;
+      const name = document.getElementById("edit-psy-name").value.trim();
+      const bio = document.getElementById("edit-psy-bio").value.trim();
+      const specialization = document.getElementById("edit-psy-spec").value.trim();
+      const active = document.getElementById("edit-psy-active").checked;
 
-  let psychologists = await getPsychologists();
+      let psychologists = await getPsychologists();
 
-  if (id) {
-    psychologists = psychologists.map(p => {
-      if (p.id === id) return { ...p, name, bio, specialization, active };
-      return p;
-    });
-  } else {
-    psychologists.push({
-      id: "psy-" + Date.now(),
-      name,
-      degree: "M. Psi., Psikolog",
-      photo: null,
-      bio,
-      specialization,
-      availability: true,
-      active
-    });
-  }
+      if (id) {
+        psychologists = psychologists.map(p => {
+          if (p.id === id) return { ...p, name, bio, specialization, active };
+          return p;
+        });
+      } else {
+        psychologists.push({
+          id: "psy-" + Date.now(),
+          name,
+          degree: "M. Psi., Psikolog",
+          photo: null,
+          bio,
+          specialization,
+          availability: true,
+          active
+        });
+      }
 
-  await savePsychologists(psychologists);
-  closePsychologistModal();
-}
+      await savePsychologists(psychologists);
+      closePsychologistModal();
+    }
 
     function runDassUnitTests() {
       const container = document.getElementById("test-results-container");
@@ -2673,6 +2648,7 @@
           `).join("")}
         </div>
       `;
+      lucide.createIcons();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
