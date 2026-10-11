@@ -1547,7 +1547,7 @@
   <!-- SCRIPT -->
   <script>
     // Konfigurasi endpoint Google Sheets Apps Script
-    const GOOGLE_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbw6iGvrBsCikXlKejRPfla3y_VBjGifM1vnpjC4HV2exFDteBd7dWFjurMEBAy3hds/exec";
+    const GOOGLE_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbw12zc2mkPvyDyQJ1VfDNwWr6uUck6xSF7N27jA_ZicIWJ-Bjr8LvieRKYbLfH8DUG_/exec";
 
     const DASS21_ITEMS = [
       { id: 1, text: "Saya merasa sulit untuk menenangkan diri", domain: "stress" },
@@ -1616,21 +1616,42 @@
       }
     ];
 
-    function getPsychologists() {
-      const stored = localStorage.getItem("sehati_psychologists");
-      if (!stored) {
-        localStorage.setItem("sehati_psychologists", JSON.stringify(INITIAL_PSYCHOLOGISTS));
-        return INITIAL_PSYCHOLOGISTS;
+    async function getPsychologists() {
+  // Coba ambil data terbaru dari Google Sheets
+  if (GOOGLE_SHEET_ENDPOINT && !GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) {
+    try {
+      const response = await fetch(GOOGLE_SHEET_ENDPOINT + "?type=get_psychologists");
+      const data = await response.json();
+      if (data && data.psychologists && data.psychologists.length > 0) {
+        localStorage.setItem("sehati_psychologists", JSON.stringify(data.psychologists));
+        return data.psychologists;
       }
-      return JSON.parse(stored);
+    } catch (err) {
+      console.log("Gagal memuat dari server, menggunakan cache lokal.", err);
     }
+  }
+  
+  // Fallback ke localStorage jika offline
+  const stored = localStorage.getItem("sehati_psychologists");
+  if (!stored) {
+    localStorage.setItem("sehati_psychologists", JSON.stringify(INITIAL_PSYCHOLOGISTS));
+    return INITIAL_PSYCHOLOGISTS;
+  }
+  return JSON.parse(stored);
+}
 
-    function savePsychologists(data) {
-      localStorage.setItem("sehati_psychologists", JSON.stringify(data));
-      renderPublicPsychologists();
-      renderAdminAvailabilityTable();
-      renderAdminPsychologistsList();
-    }
+    async function savePsychologists(data) {
+  localStorage.setItem("sehati_psychologists", JSON.stringify(data));
+  renderPublicPsychologists();
+  renderAdminAvailabilityTable();
+  renderAdminPsychologistsList();
+
+  // Kirim data ke Google Sheets agar sinkron ke HP / device lain
+  await syncToGoogleSheets({
+    type: "update_psychologists",
+    psychologists: data
+  });
+}
 
     function getAccumulatedData() {
       const stored = localStorage.getItem("sehati_accumulated_data");
@@ -2363,10 +2384,12 @@
       goToScreeningStep("intro");
     }
 
-    function renderPublicPsychologists() {
-      const container = document.getElementById("public-psychologist-grid");
-      if (!container) return;
-      const psychologists = getPsychologists();
+    async function renderPublicPsychologists() {
+  const container = document.getElementById("public-psychologist-grid");
+  if (!container) return;
+  const psychologists = await getPsychologists();
+  // ... sisa kode render ...
+}
 
       container.innerHTML = psychologists
         .filter(p => p.active !== false)
@@ -2456,10 +2479,12 @@
       lucide.createIcons();
     }
 
-    function renderAdminAvailabilityTable() {
-      const tbody = document.getElementById("admin-availability-tbody");
-      if (!tbody) return;
-      const psychologists = getPsychologists();
+    async function renderAdminAvailabilityTable() {
+  const tbody = document.getElementById("admin-availability-tbody");
+  if (!tbody) return;
+  const psychologists = await getPsychologists();
+  // ... sisa kode render ...
+}
 
       tbody.innerHTML = psychologists.map(p => {
         const isAvail = p.availability;
@@ -2482,19 +2507,21 @@
       }).join("");
     }
 
-    function togglePsychologistAvailability(id) {
-      const psychologists = getPsychologists();
-      const updated = psychologists.map(p => {
-        if (p.id === id) return { ...p, availability: !p.availability };
-        return p;
-      });
-      savePsychologists(updated);
-    }
+    async function togglePsychologistAvailability(id) {
+  const psychologists = await getPsychologists();
+  const updated = psychologists.map(p => {
+    if (p.id === id) return { ...p, availability: !p.availability };
+    return p;
+  });
+  await savePsychologists(updated);
+}
 
-    function renderAdminPsychologistsList() {
-      const container = document.getElementById("admin-psychologist-cards");
-      if (!container) return;
-      const psychologists = getPsychologists();
+    async function renderAdminPsychologistsList() {
+  const container = document.getElementById("admin-psychologist-cards");
+  if (!container) return;
+  const psychologists = await getPsychologists();
+  // ... sisa kode render ...
+}
 
       container.innerHTML = psychologists.map(p => `
         <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
@@ -2521,54 +2548,54 @@
       document.getElementById("psychologist-modal").classList.remove("hidden");
     }
 
-    function openEditPsychologistModal(id) {
-      const psychologists = getPsychologists();
-      const p = psychologists.find(x => x.id === id);
-      if (!p) return;
+    async function openEditPsychologistModal(id) {
+  const psychologists = await getPsychologists();
+  const p = psychologists.find(x => x.id === id);
+  if (!p) return;
 
-      document.getElementById("modal-title").innerText = "Edit Profil Psikolog";
-      document.getElementById("edit-psy-id").value = p.id;
-      document.getElementById("edit-psy-name").value = p.name;
-      document.getElementById("edit-psy-bio").value = p.bio || "";
-      document.getElementById("edit-psy-spec").value = p.specialization || "";
-      document.getElementById("edit-psy-active").checked = (p.active !== false);
-      document.getElementById("psychologist-modal").classList.remove("hidden");
-    }
+  document.getElementById("modal-title").innerText = "Edit Profil Psikolog";
+  document.getElementById("edit-psy-id").value = p.id;
+  document.getElementById("edit-psy-name").value = p.name;
+  document.getElementById("edit-psy-bio").value = p.bio || "";
+  document.getElementById("edit-psy-spec").value = p.specialization || "";
+  document.getElementById("edit-psy-active").checked = (p.active !== false);
+  document.getElementById("psychologist-modal").classList.remove("hidden");
+}
 
     function closePsychologistModal() {
       document.getElementById("psychologist-modal").classList.add("hidden");
     }
 
-    function savePsychologistData() {
-      const id = document.getElementById("edit-psy-id").value;
-      const name = document.getElementById("edit-psy-name").value.trim();
-      const bio = document.getElementById("edit-psy-bio").value.trim();
-      const specialization = document.getElementById("edit-psy-spec").value.trim();
-      const active = document.getElementById("edit-psy-active").checked;
+    async function savePsychologistData() {
+  const id = document.getElementById("edit-psy-id").value;
+  const name = document.getElementById("edit-psy-name").value.trim();
+  const bio = document.getElementById("edit-psy-bio").value.trim();
+  const specialization = document.getElementById("edit-psy-spec").value.trim();
+  const active = document.getElementById("edit-psy-active").checked;
 
-      let psychologists = getPsychologists();
+  let psychologists = await getPsychologists();
 
-      if (id) {
-        psychologists = psychologists.map(p => {
-          if (p.id === id) return { ...p, name, bio, specialization, active };
-          return p;
-        });
-      } else {
-        psychologists.push({
-          id: "psy-" + Date.now(),
-          name,
-          degree: "M. Psi., Psikolog",
-          photo: null,
-          bio,
-          specialization,
-          availability: true,
-          active
-        });
-      }
+  if (id) {
+    psychologists = psychologists.map(p => {
+      if (p.id === id) return { ...p, name, bio, specialization, active };
+      return p;
+    });
+  } else {
+    psychologists.push({
+      id: "psy-" + Date.now(),
+      name,
+      degree: "M. Psi., Psikolog",
+      photo: null,
+      bio,
+      specialization,
+      availability: true,
+      active
+    });
+  }
 
-      savePsychologists(psychologists);
-      closePsychologistModal();
-    }
+  await savePsychologists(psychologists);
+  closePsychologistModal();
+}
 
     function runDassUnitTests() {
       const container = document.getElementById("test-results-container");
