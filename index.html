@@ -1036,7 +1036,7 @@
             <!-- Baris Pertama: Laporan Evaluasi SEHATI (Ke Tengah) -->
             <span class="text-xs font-bold uppercase tracking-widest text-brand-teal block text-center mb-1">Laporan Evaluasi SEHATI</span>
             <!-- Baris Kedua: Hasil Skrining Kesehatan Mental (Diperkecil agar muat 1 baris & ke tengah) -->
-            <h1 class="text-lg sm:text-xl font-extrabold text-brand-navy text-center mb-3">Hasil Skrining Kesehatan Mental</h1>
+            <h1 class="text-lg sm:text-xl font-extrabold text-brand-navy text-center mb-3">Hasil Skrining Awal Kesehatan Mental</h1>
             <!-- Baris Ketiga: Nama Pengguna di Tengah (Tanpa kata "Hasil skrining untuk") -->
             <div class="mb-4">
               <h2 id="result-user-name" class="text-base sm:text-lg font-bold text-brand-navy text-center">Nama Pengguna</h2>
@@ -1708,14 +1708,32 @@
         return;
       }
 
+      // Pastikan status terekam dengan benar
       isSurveySubmitted = true;
       recordCompleteRespondentData(selectedRating.value, commentText);
 
       successAlert.classList.remove("hidden");
       document.getElementById("satisfaction-form").reset();
+      
+      // Gulir layar kembali ke atas atau ke tombol download agar pengguna tahu tombol sudah aktif
+      window.scrollTo({ top: 100, behavior: 'smooth' });
+
       setTimeout(() => {
         successAlert.classList.add("hidden");
-      }, 4000);
+      }, 5000);
+    }
+
+    function downloadPatientResultReport() {
+      // Pastikan variabel status terdeteksi aktif
+      if (!isSurveySubmitted) {
+        alert("Mohon isi dan kirimkan survei kepuasan (feedback pengguna) di bagian bawah terlebih dahulu sebelum mendownload hasil PDF.");
+        const surveyEl = document.getElementById("survey-section");
+        if (surveyEl) {
+          surveyEl.scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+      }
+      window.print();
     }
 
     function recordCompleteRespondentData(rating, comment) {
