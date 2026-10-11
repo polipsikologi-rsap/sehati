@@ -1018,17 +1018,21 @@
       <!-- STEP 7: HASIL, DIAGRAM, REKOMENDASI & SURVEI -->
       <div id="step-results" class="screening-step hidden space-y-6">
         
+        <!-- PERBAIKAN POSISI TOMBOL DOWNLOAD: Menggunakan flex column/row agar tidak menutupi tulisan pada HP -->
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center relative">
-          <!-- Tombol Download Hasil Skrining (Wajib Mengisi Feedback/Survei Dulu) -->
-          <div class="absolute top-4 right-4 no-print">
-            <button onclick="downloadPatientResultReport()" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition">
-              <i data-lucide="download" class="w-4 h-4"></i> Download Hasil (PDF/Print)
-            </button>
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 mb-4 border-b border-slate-100">
+            <div class="text-left">
+              <span class="text-xs font-bold uppercase tracking-widest text-brand-teal block">Laporan Evaluasi Awal SEHATI</span>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-0.5">Hasil Skrining Anda</h1>
+              <p id="result-user-name" class="text-slate-600 text-xs sm:text-sm mt-0.5 font-medium">Hasil skrining untuk Pengguna</p>
+            </div>
+            <!-- Tombol Download Hasil Skrining (Wajib Mengisi Feedback/Survei Dulu) -->
+            <div class="no-print w-full sm:w-auto">
+              <button onclick="downloadPatientResultReport()" class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition">
+                <i data-lucide="download" class="w-4 h-4"></i> Download Hasil (PDF/Print)
+              </button>
+            </div>
           </div>
-
-          <span class="text-xs font-bold uppercase tracking-widest text-brand-teal">Laporan Evaluasi Awal SEHATI</span>
-          <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-1">Hasil Skrining Anda</h1>
-          <p id="result-user-name" class="text-slate-600 text-xs sm:text-sm mt-1 font-medium">Hasil skrining untuk Pengguna</p>
         </div>
 
         <!-- DIAGRAM / VISUALISASI GRAFIK BATANG SKOR -->
