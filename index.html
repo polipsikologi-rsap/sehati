@@ -79,7 +79,14 @@
         left: 0;
         top: 0;
         width: 100%;
-        page-break-inside: avoid;
+      }
+      .page-break-print-1 {
+        page-break-after: always;
+        break-after: page;
+      }
+      .page-break-print-2 {
+        page-break-after: always;
+        break-after: page;
       }
       .no-print {
         display: none !important;
@@ -87,7 +94,7 @@
       }
       @page {
         size: portrait;
-        margin: 15mm;
+        margin: 12mm;
       }
     }
   </style>
@@ -1023,81 +1030,72 @@
       <!-- STEP 7: HASIL, DIAGRAM, REKOMENDASI & SURVEI -->
       <div id="step-results" class="screening-step hidden space-y-6">
         
-        <!-- HEADER HASIL SKRINING DENGAN PERUBAHAN JUDUL & POSISI NAMA DI TENGAH -->
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center relative">
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 mb-4 border-b border-slate-100">
-            <div class="text-left w-full sm:w-auto">
-              <!-- Baris Pertama -->
-              <span class="text-xs font-bold uppercase tracking-widest text-brand-teal block">Laporan Evaluasi SEHATI</span>
-              <!-- Baris Kedua -->
-              <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-navy mt-0.5">Hasil Skrining Kesehatan Mental</h1>
+        <!-- HALAMAN CETAK 1: HEADER, DIAGRAM, DAN DEPRESI -->
+        <div class="page-break-print-1 space-y-6">
+          <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
+            <!-- Baris Pertama: Laporan Evaluasi SEHATI (Ke Tengah) -->
+            <span class="text-xs font-bold uppercase tracking-widest text-brand-teal block text-center mb-1">Laporan Evaluasi SEHATI</span>
+            <!-- Baris Kedua: Hasil Skrining Kesehatan Mental (Diperkecil agar muat 1 baris & ke tengah) -->
+            <h1 class="text-lg sm:text-xl font-extrabold text-brand-navy text-center mb-3">Hasil Skrining Kesehatan Mental</h1>
+            <!-- Baris Ketiga: Nama Pengguna di Tengah (Tanpa kata "Hasil skrining untuk") -->
+            <div class="mb-4">
+              <h2 id="result-user-name" class="text-base sm:text-lg font-bold text-brand-navy text-center">Nama Pengguna</h2>
             </div>
-            <!-- Tombol Download Hasil Skrining (Wajib Mengisi Feedback/Survei Dulu) -->
-            <div class="no-print w-full sm:w-auto flex-shrink-0">
-              <button onclick="downloadPatientResultReport()" class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition">
+            <!-- Tombol Download Hasil Skrining di Bawah Nama Pengguna -->
+            <div class="no-print flex justify-center">
+              <button onclick="downloadPatientResultReport()" class="inline-flex items-center justify-center gap-1.5 px-5 py-2.5 bg-brand-teal hover:bg-brand-teal-dark text-white font-bold text-xs rounded-xl shadow-sm transition">
                 <i data-lucide="download" class="w-4 h-4"></i> Download Hasil (PDF/Print)
               </button>
             </div>
           </div>
-          <!-- Baris Ketiga: Nama Pengguna di Tengah -->
-          <div class="pt-1 pb-2">
-            <h2 id="result-user-name" class="text-base sm:text-lg font-bold text-brand-navy text-center">Nama Pengguna</h2>
-          </div>
-        </div>
 
-        <!-- DIAGRAM / VISUALISASI GRAFIK BATANG SKOR -->
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <h2 class="text-sm font-bold text-brand-navy flex items-center gap-2">
-              <i data-lucide="bar-chart-3" class="w-4 h-4 text-brand-teal"></i> Visualisasi Diagram Skor Skrining
-            </h2>
-            <span class="text-[11px] font-semibold text-slate-400">Skor Akhir (0 - 42)</span>
-          </div>
-
-          <div class="space-y-4 pt-2">
-            <div>
-              <div class="flex justify-between text-xs font-bold mb-1">
-                <span class="text-slate-700">Depresi</span>
-                <span id="chart-dep-val" class="text-brand-teal">0 (Normal)</span>
-              </div>
-              <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
-                <div id="chart-dep-bar" class="bg-brand-teal h-full transition-all duration-500" style="width: 0%"></div>
-              </div>
+          <!-- DIAGRAM / VISUALISASI GRAFIK BATANG SKOR -->
+          <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <h2 class="text-sm font-bold text-brand-navy flex items-center gap-2">
+                <i data-lucide="bar-chart-3" class="w-4 h-4 text-brand-teal"></i> Visualisasi Diagram Skor Skrining
+              </h2>
+              <span class="text-[11px] font-semibold text-slate-400">Skor Akhir (0 - 42)</span>
             </div>
 
-            <div>
-              <div class="flex justify-between text-xs font-bold mb-1">
-                <span class="text-slate-700">Kecemasan</span>
-                <span id="chart-anx-val" class="text-sky-600">0 (Normal)</span>
+            <div class="space-y-4 pt-2">
+              <div>
+                <div class="flex justify-between text-xs font-bold mb-1">
+                  <span class="text-slate-700">Depresi</span>
+                  <span id="chart-dep-val" class="text-brand-teal">0 (Normal)</span>
+                </div>
+                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                  <div id="chart-dep-bar" class="bg-brand-teal h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
               </div>
-              <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
-                <div id="chart-anx-bar" class="bg-sky-500 h-full transition-all duration-500" style="width: 0%"></div>
-              </div>
-            </div>
 
-            <div>
-              <div class="flex justify-between text-xs font-bold mb-1">
-                <span class="text-slate-700">Stres</span>
-                <span id="chart-str-val" class="text-amber-600">0 (Normal)</span>
+              <div>
+                <div class="flex justify-between text-xs font-bold mb-1">
+                  <span class="text-slate-700">Kecemasan</span>
+                  <span id="chart-anx-val" class="text-sky-600">0 (Normal)</span>
+                </div>
+                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                  <div id="chart-anx-bar" class="bg-sky-500 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
               </div>
-              <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
-                <div id="chart-str-bar" class="bg-amber-500 h-full transition-all duration-500" style="width: 0%"></div>
+
+              <div>
+                <div class="flex justify-between text-xs font-bold mb-1">
+                  <span class="text-slate-700">Stres</span>
+                  <span id="chart-str-val" class="text-amber-600">0 (Normal)</span>
+                </div>
+                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                  <div id="chart-str-bar" class="bg-amber-500 h-full transition-all duration-500" style="width: 0%"></div>
+                </div>
               </div>
             </div>
           </div>
-          
-          <div class="pt-2 text-[11px] text-slate-500 italic text-center">
-            Akumulasi data keseluruhan peserta skrining secara kolektif akan dicatat dan disinkronkan ke Google Sheets setelah survei dikirimkan.
-          </div>
-        </div>
 
-        <!-- 3 Category Result Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <!-- KARTU DEPRESI (Halaman 1) -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
-                <span class="text-xs font-extrabold uppercase text-slate-500">Depresi</span>
+                <span class="text-xs font-extrabold uppercase text-slate-500">Domain Depresi</span>
                 <span id="badge-dep-category" class="px-2.5 py-1 text-[11px] font-bold rounded-full bg-slate-100 text-slate-700">Normal</span>
               </div>
               <div class="text-3xl font-black text-brand-navy mb-1" id="score-dep-val">0</div>
@@ -1108,11 +1106,14 @@
             </div>
             <div id="action-dep-box" class="mt-4 pt-3 border-t border-slate-100"></div>
           </div>
+        </div>
 
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+        <!-- HALAMAN CETAK 2: KECEMASAN DAN STRES -->
+        <div class="page-break-print-2 grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
-                <span class="text-xs font-extrabold uppercase text-slate-500">Kecemasan</span>
+                <span class="text-xs font-extrabold uppercase text-slate-500">Domain Kecemasan</span>
                 <span id="badge-anx-category" class="px-2.5 py-1 text-[11px] font-bold rounded-full bg-slate-100 text-slate-700">Normal</span>
               </div>
               <div class="text-3xl font-black text-brand-navy mb-1" id="score-anx-val">0</div>
@@ -1124,10 +1125,10 @@
             <div id="action-anx-box" class="mt-4 pt-3 border-t border-slate-100"></div>
           </div>
 
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-3">
-                <span class="text-xs font-extrabold uppercase text-slate-500">Stres</span>
+                <span class="text-xs font-extrabold uppercase text-slate-500">Domain Stres</span>
                 <span id="badge-str-category" class="px-2.5 py-1 text-[11px] font-bold rounded-full bg-slate-100 text-slate-700">Normal</span>
               </div>
               <div class="text-3xl font-black text-brand-navy mb-1" id="score-str-val">0</div>
@@ -1138,23 +1139,25 @@
             </div>
             <div id="action-str-box" class="mt-4 pt-3 border-t border-slate-100"></div>
           </div>
-
         </div>
 
-        <!-- REKOMENDASI -->
-        <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3"></div>
+        <!-- HALAMAN CETAK 3: REKOMENDASI TINDAK LANJUT & DISCLAIMER -->
+        <div class="space-y-6">
+          <!-- REKOMENDASI -->
+          <div id="overall-guidance-card" class="p-6 rounded-2xl border bg-white shadow-sm space-y-3"></div>
 
-        <!-- DISCLAIMER -->
-        <div class="bg-amber-50/90 p-6 sm:p-7 rounded-2xl border border-amber-200 text-amber-950 space-y-3">
-          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-900">
-            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 flex-shrink-0"></i>
-            <span>PENTING UNTUK DIPAHAMI</span>
-          </div>
-          <div class="space-y-2 text-xs sm:text-sm leading-relaxed text-amber-900">
-            <p>Hasil skrining merupakan gambaran awal kondisi psikologis dan bukan diagnosis. Untuk mendapatkan penilaian dan penanganan lebih lanjut, konsultasikan dengan dokter atau psikolog.</p>
-            <p class="font-medium bg-white/70 p-3 rounded-xl border border-amber-200/70">
-              Jika Anda sedang mengalami kondisi darurat psikologis, merasa tidak aman, atau memiliki pikiran untuk menyakiti diri sendiri, jangan hanya mengandalkan hasil skrining ini. Segera cari bantuan langsung dari tenaga kesehatan atau layanan kedaruratan yang tersedia.
-            </p>
+          <!-- DISCLAIMER -->
+          <div class="bg-amber-50/90 p-6 sm:p-7 rounded-2xl border border-amber-200 text-amber-950 space-y-3">
+            <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-900">
+              <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 flex-shrink-0"></i>
+              <span>PENTING UNTUK DIPAHAMI</span>
+            </div>
+            <div class="space-y-2 text-xs sm:text-sm leading-relaxed text-amber-900">
+              <p>Hasil skrining merupakan gambaran awal kondisi psikologis dan bukan diagnosis. Untuk mendapatkan penilaian dan penanganan lebih lanjut, konsultasikan dengan dokter atau psikolog.</p>
+              <p class="font-medium bg-white/70 p-3 rounded-xl border border-amber-200/70">
+                Jika Anda sedang mengalami kondisi darurat psikologis, merasa tidak aman, atau memiliki pikiran untuk menyakiti diri sendiri, jangan hanya mengandalkan hasil skrining ini. Segera cari bantuan langsung dari tenaga kesehatan atau layanan kedaruratan yang tersedia.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -1659,7 +1662,7 @@
       }
     }
 
-    // Fungsi Sinkronisasi / Fetch data terbaru dari Google Sheets (jika endpoint mendukung GET)
+    // Sinkronisasi dan pembersihan data/komentar agar sepenuhnya sinkron dengan Google Sheets
     async function fetchDataFromGoogleSheets() {
       if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) {
         alert("Endpoint Google Sheets belum dikonfigurasi.");
@@ -1673,13 +1676,21 @@
           localData.respondents = json.respondents;
           localData.totalScreenings = json.respondents.length;
           if (json.ratings) localData.ratings = json.ratings;
+          // Menyaring komentar agar hanya mengambil komentar dari data responden yang masih aktif/ada di Google Sheets
+          localData.comments = json.respondents.map(r => r.comment).filter(c => c && c !== "-");
           localStorage.setItem("sehati_accumulated_data", JSON.stringify(localData));
           updateAdminAnalyticsDisplay();
           renderAdminRespondentsTable();
-          alert("Data admin berhasil diperbarui dari Google Sheets secara real-time!");
+          alert("Data admin & daftar komentar survei berhasil disinkronkan dengan Google Sheets!");
         }
       } catch (err) {
-        console.log("Sinkronisasi otomatis menggunakan state lokal tersimpan.", err);
+        console.log("Menggunakan state lokal tersimpan.", err);
+        // Sinkronisasi pembersihan komentar lokal berdasarkan daftar responden yang ada
+        const localData = getAccumulatedData();
+        if (localData.respondents) {
+          localData.comments = localData.respondents.map(r => r.comment).filter(c => c && c !== "-");
+          localStorage.setItem("sehati_accumulated_data", JSON.stringify(localData));
+        }
         updateAdminAnalyticsDisplay();
         renderAdminRespondentsTable();
       }
@@ -1731,6 +1742,9 @@
       if (rating) {
         data.ratings.push(parseInt(rating));
       }
+
+      // Perbarui daftar komentar dari responden aktif
+      data.comments = data.respondents.map(r => r.comment).filter(c => c && c !== "-");
       
       localStorage.setItem("sehati_accumulated_data", JSON.stringify(data));
       updateAdminAnalyticsDisplay();
@@ -1773,14 +1787,11 @@
         }
       }
       if (commentsListEl) {
-        const allComments = [
-          ...(data.comments || []),
-          ...((data.respondents || []).map(r => r.comment).filter(c => c && c !== "-"))
-        ];
-        if (allComments.length === 0) {
+        const activeComments = (data.respondents || []).map(r => r.comment).filter(c => c && c !== "-");
+        if (activeComments.length === 0) {
           commentsListEl.innerHTML = `<div class="p-3 bg-slate-50 rounded-xl text-xs text-slate-500">Belum ada komentar survei yang masuk.</div>`;
         } else {
-          commentsListEl.innerHTML = allComments.map(c => `
+          commentsListEl.innerHTML = activeComments.map(c => `
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700">
               "${c}"
             </div>
@@ -2244,14 +2255,6 @@
               <p class="text-xs text-amber-900 leading-relaxed mt-1">
                 Berdasarkan hasil skrining, terdapat indikasi gejala dalam kategori <strong>sedang hingga berat</strong> pada setidaknya satu domain. Anda sangat disarankan untuk melakukan pemeriksaan lanjutan bersama tenaga profesional.
               </p>
-              <div class="mt-3.5 flex flex-wrap items-center gap-2.5">
-                <a href="#layanan" onclick="event.preventDefault(); navigateTo('layanan')" class="px-4 py-2 bg-amber-800 hover:bg-amber-900 text-white text-xs font-bold rounded-xl transition flex items-center gap-1.5">
-                  <i data-lucide="git-merge" class="w-3.5 h-3.5"></i> Pelajari Alur Rujukan BPJS & Umum
-                </a>
-                <a href="#psikolog" onclick="event.preventDefault(); navigateTo('psikolog')" class="px-4 py-2 bg-white border border-amber-300 hover:bg-amber-100 text-amber-900 text-xs font-bold rounded-xl transition flex items-center gap-1.5">
-                  <i data-lucide="users" class="w-3.5 h-3.5"></i> Cek Ketersediaan Psikolog Hari Ini
-                </a>
-              </div>
             </div>
           </div>
         `;
@@ -2292,7 +2295,7 @@
       const results = computeDassScores(answers);
       latestComputedResults = results;
 
-      // Menampilkan langsung nama pengguna di tengah tanpa awalan "Hasil skrining untuk ..."
+      // Menampilkan nama pengguna di tengah tanpa awalan
       document.getElementById("result-user-name").innerText = screeningUserData.name || 'Pengguna';
 
       const depPct = Math.min(100, Math.round((results.depression.final / 42) * 100));
