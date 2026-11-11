@@ -70,41 +70,84 @@
       border-radius: 4px;
     }
     @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm;
+      }
       *, *::before, *::after {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
         color-adjust: exact !important;
       }
-      body * {
-        visibility: hidden;
+      html, body, main, #app-root {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background-color: #ffffff !important;
+        color: #0F172A !important;
+        overflow: visible !important;
       }
-      #step-results, #step-results * {
-        visibility: visible;
-      }
-      #chart-dep-bar, #chart-anx-bar, #chart-str-bar {
-        transition: none !important;
-      }
-      #step-results {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-      }
-      .page-break-print-1 {
-        page-break-after: always;
-        break-after: page;
-      }
-      .page-break-print-2 {
-        page-break-after: always;
-        break-after: page;
-      }
+      header,
+      footer,
+      #mobile-menu,
       .no-print {
         display: none !important;
         visibility: hidden !important;
       }
-      @page {
-        size: portrait;
-        margin: 12mm;
+      .view-section.hidden,
+      .screening-step.hidden {
+        display: none !important;
+      }
+      .view-section:not(.hidden),
+      .screening-step:not(.hidden) {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+      }
+      #step-results:not(.hidden),
+      #step-results:not(.hidden) * {
+        visibility: visible !important;
+      }
+      #step-results:not(.hidden) {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      #chart-dep-bar, #chart-anx-bar, #chart-str-bar {
+        transition: none !important;
+      }
+      .page-break-print-1 {
+        display: block !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+      .page-break-print-2 {
+        display: block !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+      .page-break-print-2 > div + div {
+        margin-top: 1.25rem !important;
+      }
+      #step-results .bg-white,
+      #step-results #overall-guidance-card,
+      #step-results .bg-amber-50\/90 {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        box-shadow: none !important;
       }
     }
   </style>
@@ -1573,8 +1616,43 @@
     </div>
   </footer>
 
+  <!-- Toast Notification Container (No Print) -->
+  <div id="app-toast-notice" class="hidden no-print fixed top-24 left-1/2 -translate-x-1/2 z-50 max-w-md w-[92%] bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg border border-slate-700 text-xs font-medium flex items-center justify-between gap-3 transition-all">
+    <span id="app-toast-text"></span>
+    <button type="button" onclick="document.getElementById('app-toast-notice').classList.add('hidden')" class="text-slate-400 hover:text-white font-bold text-sm leading-none">&times;</button>
+  </div>
+
   <!-- SCRIPT -->
   <script>
+    function showAppNotice(message) {
+      const toast = document.getElementById("app-toast-notice");
+      const textEl = document.getElementById("app-toast-text");
+      if (toast && textEl) {
+        textEl.innerText = message;
+        toast.classList.remove("hidden");
+        clearTimeout(window._appToastTimer);
+        window._appToastTimer = setTimeout(() => {
+          toast.classList.add("hidden");
+        }, 5000);
+      }
+    }
+
+    // Dukungan langsung cetak halaman dengan Ctrl + P / Cmd + P di laptop
+    window.addEventListener("mouseenter", () => {
+      try { window.focus(); } catch (err) {}
+    });
+    window.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === "p" || e.key === "P")) {
+        e.preventDefault();
+        window.print();
+      }
+    }, true);
+    window.addEventListener("beforeprint", () => {
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+
     // Konfigurasi endpoint Google Sheets Apps Script
     const GOOGLE_SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbw-UXc7KI230CpWF1_X29i07kXU65KyaLPrY_yASKs5DE32uL9GDze8nr3YVqYo_J5r/exec";
 
@@ -1710,7 +1788,7 @@
 
     async function fetchDataFromGoogleSheets() {
       if (!GOOGLE_SHEET_ENDPOINT || GOOGLE_SHEET_ENDPOINT.includes("YOUR_SCRIPT_ID")) {
-        alert("Endpoint Google Sheets belum dikonfigurasi.");
+        showAppNotice("Endpoint Google Sheets belum dikonfigurasi.");
         return;
       }
       try {
@@ -1725,7 +1803,7 @@
           localStorage.setItem("sehati_accumulated_data", JSON.stringify(localData));
           updateAdminAnalyticsDisplay();
           renderAdminRespondentsTable();
-          alert("Data admin & daftar komentar survei berhasil disinkronkan dengan Google Sheets!");
+          showAppNotice("Data admin & daftar komentar survei berhasil disinkronkan dengan Google Sheets!");
         }
       } catch (err) {
         console.log("Menggunakan state lokal tersimpan.", err);
@@ -1747,7 +1825,7 @@
       const successAlert = document.getElementById("survey-success-alert");
 
       if (!selectedRating) {
-        alert("Silakan pilih rating kepuasan terlebih dahulu (skala 1-10).");
+        showAppNotice("Silakan pilih rating kepuasan terlebih dahulu (skala 1-10).");
         return;
       }
 
@@ -1766,7 +1844,7 @@
 
     function downloadPatientResultReport() {
       if (!isSurveySubmitted) {
-        alert("Mohon isi dan kirimkan survei kepuasan (feedback pengguna) di bagian bawah terlebih dahulu sebelum mendownload hasil PDF.");
+        showAppNotice("Mohon isi dan kirimkan survei kepuasan (feedback pengguna) di bagian bawah terlebih dahulu sebelum mendownload hasil PDF.");
         const surveyEl = document.getElementById("survey-section");
         if (surveyEl) {
           surveyEl.scrollIntoView({ behavior: 'smooth' });
@@ -1961,7 +2039,7 @@
       const data = getAccumulatedData();
       const respondents = data.respondents || [];
       if (respondents.length === 0) {
-        alert("Belum ada data responden untuk diexport.");
+        showAppNotice("Belum ada data responden untuk diexport.");
         return;
       }
 
@@ -2143,7 +2221,7 @@
       } else {
         const allAnswered = answers.every(a => a !== null);
         if (!allAnswered) {
-          alert("Harap jawab seluruh 21 pertanyaan sebelum melihat hasil.");
+          showAppNotice("Harap jawab seluruh 21 pertanyaan sebelum melihat hasil.");
           return;
         }
         calculateAndShowResults();
