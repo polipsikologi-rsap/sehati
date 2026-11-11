@@ -56,6 +56,8 @@
       color: #0F172A;
       background-color: #F8FAFC;
       -webkit-font-smoothing: antialiased;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
@@ -68,11 +70,19 @@
       border-radius: 4px;
     }
     @media print {
+      *, *::before, *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+      }
       body * {
         visibility: hidden;
       }
       #step-results, #step-results * {
         visibility: visible;
+      }
+      #chart-dep-bar, #chart-anx-bar, #chart-str-bar {
+        transition: none !important;
       }
       #step-results {
         position: absolute;
@@ -702,13 +712,11 @@
             </div>
           </div>
 
-          <div class="flex items-start gap-3.5 p-4 bg-slate-50 rounded-xl border border-slate-200/80">
-            <i data-lucide="instagram" class="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5"></i>
+          <div class="flex items-start gap-3 p-3.5 bg-slate-50 rounded-xl border border-slate-200/80">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
             <div>
-              <span class="font-bold text-slate-900 block">Media Sosial Instagram</span>
-              <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="text-brand-teal font-bold hover:underline inline-flex items-center gap-1.5 mt-0.5">
-                <i data-lucide="instagram" class="w-4 h-4 text-brand-teal"></i>@rsud_anutapurapalu
-              </a>
+              <span class="font-bold text-slate-900 block mb-0.5">Media Sosial Instagram</span>
+              <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="text-brand-teal font-bold hover:underline">@rsud_anutapurapalu</a>
             </div>
           </div>
         </div>
@@ -1064,8 +1072,15 @@
                   <span class="text-slate-700">Depresi</span>
                   <span id="chart-dep-val" class="text-brand-teal">0 (Normal)</span>
                 </div>
-                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
-                  <div id="chart-dep-bar" class="bg-brand-teal h-full transition-all duration-500" style="width: 0%"></div>
+                <div class="w-full bg-slate-100 h-3.5 rounded-full overflow-hidden border border-slate-200 relative">
+                  <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none" aria-hidden="true">
+                    <rect width="100%" height="100%" fill="#f1f5f9"></rect>
+                  </svg>
+                  <div id="chart-dep-bar" class="relative z-10 bg-brand-teal h-full rounded-full overflow-hidden transition-all duration-500" style="width: 0%">
+                    <svg class="w-full h-full block" preserveAspectRatio="none" aria-hidden="true">
+                      <rect width="100%" height="100%" fill="#0D9488"></rect>
+                    </svg>
+                  </div>
                 </div>
               </div>
 
@@ -1074,8 +1089,15 @@
                   <span class="text-slate-700">Kecemasan</span>
                   <span id="chart-anx-val" class="text-sky-600">0 (Normal)</span>
                 </div>
-                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
-                  <div id="chart-anx-bar" class="bg-sky-500 h-full transition-all duration-500" style="width: 0%"></div>
+                <div class="w-full bg-slate-100 h-3.5 rounded-full overflow-hidden border border-slate-200 relative">
+                  <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none" aria-hidden="true">
+                    <rect width="100%" height="100%" fill="#f1f5f9"></rect>
+                  </svg>
+                  <div id="chart-anx-bar" class="relative z-10 bg-sky-500 h-full rounded-full overflow-hidden transition-all duration-500" style="width: 0%">
+                    <svg class="w-full h-full block" preserveAspectRatio="none" aria-hidden="true">
+                      <rect width="100%" height="100%" fill="#0ea5e9"></rect>
+                    </svg>
+                  </div>
                 </div>
               </div>
 
@@ -1084,8 +1106,15 @@
                   <span class="text-slate-700">Stres</span>
                   <span id="chart-str-val" class="text-amber-600">0 (Normal)</span>
                 </div>
-                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
-                  <div id="chart-str-bar" class="bg-amber-500 h-full transition-all duration-500" style="width: 0%"></div>
+                <div class="w-full bg-slate-100 h-3.5 rounded-full overflow-hidden border border-slate-200 relative">
+                  <svg class="absolute inset-0 w-full h-full" preserveAspectRatio="none" aria-hidden="true">
+                    <rect width="100%" height="100%" fill="#f1f5f9"></rect>
+                  </svg>
+                  <div id="chart-str-bar" class="relative z-10 bg-amber-500 h-full rounded-full overflow-hidden transition-all duration-500" style="width: 0%">
+                    <svg class="w-full h-full block" preserveAspectRatio="none" aria-hidden="true">
+                      <rect width="100%" height="100%" fill="#f59e0b"></rect>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1529,8 +1558,8 @@
               <span>Email: <a href="mailto:rsu.anutapurapalu@yahoo.com" class="font-bold text-slate-800 hover:text-brand-teal">rsu.anutapurapalu@yahoo.com</a></span>
             </p>
             <p class="flex items-center gap-2">
-              <i data-lucide="instagram" class="w-4 h-4 text-brand-teal flex-shrink-0"></i>
-              <span>Instagram: <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-800 hover:text-brand-teal inline-flex items-center gap-1 ml-1"><i data-lucide="instagram" class="w-3.5 h-3.5"></i>@rsud_anutapurapalu</a></span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-brand-teal flex-shrink-0" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              <span>Instagram: <a href="https://instagram.com/rsud_anutapurapalu" target="_blank" rel="noopener noreferrer" class="font-bold text-slate-800 hover:text-brand-teal">@rsud_anutapurapalu</a></span>
             </p>
           </div>
         </div>
